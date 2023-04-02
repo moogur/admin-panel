@@ -1,8 +1,10 @@
 {
-  "parser": "@typescript-eslint/parser",
+  "parser": "vue-eslint-parser",
   "parserOptions": {
+    "parser": "@typescript-eslint/parser",
     "project": "./tsconfig.json",
-    "sourceType": "module"
+    "sourceType": "module",
+    "extraFileExtensions": [".vue"]
   },
   "plugins": [
     "@typescript-eslint",
@@ -17,6 +19,7 @@
   ],
   "extends": [
     "airbnb-typescript/base",
+    "plugin:vue/vue3-recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:unicorn/recommended",
     "plugin:prettier/recommended",
@@ -30,7 +33,7 @@
     "node": true,
     "browser": true
   },
-  "ignorePatterns": [".eslintrc.js", "node_modules", "scripts"],
+  "ignorePatterns": [".eslintrc.js", "node_modules", "scripts", "src/vite-env.d.ts"],
   "settings": {
     "import/internal-regex": "^(@src|@shared)/",
     "import/ignore": ["node_modules"]
@@ -66,7 +69,7 @@
     "unicorn/no-array-for-each": "off",
     "unicorn/no-array-reduce": "off",
     "unicorn/no-null": "off",
-    "unicorn/filename-case": ["error", { "cases": { "camelCase": true } }],
+    "unicorn/filename-case": ["error", { "cases": { "camelCase": true, "pascalCase": true } }],
 
     "optimize-regex/optimize-regex": "warn",
     "sonarjs/cognitive-complexity": ["error", 30],

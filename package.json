@@ -14,7 +14,8 @@
     "build": "vue-tsc && vite build && rm ./dist/index-dev.*",
     "visualizer": "vue-tsc && vite build --mode visualizer",
     "preview": "npm run build && vite preview",
-    "lint": "eslint \"{src}/**/*.{ts,json}\" --fix",
+    "lint": "eslint \"src/**/*.{ts,json,vue}\" --fix",
+    "stylelint": "stylelint 'src/**/*.{css,scss}'",
     "sonar:publish": "node ./scripts/sonarqube-scanner.js",
     "pre-commit": "lint-staged",
     "prepare": "husky install"
@@ -43,6 +44,7 @@
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-sonarjs": "^0.19.0",
     "eslint-plugin-unicorn": "^46.0.0",
+    "eslint-plugin-vue": "^9.10.0",
     "husky": "^7.0.4",
     "lint-staged": "^12.5.0",
     "prettier": "^2.8.7",
@@ -60,11 +62,15 @@
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-html": "^3.2.0",
     "vite-plugin-imagemin": "^0.6.1",
+    "vue-eslint-parser": "^9.1.1",
     "vue-tsc": "^1.2.0"
   },
   "lint-staged": {
-    "./src/**/*.{ts,json}": [
+    "./src/**/*.{ts,json,vue}": [
       "npm run lint"
+    ],
+    "./src/**/*.{css,scss}": [
+      "npm run stylelint"
     ]
   }
 }

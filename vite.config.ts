@@ -8,10 +8,10 @@ import viteImagemin from 'vite-plugin-imagemin';
 const build = {
   sourcemap: false,
   rollupOptions: {
-    manualChunks: (path) => {
-      if (/node_modules/.test(path)) return `lib.${path.split('node_modules/')[1]?.split('/')[0]?.replace('@', '')}`;
-    },
     output: {
+      manualChunks: (path) => {
+        if (/node_modules/.test(path)) return `lib.${path.split('node_modules/')[1]?.split('/')[0]?.replace('@', '')}`;
+      },
       assetFileNames: ({ name }) => {
         switch (true) {
           case /\.(png|jpe?g|svg|gif|tiff|bmp|ico)$/i.test(name ?? ''):
