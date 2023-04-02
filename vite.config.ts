@@ -9,23 +9,23 @@ const build = {
   sourcemap: false,
   rollupOptions: {
     manualChunks: (path) => {
-      if (/node_modules/.test(path)) return path.split('node_modules/')[1]?.split('/')[0]?.replace('@', '');
+      if (/node_modules/.test(path)) return `lib.${path.split('node_modules/')[1]?.split('/')[0]?.replace('@', '')}`;
     },
     output: {
       assetFileNames: ({ name }) => {
         switch (true) {
           case /\.(png|jpe?g|svg|gif|tiff|bmp|ico)$/i.test(name ?? ''):
-            return `images/[name]-[hash][extname]`;
+            return `images/[name].[hash][extname]`;
 
           case /\.css$/i.test(name ?? ''):
-            return `styles/[name]-[hash][extname]`;
+            return `styles/[name].[hash][extname]`;
 
           default:
-            return `assets/[name]-[hash][extname]`;
+            return `assets/[name].[hash][extname]`;
         }
       },
-      chunkFileNames: 'js/[name]-[hash].js',
-      entryFileNames: 'js/[name]-[hash].js',
+      chunkFileNames: 'js/[name].[hash].js',
+      entryFileNames: 'js/[name].[hash].js',
     },
   },
 };
