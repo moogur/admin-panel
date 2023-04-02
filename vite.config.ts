@@ -4,14 +4,15 @@ import viteCompression from 'vite-plugin-compression';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import { visualizer } from 'rollup-plugin-visualizer';
 import viteImagemin from 'vite-plugin-imagemin';
+import path from 'node:path';
 
 const build = {
   sourcemap: false,
   rollupOptions: {
-    manualChunks: (path) => {
-      if (/node_modules/.test(path)) return `lib.${path.split('node_modules/')[1]?.split('/')[0]?.replace('@', '')}`;
-    },
     output: {
+      manualChunks: (path) => {
+        if (/node_modules/.test(path)) return `lib.${path.split('node_modules/')[1]?.split('/')[0]?.replace('@', '')}`;
+      },
       assetFileNames: ({ name }) => {
         switch (true) {
           case /\.(png|jpe?g|svg|gif|tiff|bmp|ico)$/i.test(name ?? ''):
@@ -110,11 +111,19 @@ export default defineConfig(({ mode }) => {
         ],
         build,
         preview: { port: 3001 },
+        resolve: {
+          alias: [
+            { find: '@src', replacement: path.resolve(__dirname, 'src') },
+            { find: '@assets', replacement: path.resolve(__dirname, 'src', 'assets') },
+            { find: '@pages', replacement: path.resolve(__dirname, 'src', 'pages') },
+            { find: '@shared', replacement: path.resolve(__dirname, 'src', 'shared') },
+          ],
+        },
       };
 
     default:
       return {
-        plugins: [vue(), createHtmlPlugin({ template: '/index-dev.html' })],
+        plugins: [vue(), , createHtmlPlugin({ template: '/index-dev.html' })],
         build: { sourcemap: true },
         server: { port: 3000 },
       };

@@ -17,6 +17,12 @@
     "removeComments": true,
     "forceConsistentCasingInFileNames": false,
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "paths": {
+    "@shared/*": ["src/shared/*"],
+    "@pages/*": ["src/pages/*"],
+    "@assets/*": ["src/assets/*"],
+    "@src/*": ["src/*"]
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
