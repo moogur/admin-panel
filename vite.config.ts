@@ -114,7 +114,7 @@ export default defineConfig(({ mode }) => {
 
     default:
       return {
-        plugins: [vue(), createHtmlPlugin({ template: '/index-dev.html' })],
+        plugins: [vue(), , createHtmlPlugin({ template: '/index-dev.html' })],
         build: { sourcemap: true },
         server: { port: 3000 },
       };
