@@ -1,8 +1,28 @@
 body {
   display: flex;
-  flex-direction: column;
+  flex-flow: column;
   width: 100vw;
   height: 100vh;
 
-  background-color: #eef0f6;
+  background-color: #e4e9f7;
+}
+
+main > article:before {
+  position: absolute;
+  z-index: -1;
+
+  background-color: rgba(0, 0, 0, 0.4);
+
+  opacity: 0;
+
+  transition: all 0.4s ease;
+
+  content: '';
+  inset: 0;
+}
+
+main > aside:hover + article:before {
+  z-index: 10000;
+
+  opacity: 1;
 }

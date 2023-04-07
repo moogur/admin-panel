@@ -1,43 +1,29 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 
+import { links } from '@shared/constants';
 import { useAuthStore } from '@store/app';
 
-const routes = [
-  {
-    path: '/',
-    component: () => import('../pages/MainPage/MainPage.vue'),
-  },
-  {
-    path: '/login',
-    component: () => import('../pages/LoginPage/LoginPage.vue'),
-  },
-  // {
-  //   path: '/users',
-  //   component: HelloWorld,
-  // },
-  // {
-  //   path: '/settings',
-  //   component: HelloWorld,
-  // },
-];
+const routes = Object.values(links).map(({ path, component }) => ({
+  path,
+  component: () => import(`../pages/${component}/${component}.vue`),
+}));
 
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
 });
 
-const publicPage = '/login';
 router.beforeEach((to) => {
-  const isLoginPage = publicPage === to.path;
+  const isLoginPage = links.logout.path === to.path;
   const auth = useAuthStore();
 
   if (auth.isAuth) {
-    if (isLoginPage) return '/';
+    if (isLoginPage) return links.main.path;
   } else {
     if (!isLoginPage) {
       auth.setRedirectUrl(to.fullPath);
 
-      return '/login';
+      return links.logout.path;
     }
   }
 

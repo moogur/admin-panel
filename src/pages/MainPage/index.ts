@@ -1,1 +1,1 @@
-export { default as HelloWorld } from './MainPage.vue';
+export { default as MainPage } from './MainPage.vue';

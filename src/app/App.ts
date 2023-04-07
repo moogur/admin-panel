@@ -3,11 +3,16 @@ import { storeToRefs } from 'pinia';
 import { defineComponent, onMounted, watch, ref } from 'vue';
 import { useRoute } from 'vue-router';
 
-import { useAuthStore, getAdminInfoThunk, useGetAdminInfoStore, adminLogoutThunk } from '@store';
+import { LeftMenu, MainLoader } from '@shared/components';
+import { useAuthStore, getAdminInfoThunk, useGetAdminInfoStore } from '@store';
 
 const checkLoginPage = (path: string) => !path.startsWith('/login');
 
 export default defineComponent({
+  components: {
+    LeftMenu,
+    MainLoader,
+  },
   setup() {
     const { initialization, isAuth } = storeToRefs(useAuthStore());
     const { data } = storeToRefs(useGetAdminInfoStore());
@@ -29,7 +34,6 @@ export default defineComponent({
       notLoginPage,
       currentDate: dayjs().year(),
       admin: data,
-      logout: adminLogoutThunk,
       isAuth,
     };
   },

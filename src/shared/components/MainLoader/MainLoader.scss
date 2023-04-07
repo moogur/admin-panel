@@ -1,0 +1,58 @@
+.loader {
+  position: fixed;
+  top: calc(50% - 10vmin);
+  left: calc(50% - 10vmin);
+  z-index: 1;
+
+  box-sizing: border-box;
+  width: 20vmin;
+  height: 20vmin;
+  border: solid 2vmin transparent;
+  border-top-color: #0099ff;
+  border-right-color: #0099ff;
+  border-radius: 50%;
+
+  animation: spin 1s infinite linear;
+
+  &:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    box-sizing: border-box;
+    width: 16vmin;
+    height: 16vmin;
+    border: solid 2vmin transparent;
+    border-top-color: #33ccff;
+    border-right-color: #33ccff;
+    border-radius: 50%;
+
+    animation: spin 2s infinite linear;
+
+    content: '';
+  }
+
+  &:after {
+    position: absolute;
+    top: 2vmin;
+    left: 2vmin;
+
+    box-sizing: border-box;
+    width: 12vmin;
+    height: 12vmin;
+    border: solid 2vmin transparent;
+    border-top-color: #66ffff;
+    border-right-color: #66ffff;
+    border-radius: 50%;
+
+    animation: spin 3s infinite linear;
+
+    content: '';
+  }
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
