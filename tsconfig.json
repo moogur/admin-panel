@@ -16,12 +16,19 @@
     "noEmit": true,
     "removeComments": true,
     "forceConsistentCasingInFileNames": false,
-  },
-  "paths": {
-    "@shared/*": ["src/shared/*"],
-    "@pages/*": ["src/pages/*"],
-    "@assets/*": ["src/assets/*"],
-    "@src/*": ["src/*"]
+    "paths": {
+      "@api": ["./src/api/index.ts"],
+      "@api/*": ["./src/api/*"],
+      "@app": ["./src/app/index.ts"],
+      "@assets/*": ["./src/assets/*"],
+      "@pages": ["./src/pages/index.ts"],
+      "@pages/*": ["./src/pages/*"],
+      "@router": ["./src/router/index.ts"],
+      "@shared/*": ["./src/shared/*"],
+      "@store": ["./src/store/index.ts"],
+      "@store/*": ["./src/store/*"],
+      "@src/*": ["./src/*"]
+    },
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue"],
   "references": [{ "path": "./tsconfig.node.json" }]
