@@ -6,6 +6,17 @@ import { visualizer } from 'rollup-plugin-visualizer';
 import viteImagemin from 'vite-plugin-imagemin';
 import path from 'node:path';
 
+const alias = [
+  { find: '@api', replacement: path.resolve(__dirname, 'src', 'api') },
+  { find: '@app', replacement: path.resolve(__dirname, 'src', 'app') },
+  { find: '@assets', replacement: path.resolve(__dirname, 'src', 'assets') },
+  { find: '@pages', replacement: path.resolve(__dirname, 'src', 'pages') },
+  { find: '@router', replacement: path.resolve(__dirname, 'src', 'router') },
+  { find: '@shared', replacement: path.resolve(__dirname, 'src', 'shared') },
+  { find: '@store', replacement: path.resolve(__dirname, 'src', 'store') },
+  { find: '@src', replacement: path.resolve(__dirname, 'src') },
+];
+
 const build = {
   sourcemap: false,
   rollupOptions: {
@@ -48,6 +59,7 @@ export default defineConfig(({ mode }) => {
           }),
         ],
         build,
+        resolve: { alias },
       };
 
     case 'production':
@@ -111,21 +123,20 @@ export default defineConfig(({ mode }) => {
         ],
         build,
         preview: { port: 3001 },
-        resolve: {
-          alias: [
-            { find: '@src', replacement: path.resolve(__dirname, 'src') },
-            { find: '@assets', replacement: path.resolve(__dirname, 'src', 'assets') },
-            { find: '@pages', replacement: path.resolve(__dirname, 'src', 'pages') },
-            { find: '@shared', replacement: path.resolve(__dirname, 'src', 'shared') },
-          ],
-        },
+        resolve: { alias },
       };
 
     default:
       return {
         plugins: [vue(), , createHtmlPlugin({ template: '/index-dev.html' })],
         build: { sourcemap: true },
-        server: { port: 3000 },
+        server: {
+          port: 3000,
+          proxy: {
+            '/authorization-api': 'http://test.admin.server.lan',
+          },
+        },
+        resolve: { alias },
       };
   }
 });

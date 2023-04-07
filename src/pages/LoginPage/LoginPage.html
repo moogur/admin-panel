@@ -1,0 +1,12 @@
+<form class="login-form" @submit.prevent="onSubmit" novalidate>
+  <h2>Login</h2>
+  <p class="input-wrapper">
+    <input type="text" placeholder="Username" v-model="state.username" />
+    <span v-if="v$.username.$error" class="error">{{ v$.username.$errors[0].$message }}</span>
+  </p>
+  <p class="input-wrapper">
+    <input type="password" placeholder="Password" v-model="state.password" />
+    <span v-if="v$.password.$error" class="error">{{ v$.password.$errors[0].$message }}</span>
+  </p>
+  <button>Submit</button>
+</form>

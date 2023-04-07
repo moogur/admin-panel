@@ -38,7 +38,7 @@ module.exports = {
   },
   ignorePatterns: ['.eslintrc.cjs', 'node_modules', 'scripts', 'src/vite-env.d.ts', 'src/**/*.vue'],
   settings: {
-    'import/internal-regex': '^(@src|@shared)/',
+    'import/internal-regex': '^(@api|@api/|@app|@assets/|@pages|@pages/|@router|@shared/|@store|@store/|@src/)',
     'import/ignore': ['node_modules'],
   },
   rules: {
