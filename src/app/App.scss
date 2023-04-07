@@ -1,97 +1,49 @@
-.loader {
-  position: fixed;
-  top: calc(50% - 10vmin);
-  left: calc(50% - 10vmin);
-  z-index: 1;
-
-  box-sizing: border-box;
-  width: 20vmin;
-  height: 20vmin;
-  border: solid 2vmin transparent;
-  border-top-color: #0099ff;
-  border-right-color: #0099ff;
-  border-radius: 50%;
-
-  animation: spin 1s infinite linear;
-
-  &:before {
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    box-sizing: border-box;
-    width: 16vmin;
-    height: 16vmin;
-    border: solid 2vmin transparent;
-    border-top-color: #33ccff;
-    border-right-color: #33ccff;
-    border-radius: 50%;
-
-    animation: spin 2s infinite linear;
-
-    content: '';
-  }
-
-  &:after {
-    position: absolute;
-    top: 2vmin;
-    left: 2vmin;
-
-    box-sizing: border-box;
-    width: 12vmin;
-    height: 12vmin;
-    border: solid 2vmin transparent;
-    border-top-color: #66ffff;
-    border-right-color: #66ffff;
-    border-radius: 50%;
-
-    animation: spin 3s infinite linear;
-
-    content: '';
-  }
-}
-
-@keyframes spin {
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
 header {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
   margin-left: auto;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+
+  background-color: #fafafa;
 }
 
 header,
 footer {
-  height: 30px;
+  height: 50px;
   padding: 10px 15px;
 }
 
 .username {
-  margin-right: 15px;
+  color: #d63384;
+  font-weight: bold;
 
-  font-size: 20px;
+  font-size: 18px;
   line-height: 30px;
-}
-
-.logout-button {
-  padding: 5px 15px;
-  border: none;
-  border-radius: 8px;
-
-  color: #ffffff;
-  font-size: 20px;
-
-  background-color: #3498db;
-  cursor: pointer;
+  letter-spacing: 1px;
 }
 
 main {
   display: flex;
   flex: 1;
-  padding: 15px 0;
+}
+
+.main-content {
+  position: relative;
+
+  display: flex;
+
+  flex: 1;
+  padding: 15px;
 }
 
 footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
   margin-top: auto;
+  border-top: 1px solid rgba(0, 0, 0, 0.4);
+
+  background-color: #fafafa;
 }

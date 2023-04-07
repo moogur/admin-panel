@@ -1,6 +1,7 @@
 import { storeToRefs } from 'pinia';
 
 import router from '@router';
+import { links } from '@shared/constants';
 import { useAuthStore } from '@store/app';
 
 import { useAdminLogoutStore, useAdminLoginStore } from '../slice';
@@ -18,5 +19,5 @@ export async function adminLogoutThunk() {
 
   auth.$reset();
   adminLogin.$reset();
-  router.push('/login');
+  router.push(links.logout.path);
 }
