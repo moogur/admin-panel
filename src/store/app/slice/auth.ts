@@ -1,8 +1,14 @@
 import { defineStore } from 'pinia';
 
+import { Admin } from '@api/AuthorizationApi';
 import { AUTH_KEY } from '@shared/constants';
 
-export type RedirectStore = { url: string | null; isAuth: boolean; initialization: boolean };
+export type RedirectStore = {
+  initialization: boolean;
+  url: string | null;
+  isAuth: boolean;
+  user: Admin | null;
+};
 
 export const useAuthStore = defineStore({
   id: 'redirect',
@@ -10,22 +16,27 @@ export const useAuthStore = defineStore({
     url: null,
     isAuth: localStorage.getItem(AUTH_KEY) === 'true',
     initialization: true,
+    user: null,
   }),
   actions: {
     $reset() {
+      this.$patch({ url: null, isAuth: false, user: null });
       localStorage.setItem(AUTH_KEY, 'false');
-      this.$patch({ url: null, isAuth: false });
     },
 
+    setWasInitialized() {
+      this.initialization = false;
+    },
     setRedirectUrl(url: string | null) {
       this.url = url;
     },
-    setAuth(isAuth: boolean) {
-      this.isAuth = isAuth;
-      localStorage.setItem(AUTH_KEY, String(isAuth));
+    setAuth(user: Admin) {
+      this.isAuth = true;
+      this.user = user;
+      localStorage.setItem(AUTH_KEY, 'true');
     },
-    setWasInitialized() {
-      this.initialization = false;
+    updateUserInfo(user: Admin) {
+      this.user = user;
     },
   },
 });

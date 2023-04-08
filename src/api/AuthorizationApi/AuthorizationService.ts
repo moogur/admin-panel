@@ -1,9 +1,9 @@
-import { OnlyId, RequestConfig } from '@shared/types';
+import { OnlyId, RequestConfig, SecretKeysEnum } from '@shared/types';
 
 import { BaseApiService } from '../baseApi';
 import { AUTHORIZATION_BASEURL } from '../baseUrls';
 
-import { Admin, LoginAdmin } from './authorizationTypes';
+import { Admin, LoginAdmin, UpdateAdminBody } from './authorizationTypes';
 
 export class AuthorizationService extends BaseApiService {
   constructor() {
@@ -29,6 +29,22 @@ export class AuthorizationService extends BaseApiService {
     return this.request({
       method: 'get',
       url: 'admin',
+    });
+  }
+
+  public updateSecret(config: RequestConfig<{ status: SecretKeysEnum }>): Promise<Admin> {
+    return this.request({
+      method: 'put',
+      url: 'secretOrToken',
+      ...config,
+    });
+  }
+
+  public updateAdminInfo(config: RequestConfig<UpdateAdminBody>): Promise<OnlyId> {
+    return this.request({
+      method: 'patch',
+      url: 'admin',
+      ...config,
     });
   }
 }

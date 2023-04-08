@@ -4,20 +4,22 @@ import router from '@router';
 import { links } from '@shared/constants';
 import { useAuthStore } from '@store/app';
 
-import { useAdminLogoutStore, useAdminLoginStore } from '../slice';
+import { useAdminLoginStore, useAdminLogoutStore, useGetAdminInfoStore } from '../slice';
 
 export async function adminLogoutThunk() {
-  const { error } = storeToRefs(useAdminLogoutStore());
-  const { thunk } = useAdminLogoutStore();
+  const logoutStore = useAdminLogoutStore();
+  const { error } = storeToRefs(logoutStore);
 
-  await thunk();
+  await logoutStore.thunk();
 
   if (error.value) return console.log(error.value.message);
 
-  const auth = useAuthStore();
-  const adminLogin = useAdminLoginStore();
+  const authStore = useAuthStore();
+  const adminLoginStore = useAdminLoginStore();
+  const getAdminInfoStore = useGetAdminInfoStore();
 
-  auth.$reset();
-  adminLogin.$reset();
+  authStore.$reset();
+  adminLoginStore.$reset();
+  getAdminInfoStore.$reset();
   router.push(links.logout.path);
 }

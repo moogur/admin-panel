@@ -8,16 +8,16 @@ import { useAuthStore } from '@store/app';
 
 import { useAdminLoginStore } from '../slice';
 
-export async function adminLoginThunk(data: RequestData<LoginAdmin>) {
-  const { error } = storeToRefs(useAdminLoginStore());
-  const { thunk } = useAdminLoginStore();
+export async function adminLoginThunk(body: RequestData<LoginAdmin>) {
+  const loginStore = useAdminLoginStore();
+  const { error, data } = storeToRefs(loginStore);
 
-  await thunk(data);
+  await loginStore.thunk(body);
 
-  if (error.value) return console.log(error.value.message);
+  if (error.value || !data.value) return console.log(error.value?.message);
 
   const auth = useAuthStore();
-  auth.setAuth(true);
   router.push(auth.url ?? links.main.path);
   if (auth.url) auth.setRedirectUrl(null);
+  auth.setAuth(data.value);
 }

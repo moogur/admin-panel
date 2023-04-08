@@ -1,13 +1,12 @@
 <aside>
   <ul class="menu-links">
-    <li v-for="{ title, path } in links" class="nav-link">
+    <li v-for="{ title, path, icon } in links" class="nav-link">
       <router-link :to="path" v-if="path !== links.logout.path" activeClass="link-active">
-        <HomeIcon v-if="path === links.main.path"></HomeIcon>
-        <SettingsIcon v-if="path === links.settings.path"></SettingsIcon>
+        <component :is="icon" />
         <span>{{ title }}</span>
       </router-link>
       <button v-else v-on:click="logout">
-        <SignOutIcon></SignOutIcon>
+        <component :is="icon" />
         <span>{{ title }}</span>
       </button>
     </li>
