@@ -1,29 +1,27 @@
 import useVuelidate from '@vuelidate/core';
-import { required, minLength } from '@vuelidate/validators';
 import { defineComponent, reactive } from 'vue';
 
+import { LoginAdmin } from '@api';
 import { adminLoginThunk } from '@store';
+
+import { formValidationRules } from './constants';
 
 export default defineComponent({
   setup() {
-    const state = reactive({
+    const formData = reactive<LoginAdmin>({
       username: '',
       password: '',
     });
-    const rules = {
-      username: { required, minLength: minLength(5) },
-      password: { required, minLength: minLength(5) },
-    };
 
-    const v$ = useVuelidate(rules, state, { $lazy: true });
+    const v$ = useVuelidate(formValidationRules, formData, { $lazy: true });
 
     const onSubmit = () => {
       v$.value.$touch();
       if (v$.value.$invalid) return;
 
-      adminLoginThunk({ data: state });
+      adminLoginThunk({ data: formData });
     };
 
-    return { state, v$, onSubmit };
+    return { formData, v$, onSubmit };
   },
 });

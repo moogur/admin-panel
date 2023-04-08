@@ -1,8 +1,8 @@
 import useVuelidate from '@vuelidate/core';
-import { required, minLength, email } from '@vuelidate/validators';
 import { storeToRefs } from 'pinia';
 import { defineComponent, onMounted, onUnmounted, ref, reactive } from 'vue';
 
+import { UpdateAdminBody } from '@api';
 import { Modal } from '@shared/components';
 import {
   useAuthStore,
@@ -13,7 +13,7 @@ import {
 } from '@store';
 
 import { prepareFormData } from './UserInfoSettingsUtils';
-import { list } from './constants';
+import { formValidationRules, list } from './constants';
 
 export default defineComponent({
   components: {
@@ -26,16 +26,11 @@ export default defineComponent({
     const { loading } = storeToRefs(infoStore);
     const showModal = ref(false);
 
-    const formData = reactive({
+    const formData = reactive<Record<keyof UpdateAdminBody, string>>({
       username: '',
       email: '',
       password: '',
     });
-    const rules = {
-      username: { required, minLength: minLength(5) },
-      email: { minLength: minLength(10), email },
-      password: { minLength: minLength(10) },
-    };
 
     onMounted(getAdminInfoThunk);
     onUnmounted(() => {
@@ -43,7 +38,7 @@ export default defineComponent({
       updateInfoStore.$reset();
     });
 
-    const v$ = useVuelidate(rules, formData, { $lazy: true });
+    const v$ = useVuelidate(formValidationRules, formData, { $lazy: true });
 
     const setShowModal = (show: boolean) => {
       formData.username = user.value?.username ?? '';
