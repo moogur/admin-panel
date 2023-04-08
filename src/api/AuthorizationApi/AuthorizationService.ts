@@ -32,7 +32,7 @@ export class AuthorizationService extends BaseApiService {
     });
   }
 
-  public updateSecret(config: RequestConfig<{ status: SecretKeysEnum }>): Promise<Admin> {
+  public updateSecret(config: RequestConfig<{ status: SecretKeysEnum }>): Promise<OnlyId> {
     return this.request({
       method: 'put',
       url: 'secretOrToken',
