@@ -1,0 +1,6 @@
+<ul class="keys-list">
+  <li v-for="{title, action} in list">
+    <span class="title">{{ title }}</span>
+    <button class="action" v-on:click="action">update</button>
+  </li>
+</ul>

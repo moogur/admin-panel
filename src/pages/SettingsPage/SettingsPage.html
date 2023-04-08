@@ -1,1 +1,16 @@
-<div>Settings Page</div>
+<ul class="tabs">
+  <li v-for="({ title, key, component }, index) in tabs" class="tab">
+    <input
+      type="radio"
+      name="settings-tabs"
+      :id="key"
+      :checked="activeKeyItem === key"
+      class="tab-switch"
+      v-on:change="changeActiveKey(key)"
+    />
+    <label :for="key" class="tab-label">{{ title }}</label>
+    <section v-if="activeKeyItem === key" class="tab-content">
+      <component :is="component"></component>
+    </section>
+  </li>
+</ul>

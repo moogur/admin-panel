@@ -7,5 +7,9 @@ export interface LoginAdmin {
 
 export interface Admin extends OnlyId {
   username: string;
-  email: string;
+  email: string | null;
+}
+
+export interface UpdateAdminBody extends Omit<Admin, 'id'> {
+  password?: string;
 }

@@ -1,17 +1,18 @@
 body {
   display: flex;
-  flex-flow: column;
+  flex-flow: row;
+  flex-wrap: wrap;
   width: 100vw;
   height: 100vh;
 
   background-color: #e4e9f7;
 }
 
-main > article:before {
+main:before {
   position: absolute;
   z-index: -1;
 
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: #00000066;
 
   opacity: 0;
 
@@ -21,8 +22,9 @@ main > article:before {
   inset: 0;
 }
 
-main > aside:hover + article:before {
-  z-index: 10000;
+aside:hover + main:before {
+  z-index: 998;
 
   opacity: 1;
+  backdrop-filter: blur(2px);
 }

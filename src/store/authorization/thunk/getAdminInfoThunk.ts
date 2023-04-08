@@ -5,13 +5,13 @@ import { useAuthStore } from '@store/app';
 import { useGetAdminInfoStore } from '../slice';
 
 export async function getAdminInfoThunk() {
-  const { error } = storeToRefs(useGetAdminInfoStore());
-  const { thunk } = useGetAdminInfoStore();
+  const getAdminInfoStore = useGetAdminInfoStore();
+  const { error, data } = storeToRefs(getAdminInfoStore);
 
-  await thunk();
+  await getAdminInfoStore.thunk();
 
-  if (error.value) return console.log(error.value.message);
+  if (error.value || !data.value) return console.log(error.value?.message);
 
   const auth = useAuthStore();
-  auth.setAuth(true);
+  auth.setAuth(data.value);
 }

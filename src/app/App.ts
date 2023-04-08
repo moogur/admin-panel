@@ -1,10 +1,9 @@
-import dayjs from 'dayjs';
 import { storeToRefs } from 'pinia';
 import { defineComponent, onMounted, watch, ref } from 'vue';
 import { useRoute } from 'vue-router';
 
 import { LeftMenu, MainLoader } from '@shared/components';
-import { useAuthStore, getAdminInfoThunk, useGetAdminInfoStore } from '@store';
+import { useAuthStore, getAdminInfoThunk } from '@store';
 
 const checkLoginPage = (path: string) => !path.startsWith('/login');
 
@@ -14,15 +13,15 @@ export default defineComponent({
     MainLoader,
   },
   setup() {
-    const { initialization, isAuth } = storeToRefs(useAuthStore());
-    const { data } = storeToRefs(useGetAdminInfoStore());
-    const { setWasInitialized } = useAuthStore();
     const route = useRoute();
+
+    const authStore = useAuthStore();
+    const { initialization, isAuth, user } = storeToRefs(authStore);
     const notLoginPage = ref(checkLoginPage(route.path));
 
     onMounted(async () => {
       if (isAuth.value) await getAdminInfoThunk();
-      setWasInitialized();
+      authStore.setWasInitialized();
     });
 
     watch(route, () => {
@@ -32,8 +31,7 @@ export default defineComponent({
     return {
       initialization,
       notLoginPage,
-      currentDate: dayjs().year(),
-      admin: data,
+      user,
       isAuth,
     };
   },
