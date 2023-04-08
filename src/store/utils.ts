@@ -4,14 +4,16 @@ import { logout } from '@shared/utils';
 
 import { BaseStore } from './types';
 
-export const getBaseInitialState =
-  <T>() =>
-  (): BaseStore<T> => ({
-    data: null,
-    error: null,
-    loaded: false,
-    loading: false,
-  });
+export function getBaseInitialState<T>() {
+  return function (): BaseStore<T> {
+    return {
+      data: null,
+      error: null,
+      loaded: false,
+      loading: false,
+    };
+  };
+}
 
 const additionToRequest = { error: null, loaded: true, loading: false };
 const additionToError = { data: null, loaded: false, loading: false };
