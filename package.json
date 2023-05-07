@@ -11,7 +11,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc && vite build && rm ./dist/index-dev.*",
+    "build": "vue-tsc && vite build && rm ./dist/index-dev.* && rm -fr ./dist/public",
     "visualizer": "vue-tsc && vite build --mode visualizer",
     "preview": "npm run build && vite preview",
     "lint": "eslint \"src/**/*.{ts,vue,json}\" --fix",
@@ -26,10 +26,12 @@
     "dayjs": "^1.11.7",
     "ky": "^0.33.3",
     "pinia": "^2.0.33",
+    "uuid": "^9.0.0",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
+    "@types/uuid": "^9.0.1",
     "@typescript-eslint/eslint-plugin": "^5.56.0",
     "@typescript-eslint/parser": "^5.56.0",
     "@vitejs/plugin-vue": "^4.1.0",

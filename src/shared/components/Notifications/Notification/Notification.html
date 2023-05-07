@@ -1,0 +1,8 @@
+<section class="notification" :ref="toastId">
+  <SvgIcon :icon="icon" class="icon" :class="class"></SvgIcon>
+  <div class="body">
+    <h5 class="title">{{ toastTitle }}</h5>
+    <p class="message">{{ toastMessage }}</p>
+  </div>
+  <button @click.prevent="removeNotifications(toastId)" class="button">{{ actionTitle }}</button>
+</section>

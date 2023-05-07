@@ -1,5 +1,4 @@
-import { HTTPError } from 'ky';
-
+import { ApiError, apiError520 } from '@api/baseApi';
 import { logout } from '@shared/utils';
 
 import { BaseStore } from './types';
@@ -17,6 +16,7 @@ export function getBaseInitialState<T>() {
 
 const additionToRequest = { error: null, loaded: true, loading: false };
 const additionToError = { data: null, loaded: false, loading: false };
+const additionTo401Error = { error: null, ...additionToError };
 
 export async function thunkRequestHelper<T, K extends BaseStore<T>>(that: K, thunk: Promise<T>) {
   that.loading = true;
@@ -24,26 +24,12 @@ export async function thunkRequestHelper<T, K extends BaseStore<T>>(that: K, thu
     that.data = await thunk;
     Object.assign(that, additionToRequest);
   } catch (error) {
-    if (error instanceof HTTPError) {
-      if (error.response.status === 401) logout();
-      that.error = error;
+    const preparedError = error instanceof ApiError ? error : apiError520;
+    if (preparedError.statusCode === 401) {
+      Object.assign(that, additionTo401Error);
+      logout(preparedError);
     } else {
-      if (typeof error === 'object' && error !== null && 'name' in error && error.name === 'TimeoutError') logout();
-      that.error = new HTTPError(
-        new Response('', {
-          status: 520,
-          statusText: 'Unknown Error',
-        }),
-        new Request(''),
-        {
-          method: '',
-          credentials: 'include',
-          retry: {},
-          prefixUrl: '',
-          onDownloadProgress: () => {},
-        },
-      );
+      Object.assign(that, additionToError, { error: preparedError });
     }
-    Object.assign(that, additionToError);
   }
 }

@@ -14,4 +14,4 @@ export const list = [
     title: 'Server secret',
     action: () => updateSecretThunk(SecretKeysEnum.Server),
   },
-];
+] as const;

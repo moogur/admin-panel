@@ -20,7 +20,7 @@ export class AuthorizationService extends BaseApiService {
 
   public adminLogout(): Promise<OnlyId> {
     return this.request({
-      method: 'get',
+      method: 'post',
       url: 'admin/logout',
     });
   }
@@ -32,7 +32,7 @@ export class AuthorizationService extends BaseApiService {
     });
   }
 
-  public updateSecret(config: RequestConfig<{ status: SecretKeysEnum }>): Promise<OnlyId> {
+  public updateSecret(config: RequestConfig<{ type: SecretKeysEnum }>): Promise<{ status: true }> {
     return this.request({
       method: 'put',
       url: 'secretOrToken',
@@ -40,7 +40,7 @@ export class AuthorizationService extends BaseApiService {
     });
   }
 
-  public updateAdminInfo(config: RequestConfig<UpdateAdminBody>): Promise<OnlyId> {
+  public updateAdminInfo(config: RequestConfig<UpdateAdminBody>): Promise<Admin> {
     return this.request({
       method: 'patch',
       url: 'admin',

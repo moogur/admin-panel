@@ -1,33 +1,24 @@
 import { defineComponent } from 'vue';
 
-import { CloseIcon } from '../Icons';
+import { SvgIcon } from '../SvgIcon';
 
 export default defineComponent({
   components: {
-    CloseIcon,
+    SvgIcon,
   },
   props: {
-    onClose: {
-      required: true,
-      type: Function,
-    },
     title: {
       default: '',
       type: String,
-    },
-    onOk: {
-      default: () => {},
-      type: Function,
     },
     formName: {
       default: null,
       type: String,
     },
   },
+  emits: ['close', 'ok'],
   setup(properties) {
     return {
-      close: properties.onClose,
-      ok: properties.onOk,
       titleModal: properties.title,
       form: properties.formName,
     };

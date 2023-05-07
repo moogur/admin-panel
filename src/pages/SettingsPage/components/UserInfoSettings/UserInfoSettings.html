@@ -4,8 +4,8 @@
     <span class="value">{{ user?.[key] ?? '-' }}</span>
   </li>
 </ul>
-<button class="edit-button" :disabled="loading" v-on:click="setShowModal(true)">Edit</button>
-<Modal v-if="showModal" :onClose="() => setShowModal(false)" title="Edit information" formName="edit-info-form">
+<button class="edit-button" :disabled="loading" @click="setShowModal(true)">Edit</button>
+<Modal v-if="showModal" @close="setShowModal(false)" title="Edit information" formName="edit-info-form">
   <form class="edit-info-form" @submit.prevent="onSubmit" novalidate id="edit-info-form">
     <p class="input-wrapper">
       <input type="text" placeholder="Username" v-model="formData.username" autocomplete="off" />

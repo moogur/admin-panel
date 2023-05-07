@@ -1,0 +1,10 @@
+<TransitionGroup name="notifications" tag="article" class="notifications">
+  <Notification
+    v-for="item in notifications"
+    :key="item.id"
+    :id="item.id"
+    :type="item.type"
+    :title="item.title"
+    :message="item.message"
+  ></Notification>
+</TransitionGroup>
