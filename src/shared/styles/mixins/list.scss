@@ -1,0 +1,28 @@
+@mixin list-group {
+  width: fit-content;
+  padding: 20px;
+  border-radius: 8px;
+
+  background-color: #ffffff;
+
+  li {
+    display: flex;
+    padding: 15px;
+    border-bottom: 1px solid #eeeeee;
+
+    color: #607080;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+@mixin list-title {
+  margin-bottom: 25px;
+
+  color: #25396f;
+  font-weight: bold;
+  font-size: 19px;
+  line-height: 23px;
+}

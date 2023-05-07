@@ -45,10 +45,20 @@ const build = {
   },
 };
 
+const css = {
+  preprocessorOptions: {
+    scss: {
+      additionalData: `@import "@shared/styles/variables/scss.scss";
+@import "@shared/styles/mixins/index.scss";`,
+    },
+  },
+};
+
 export default defineConfig(({ mode }) => {
   switch (mode) {
     case 'visualizer':
       return {
+        css,
         plugins: [
           vue(),
           createHtmlPlugin({ template: 'public/index-dev.html' }),
@@ -67,6 +77,7 @@ export default defineConfig(({ mode }) => {
 
     case 'production':
       return {
+        css,
         plugins: [
           vue(),
           viteImagemin({
@@ -131,6 +142,7 @@ export default defineConfig(({ mode }) => {
 
     default:
       return {
+        css,
         plugins: [vue(), createHtmlPlugin({ template: '/index-dev.html' })],
         build: { sourcemap: true },
         server: {

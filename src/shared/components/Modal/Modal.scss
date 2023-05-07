@@ -1,48 +1,53 @@
 .overlay {
   position: fixed;
 
-  z-index: 9;
+  z-index: $z-index-modal;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
   background: #00000066;
-  backdrop-filter: blur(2px);
+  backdrop-filter: blur($blur-background);
   inset: 0;
 }
 
 .modal {
   width: 500px;
-  padding: 20px;
-  border-radius: 16px;
+  border-radius: 8px;
 
-  background-color: #fafafa;
+  background-color: #ffffff;
+}
+
+.modal-header,
+.modal-main,
+.modal-footer {
+  padding: 20px;
 }
 
 .modal-header {
   position: relative;
-
-  margin-bottom: 20px;
-
-  color: #707070;
 }
 
 .modal-title {
   padding-right: 15px;
 
-  font-size: 30px;
+  color: #25396f;
+  font-weight: bold;
+
+  font-size: 18px;
+  line-height: 26px;
 }
 
 .close-icon {
   position: absolute;
-  top: -10px;
-  right: -10px;
+  top: 10px;
+  right: 10px;
 
   padding: 0;
   border: none;
 
-  color: #707070;
+  color: #454546;
 
   background-color: transparent;
   cursor: pointer;
@@ -60,28 +65,8 @@
 .modal-footer {
   display: flex;
   justify-content: flex-end;
-  margin-top: 20px;
 }
 
 .close-button {
-  padding: 10px 20px;
-  border: 1px solid #695cfe;
-  border-radius: 6px;
-
-  color: #695cfe;
-
-  background-color: transparent;
-  cursor: pointer;
-}
-
-.ok-button {
-  margin-left: 15px;
-  padding: 10px 20px;
-  border: 1px solid #695cfe;
-  border-radius: 6px;
-
-  color: #ffffff;
-
-  background-color: #695cfe;
-  cursor: pointer;
+  margin-right: 16px;
 }

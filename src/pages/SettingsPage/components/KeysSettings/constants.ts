@@ -3,15 +3,15 @@ import { updateSecretThunk } from '@store';
 
 export const list = [
   {
-    title: 'User secret',
+    title: 'User',
     action: () => updateSecretThunk(SecretKeysEnum.User),
   },
   {
-    title: 'Admin secret',
+    title: 'Admin',
     action: () => updateSecretThunk(SecretKeysEnum.Admin),
   },
   {
-    title: 'Server secret',
+    title: 'Server',
     action: () => updateSecretThunk(SecretKeysEnum.Server),
   },
 ] as const;

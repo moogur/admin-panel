@@ -9,7 +9,7 @@ export default defineComponent({
     UserInfoSettings,
   },
   setup() {
-    const activeKeyItem: Ref<'keys' | 'userInfo'> = ref(tabs[0]?.key);
+    const activeKeyItem: Ref<'keys' | 'info'> = ref(tabs[0]?.key);
 
     const changeActiveKey = (key: typeof activeKeyItem.value) => {
       activeKeyItem.value = key;

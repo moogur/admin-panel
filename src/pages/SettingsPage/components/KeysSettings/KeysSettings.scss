@@ -1,35 +1,17 @@
 .keys-list {
-  width: 230px;
-
-  li {
-    border-bottom: 1px solid #00000066;
-
-    &:last-child {
-      border-bottom: none;
-    }
-  }
+  @include list-group;
 }
 
-.title {
-  display: inline-block;
-  width: 60%;
-  padding: 10px 15px;
+.regenerate-title {
+  @include list-title;
+}
+
+.text {
+  flex: 1;
+  align-self: center;
+  width: 20%;
 }
 
 .action {
-  margin-left: 5px;
-  padding: 5px 20px;
-  border: 0;
-  border-radius: 6px;
-
-  color: #695cfe;
-
-  background-color: transparent;
-  cursor: pointer;
-
-  &:hover {
-    color: #ffffff;
-
-    background-color: #695cfe;
-  }
+  align-self: center;
 }

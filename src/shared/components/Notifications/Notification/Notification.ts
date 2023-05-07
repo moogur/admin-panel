@@ -26,9 +26,6 @@ export default defineComponent({
     onUnmounted(() => clearTimeout(timeoutId.value));
 
     return {
-      toastId: properties.id,
-      toastTitle: properties.title,
-      toastMessage: properties.message,
       removeNotifications,
       ...notificationMessages[properties.type],
     };

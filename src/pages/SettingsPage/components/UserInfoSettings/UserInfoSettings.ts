@@ -3,7 +3,7 @@ import { storeToRefs } from 'pinia';
 import { defineComponent, onMounted, onUnmounted, ref, reactive } from 'vue';
 
 import { UpdateAdminBody } from '@api';
-import { Modal } from '@shared/components';
+import { Modal, FormInput, CustomButton } from '@shared/components';
 import {
   useAuthStore,
   getAdminInfoThunk,
@@ -18,6 +18,8 @@ import { formValidationRules, list } from './constants';
 export default defineComponent({
   components: {
     Modal,
+    FormInput,
+    CustomButton,
   },
   setup() {
     const { user } = storeToRefs(useAuthStore());
