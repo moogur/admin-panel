@@ -1,4 +1,4 @@
-import { defineComponent, ref } from 'vue';
+import { Ref, defineComponent, ref } from 'vue';
 
 import { KeysSettings, UserInfoSettings } from './components';
 import { tabs } from './constants';
@@ -9,9 +9,9 @@ export default defineComponent({
     UserInfoSettings,
   },
   setup() {
-    const activeKeyItem = ref(tabs[0]?.key);
+    const activeKeyItem: Ref<'keys' | 'userInfo'> = ref(tabs[0]?.key);
 
-    const changeActiveKey = (key: string) => {
+    const changeActiveKey = (key: typeof activeKeyItem.value) => {
       activeKeyItem.value = key;
     };
 
