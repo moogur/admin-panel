@@ -1,6 +1,6 @@
 import { storeToRefs } from 'pinia';
 
-import { logout } from '@shared/utils';
+import { errorNotification, logout } from '@shared/utils';
 
 import { useAdminLogoutStore } from '../slice';
 
@@ -10,7 +10,7 @@ export async function adminLogoutThunk() {
 
   await logoutStore.thunk();
 
-  if (error.value) return console.log(error.value.message);
+  if (error.value) errorNotification(error.value);
 
   logout();
 }

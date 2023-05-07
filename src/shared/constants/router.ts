@@ -3,18 +3,18 @@ export const links = {
     path: '/',
     title: 'Main',
     component: 'MainPage',
-    icon: 'HomeIcon',
+    icon: 'home',
   },
   settings: {
     path: '/settings',
     title: 'Settings',
     component: 'SettingsPage',
-    icon: 'SettingsIcon',
+    icon: 'settings',
   },
   logout: {
     path: '/login',
     title: 'Logout',
     component: 'LoginPage',
-    icon: 'SignOutIcon',
+    icon: 'sign-out',
   },
 } as const;

@@ -2,11 +2,11 @@
   <ul class="menu-links">
     <li v-for="{ title, path, icon } in links" class="nav-link">
       <router-link :to="path" v-if="path !== links.logout.path" activeClass="link-active">
-        <component :is="icon" />
+        <SvgIcon :icon="icon" />
         <span>{{ title }}</span>
       </router-link>
-      <button v-else v-on:click="logout">
-        <component :is="icon" />
+      <button v-else @click="logout">
+        <SvgIcon :icon="icon" />
         <span>{{ title }}</span>
       </button>
     </li>

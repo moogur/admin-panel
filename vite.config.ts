@@ -26,14 +26,17 @@ const build = {
       },
       assetFileNames: ({ name }) => {
         switch (true) {
-          case /\.(png|jpe?g|svg|gif|tiff|bmp|ico)$/i.test(name ?? ''):
+          case /\.(png|jpe?g|svg|gif|tiff|bmp|ico)$/i.test(name ?? ''): {
             return `images/[name].[hash][extname]`;
+          }
 
-          case /\.css$/i.test(name ?? ''):
+          case /\.css$/i.test(name ?? ''): {
             return `styles/[name].[hash][extname]`;
+          }
 
-          default:
+          default: {
             return `assets/[name].[hash][extname]`;
+          }
         }
       },
       chunkFileNames: 'js/[name].[hash].js',
@@ -128,7 +131,7 @@ export default defineConfig(({ mode }) => {
 
     default:
       return {
-        plugins: [vue(), , createHtmlPlugin({ template: '/index-dev.html' })],
+        plugins: [vue(), createHtmlPlugin({ template: '/index-dev.html' })],
         build: { sourcemap: true },
         server: {
           port: 3000,

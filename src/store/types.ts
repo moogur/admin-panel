@@ -1,8 +1,8 @@
-import { HTTPError } from 'ky';
+import { ApiError } from '@api/baseApi';
 
 export interface BaseStore<T> {
   data: T | null;
   loading: boolean;
   loaded: boolean;
-  error: HTTPError | null;
+  error: ApiError | null;
 }

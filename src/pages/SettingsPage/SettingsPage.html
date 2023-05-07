@@ -6,7 +6,7 @@
       :id="key"
       :checked="activeKeyItem === key"
       class="tab-switch"
-      v-on:change="changeActiveKey(key)"
+      @change="changeActiveKey(key)"
     />
     <label :for="key" class="tab-label">{{ title }}</label>
     <section v-if="activeKeyItem === key" class="tab-content">

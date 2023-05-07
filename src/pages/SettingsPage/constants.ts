@@ -9,4 +9,4 @@ export const tabs = [
     title: 'User info',
     component: 'UserInfoSettings',
   },
-];
+] as const;
