@@ -7,12 +7,18 @@
   <CustomButton
     text="Edit"
     variant="primary"
-    :disabled="loading"
+    :disabled="infoLoading"
     @click="setShowModal(true)"
     class="button"
   ></CustomButton>
 </ul>
-<Modal v-if="showModal" @close="setShowModal(false)" title="Edit information" formName="edit-info-form">
+<Modal
+  v-if="showModal"
+  @close="setShowModal(false)"
+  title="Edit information"
+  formName="edit-info-form"
+  :disabled="updateLoading"
+>
   <form class="edit-info-form" @submit.prevent="onSubmit" novalidate id="edit-info-form">
     <FormInput
       :errorMessage="v$.username.$errors[0]?.$message"
@@ -21,6 +27,7 @@
       v-model="formData.username"
       class="input"
       autocomplete="off"
+      :disabled="updateLoading"
     />
     <FormInput
       :errorMessage="v$.email.$errors[0]?.$message"
@@ -29,6 +36,7 @@
       v-model="formData.email"
       class="input"
       autocomplete="off"
+      :disabled="updateLoading"
     />
     <FormInput
       :errorMessage="v$.password.$errors[0]?.$message"
@@ -37,6 +45,7 @@
       v-model="formData.password"
       class="input"
       autocomplete="new-password"
+      :disabled="updateLoading"
     />
   </form>
 </Modal>

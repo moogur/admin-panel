@@ -25,7 +25,8 @@ export default defineComponent({
     const { user } = storeToRefs(useAuthStore());
     const updateInfoStore = useUpdateAdminInfoStore();
     const infoStore = useGetAdminInfoStore();
-    const { loading } = storeToRefs(infoStore);
+    const { loading: updateLoading } = storeToRefs(updateInfoStore);
+    const { loading: infoLoading } = storeToRefs(infoStore);
     const showModal = ref(false);
 
     const formData = reactive<Record<keyof UpdateAdminBody, string>>({
@@ -61,7 +62,8 @@ export default defineComponent({
     return {
       user,
       list,
-      loading,
+      infoLoading,
+      updateLoading,
       showModal,
       setShowModal,
       formData,

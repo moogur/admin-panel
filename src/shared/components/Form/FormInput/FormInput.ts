@@ -22,5 +22,13 @@ export default defineComponent({
       default: 'on',
       type: String as () => 'off' | 'on' | 'new-password',
     },
+    disabled: {
+      default: false,
+      type: Boolean,
+    },
+    showLabel: {
+      default: true,
+      type: Boolean,
+    },
   },
 });
