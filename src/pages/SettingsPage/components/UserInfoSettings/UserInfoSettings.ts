@@ -37,6 +37,7 @@ export default defineComponent({
 
     onMounted(getAdminInfoThunk);
     onUnmounted(() => {
+      infoStore.abortController?.abort();
       infoStore.$reset();
       updateInfoStore.$reset();
     });

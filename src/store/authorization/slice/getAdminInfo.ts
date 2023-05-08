@@ -9,7 +9,7 @@ export const useGetAdminInfoStore = defineStore({
   state: getBaseInitialState<Admin>(),
   actions: {
     thunk() {
-      return thunkRequestHelper(this, authorizationService.getAdminInfo());
+      return thunkRequestHelper(this, authorizationService.getAdminInfo, {});
     },
   },
 });
