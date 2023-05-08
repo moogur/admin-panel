@@ -11,7 +11,7 @@ export const links = {
     component: 'SettingsPage',
     icon: 'settings',
   },
-  logout: {
+  login: {
     path: '/login',
     title: 'Logout',
     component: 'LoginPage',

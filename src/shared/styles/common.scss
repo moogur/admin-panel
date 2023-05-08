@@ -13,21 +13,26 @@ body {
 }
 
 h2 {
+
   @include stylesForH(2rem);
 }
 
 h3 {
+
   @include stylesForH(1.75rem);
 }
 
 h4 {
+
   @include stylesForH(1.5rem);
 }
 
 h5 {
+
   @include stylesForH(1.25rem);
 }
 
 h6 {
+
   @include stylesForH(1rem);
 }

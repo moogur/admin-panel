@@ -21,7 +21,6 @@ export const useAuthStore = defineStore({
   actions: {
     $reset() {
       this.$patch({ url: null, isAuth: false, user: null });
-      localStorage.setItem(AUTH_KEY, 'false');
     },
 
     setWasInitialized() {
@@ -33,10 +32,9 @@ export const useAuthStore = defineStore({
     setAuth(user: Admin) {
       this.isAuth = true;
       this.user = user;
-      localStorage.setItem(AUTH_KEY, 'true');
     },
-    updateUserInfo(user: Admin) {
-      this.user = user;
+    updateUserInfo(user: Omit<Admin, 'id'>) {
+      this.user = { id: this.user?.id ?? '', ...user };
     },
   },
 });

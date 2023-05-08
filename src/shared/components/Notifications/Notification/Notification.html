@@ -1,8 +1,8 @@
-<section class="notification" :ref="id">
-  <SvgIcon :icon="icon" class="icon" :class="class"></SvgIcon>
+<section class="notification" :class="class" :ref="id">
+  <SvgIcon :icon="icon" class="icon"></SvgIcon>
   <div class="body">
-    <h5 class="title">{{ title }}</h5>
-    <p class="message">{{ message }}</p>
+    <h6 class="title">{{ title }}</h6>
+    <p v-if="message" class="message">{{ message }}</p>
   </div>
-  <button @click.prevent="removeNotifications(id)" class="button">{{ actionTitle }}</button>
+  <button @click.prevent="removeNotifications(id)" class="button"><SvgIcon icon="close"></SvgIcon></button>
 </section>

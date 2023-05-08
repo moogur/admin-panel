@@ -12,11 +12,14 @@ export function errorNotification(error?: ApiError | null) {
 
     createNotification({ title: error.message, message, type: NotificationType.Error });
   } else {
-    console.log(error?.statusCode, error?.message);
     createNotification({ title: error?.message, type: NotificationType.Error });
   }
 }
 
 export function successNotification(title: string, message?: string) {
-  createNotification({ title, message, type: NotificationType.Success });
+  if (message) {
+    createNotification({ title, message, type: NotificationType.Success });
+  } else {
+    createNotification({ title, type: NotificationType.Success });
+  }
 }

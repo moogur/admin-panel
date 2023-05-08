@@ -1,9 +1,9 @@
 import useVuelidate from '@vuelidate/core';
-import { defineComponent, reactive } from 'vue';
+import { defineComponent, onMounted, reactive } from 'vue';
 
 import { LoginAdmin } from '@api';
 import { FormInput, CustomButton } from '@shared/components';
-import { adminLoginThunk } from '@store';
+import { adminLoginThunk, useAdminLoginStore, useGetAdminInfoStore } from '@store';
 
 import { formValidationRules } from './constants';
 
@@ -13,9 +13,16 @@ export default defineComponent({
     CustomButton,
   },
   setup() {
+    const adminLoginStore = useAdminLoginStore();
+    const getAdminInfoStore = useGetAdminInfoStore();
     const formData = reactive<LoginAdmin>({
       username: '',
       password: '',
+    });
+
+    onMounted(() => {
+      adminLoginStore.$reset();
+      getAdminInfoStore.$reset();
     });
 
     const v$ = useVuelidate(formValidationRules, formData, { $lazy: true });
