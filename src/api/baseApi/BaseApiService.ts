@@ -1,10 +1,10 @@
-import ky, { HTTPError } from 'ky';
+import ky, { HTTPError, Options } from 'ky';
 import { KyInstance } from 'ky/distribution/types/ky';
 
 import { isObject } from '@shared/type-guards';
 import { AdvancedRequestConfig } from '@shared/types';
 
-import { ApiError, apiError520, apiError401, apiError404, apiError524 } from './ApiError';
+import { ApiError, apiError520, apiError401, apiError404, apiError524, apiError499 } from './ApiError';
 
 export abstract class BaseApiService {
   private instance: KyInstance;
@@ -22,16 +22,21 @@ export abstract class BaseApiService {
 
   protected async request<T, K>(config: AdvancedRequestConfig<T>) {
     try {
-      const result = await this.instance(config.url, {
+      const preparedConfig: Options = {
         method: config.method,
-        json: config.data,
         headers: config.headers,
         signal: config.abortSignal,
-      });
+      };
+      if ('data' in config) preparedConfig.json = config.data;
+
+      const result = await this.instance(config.url, preparedConfig);
 
       return await result.json<K>();
     } catch (error) {
-      if (isObject(error) && 'name' in error && error.name === 'TimeoutError') throw apiError524;
+      if (isObject(error) && 'name' in error) {
+        if (error.name === 'TimeoutError') throw apiError524;
+        if (error.name === 'AbortError') throw apiError499;
+      }
 
       if (error instanceof HTTPError) {
         if (error.response.status === 401) throw apiError401;

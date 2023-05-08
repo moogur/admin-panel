@@ -15,6 +15,7 @@ export default defineComponent({
     const { loading } = storeToRefs(updateSecretStore);
 
     onUnmounted(() => {
+      updateSecretStore.abortController?.abort();
       updateSecretStore.$reset();
     });
 

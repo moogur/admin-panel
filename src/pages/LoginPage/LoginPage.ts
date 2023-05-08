@@ -33,7 +33,7 @@ export default defineComponent({
       v$.value.$touch();
       if (v$.value.$invalid) return;
 
-      adminLoginThunk({ data: formData });
+      adminLoginThunk(formData);
     };
 
     return { formData, v$, onSubmit, loading };

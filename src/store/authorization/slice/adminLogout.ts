@@ -9,7 +9,7 @@ export const useAdminLogoutStore = defineStore({
   state: getBaseInitialState<OnlyId>(),
   actions: {
     thunk() {
-      return thunkRequestHelper(this, authorizationService.adminLogout());
+      return thunkRequestHelper(this, authorizationService.adminLogout, {});
     },
   },
 });

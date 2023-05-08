@@ -5,4 +5,5 @@ export interface BaseStore<T> {
   loading: boolean;
   loaded: boolean;
   error: ApiError | null;
+  abortController: AbortController | null;
 }

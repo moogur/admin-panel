@@ -1,3 +1,4 @@
+import { RequestConfig, RequestConfigWithAbortSignal } from '@shared/types';
 import { errorNotification, logout, prepareError } from '@shared/utils';
 
 import { BaseStore } from './types';
@@ -9,24 +10,34 @@ export function getBaseInitialState<T>() {
       error: null,
       loaded: false,
       loading: false,
+      abortController: null,
     };
   };
 }
 
-const additionToRequest = { error: null, loaded: true, loading: false };
-const additionToError = { data: null, loaded: false, loading: false };
+const additionToAbort = { loading: false, abortController: null };
+const additionToRequest = { error: null, loaded: true, ...additionToAbort };
+const additionToError = { data: null, loaded: false, ...additionToAbort };
 const additionTo401Error = { error: null, ...additionToError };
 
-export async function thunkRequestHelper<T, K extends BaseStore<T>>(that: K, thunk: Promise<T>) {
+export async function thunkRequestHelper<T, K extends BaseStore<T>, L>(
+  that: K,
+  thunk: (parameter: RequestConfigWithAbortSignal<L>) => Promise<T>,
+  parameter: RequestConfig<L>,
+) {
   that.loading = true;
   try {
-    that.data = await thunk;
+    const controller = new AbortController();
+    that.abortController = controller;
+    that.data = await thunk({ ...parameter, abortSignal: controller.signal });
     Object.assign(that, additionToRequest);
   } catch (error) {
     const preparedError = prepareError(error);
     if (preparedError.statusCode === 401) {
       Object.assign(that, additionTo401Error);
       logout();
+    } else if (preparedError.statusCode === 499) {
+      Object.assign(that, additionToAbort);
     } else {
       Object.assign(that, additionToError, { error: preparedError });
     }
@@ -35,5 +46,6 @@ export async function thunkRequestHelper<T, K extends BaseStore<T>>(that: K, thu
 }
 
 export function showErrorMessage(error: unknown) {
-  errorNotification(prepareError(error));
+  const preparedError = prepareError(error);
+  if (preparedError.statusCode !== 499) errorNotification(preparedError);
 }
