@@ -1,71 +1,75 @@
 button {
-  padding: 8px 12px;
-  border-radius: 3px;
+  padding: var(--btn-padding-y) var(--btn-padding-x);
+  border-radius: var(--btn-border-radius);
 
-  font-size: 16px;
-  line-height: 24px;
+  font-size: var(--btn-font-size);
+  line-height: var(--btn-line-height);
 
   cursor: pointer;
 
   &:disabled {
     background-color: transparent;
-    cursor: no-drop;
+    cursor: var(--btn-disabled-cursor);
   }
 }
 
 .info {
-  border: 1px solid #0dcaf0;
+  border: var(--border-width) solid var(--btn-info-border-color);
 
-  color: #ffffff;
+  color: var(--btn-info-color);
 
-  background-color: #0dcaf0;
+  background-color: var(--btn-info-bg);
 
   &:disabled {
-    color: #0dcaf0;
+    border-color: var(--btn-info-disabled-border-color);
+
+    color: var(--btn-info-disabled-color);
   }
 
   &:active:not(:disabled) {
-    border-color: #3dd5f3;
+    border-color: var(--btn-info-active-border-color);
 
-    background-color: #3dd5f3;
+    background-color: var(--btn-info-active-bg);
   }
 }
 
 .primary {
-  border: 1px solid #435ebe;
+  border: var(--border-width) solid var(--btn-primary-border-color);
 
-  color: #ffffff;
+  color: var(--btn-primary-color);
 
-  background-color: #435ebe;
+  background-color: var(--btn-primary-bg);
 
   &:disabled {
-    color: #435ebe;
+    border-color: var(--btn-primary-disabled-border-color);
+
+    color: var(--btn-primary-disabled-color);
   }
 
   &:active:not(:disabled) {
-    border-color: #364b98;
+    border-color: var(--btn-primary-active-border-color);
 
-    background-color: #364b98;
+    background-color: var(--btn-primary-active-bg);
   }
 }
 
 .secondary {
-  border: 1px solid #ced4da;
+  border: var(--border-width) solid var(--btn-secondary-border-color);
 
-  color: #000000;
+  color: var(--btn-secondary-color);
 
-  background-color: #ced4da;
+  background-color: var(--btn-secondary-bg);
 
   &:disabled {
-    border-color: #ced4da;
+    border-color: var(--btn-secondary-disabled-border-color);
 
-    color: #ced4da;
+    color: var(--btn-secondary-disabled-color);
   }
 
   &:active:not(:disabled) {
-    border-color: #a5aaae;
+    border-color: var(--btn-secondary-active-border-color);
 
-    background-color: #a5aaae;
+    background-color: var(--btn-secondary-active-bg);
   }
 }
 
@@ -73,10 +77,10 @@ button {
   padding: 0;
   border: none;
 
-  color: #5c636a;
+  color: var(--btn-light-color);
   font-weight: bold;
 
-  background-color: transparent;
+  background-color: var(--btn-light-bg);
 
   &:disabled {
     opacity: 0.5;

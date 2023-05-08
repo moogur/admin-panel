@@ -1,3 +1,46 @@
 :root {
-  --bs-body-bg: #f2f7ff;
+  --body-bg: #f2f7ff;
+  --border-width: 1px;
+  // common button
+  --btn-border-radius: 0.25rem;
+  --btn-disabled-cursor: no-drop;
+  --btn-padding-x: 0.75rem;
+  --btn-padding-y: 0.375rem;
+  --btn-font-size: 1rem;
+  --btn-line-height: 1.5;
+  // primary button
+  --btn-primary-color: #ffffff;
+  --btn-primary-bg: #435ebe;
+  --btn-primary-border-color: #435ebe;
+  --btn-primary-disabled-color: #435ebe;
+  --btn-primary-disabled-border-color: #435ebe;
+  --btn-primary-active-bg: #364b98;
+  --btn-primary-active-border-color: #32478f;
+  // secondary button
+  --btn-secondary-color: #000000;
+  --btn-secondary-bg: #ced4da;
+  --btn-secondary-border-color: #ced4da;
+  --btn-secondary-disabled-color: #6c757d;
+  --btn-secondary-disabled-border-color: #6c757d;
+  --btn-secondary-active-bg: #a5aaae;
+  --btn-secondary-active-border-color: #9b9fa4;
+  // info button
+  --btn-info-color: #000000;
+  --btn-info-bg: #0dcaf0;
+  --btn-info-border-color: #0dcaf0;
+  --btn-info-disabled-color: #0dcaf0;
+  --btn-info-disabled-border-color: #0dcaf0;
+  --btn-info-active-bg: #3dd5f3;
+  --btn-info-active-border-color: #25cff2;
+  // light button
+  --btn-light-color: #5c636a;
+  --btn-light-bg: transparent;
+  // card
+  --card-bg: #ffffff;
+  --card-border-radius: 0.7rem;
+  --card-cap-padding: 1.5rem;
+  --card-item-border-color: #eeeeee;
+  --card-item-color: #607080;
+  // font
+  --h-font-color: #25396f;
 }

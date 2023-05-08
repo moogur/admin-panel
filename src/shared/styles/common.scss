@@ -1,3 +1,7 @@
+html {
+  font-size: 16px;
+}
+
 body {
   display: flex;
   flex-flow: row;
@@ -5,5 +9,25 @@ body {
   width: 100vw;
   height: 100vh;
 
-  background-color: var(--bs-body-bg);
+  background-color: var(--body-bg);
+}
+
+h2 {
+  @include stylesForH(2rem);
+}
+
+h3 {
+  @include stylesForH(1.75rem);
+}
+
+h4 {
+  @include stylesForH(1.5rem);
+}
+
+h5 {
+  @include stylesForH(1.25rem);
+}
+
+h6 {
+  @include stylesForH(1rem);
 }

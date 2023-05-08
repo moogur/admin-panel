@@ -16,3 +16,7 @@ export function errorNotification(error?: ApiError | null) {
     createNotification({ title: error?.message, type: NotificationType.Error });
   }
 }
+
+export function successNotification(title: string, message?: string) {
+  createNotification({ title, message, type: NotificationType.Success });
+}

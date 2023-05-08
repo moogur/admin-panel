@@ -1,28 +1,19 @@
 @mixin list-group {
   width: fit-content;
-  padding: 20px;
-  border-radius: 8px;
+  padding: var(--card-cap-padding);
+  border-radius: var(--card-border-radius);
 
-  background-color: #ffffff;
+  background-color: var(--card-bg);
 
   li {
     display: flex;
     padding: 15px;
-    border-bottom: 1px solid #eeeeee;
+    border-bottom: var(--border-width) solid var(--card-item-border-color);
 
-    color: #607080;
+    color: var(--card-item-color);
 
     &:last-child {
       border-bottom: none;
     }
   }
-}
-
-@mixin list-title {
-  margin-bottom: 25px;
-
-  color: #25396f;
-  font-weight: bold;
-  font-size: 19px;
-  line-height: 23px;
 }

@@ -1,13 +1,13 @@
 input {
   width: -webkit-fill-available;
   padding: 10px 15px;
-  border: 1px solid #dce7f1;
+  border: var(--border-width) solid #dce7f1;
   border-radius: 3px;
 
   color: #607080;
-
-  font-size: 16px;
-  line-height: 24px;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
 
   outline: none;
 
@@ -43,6 +43,6 @@ input {
   left: 0;
 
   color: #dc3545;
-  font-size: 15px;
+  font-size: 0.875rem;
   white-space: nowrap;
 }

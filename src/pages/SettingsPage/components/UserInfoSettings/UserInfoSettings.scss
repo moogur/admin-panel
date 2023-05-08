@@ -1,11 +1,9 @@
 .info-list {
-
   @include list-group;
 }
 
 .info-title {
-
-  @include list-title;
+  margin-bottom: 25px;
 }
 
 .text {
