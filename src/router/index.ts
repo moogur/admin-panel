@@ -14,7 +14,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to) => {
-  const isLoginPage = links.logout.path === to.path;
+  const isLoginPage = links.login.path === to.path;
   const auth = useAuthStore();
 
   if (auth.isAuth) {
@@ -23,7 +23,7 @@ router.beforeEach((to) => {
     if (!isLoginPage) {
       auth.setRedirectUrl(to.fullPath);
 
-      return links.logout.path;
+      return links.login.path;
     }
   }
 

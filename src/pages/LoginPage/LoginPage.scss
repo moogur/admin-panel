@@ -1,7 +1,4 @@
 .login-form {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
   width: 500px;
   margin: auto;
   padding: 30px;
@@ -11,45 +8,17 @@
 }
 
 h2 {
-  font-size: 30px;
+  margin-bottom: 25px;
+
   text-align: center;
 }
 
-.input-wrapper {
-  position: relative;
+.input:not(:last-child) {
+  margin-bottom: 25px;
 }
 
-input {
-  width: -webkit-fill-available;
-  padding: 10px 15px;
-  border: 1px solid #d63384;
-  border-radius: 8px;
-
-  font-size: 20px;
-
-  outline: none;
-}
-
-.error {
-  position: absolute;
-  bottom: -16px;
-  left: 0;
-
-  color: #ed1d1d;
-  font-size: 15px;
-  white-space: nowrap;
-}
-
-button {
-  min-width: 40%;
+.button {
+  display: block;
+  width: 33%;
   margin: 0 auto;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 8px;
-
-  color: #ffffff;
-  font-size: 20px;
-
-  background-color: #3498db;
-  cursor: pointer;
 }

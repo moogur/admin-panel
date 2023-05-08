@@ -1,5 +1,4 @@
-import { ApiError, apiError520 } from '@api/baseApi';
-import { logout } from '@shared/utils';
+import { errorNotification, logout, prepareError } from '@shared/utils';
 
 import { BaseStore } from './types';
 
@@ -24,12 +23,17 @@ export async function thunkRequestHelper<T, K extends BaseStore<T>>(that: K, thu
     that.data = await thunk;
     Object.assign(that, additionToRequest);
   } catch (error) {
-    const preparedError = error instanceof ApiError ? error : apiError520;
+    const preparedError = prepareError(error);
     if (preparedError.statusCode === 401) {
       Object.assign(that, additionTo401Error);
-      logout(preparedError);
+      logout();
     } else {
       Object.assign(that, additionToError, { error: preparedError });
     }
+    throw preparedError;
   }
+}
+
+export function showErrorMessage(error: unknown) {
+  errorNotification(prepareError(error));
 }

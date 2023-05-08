@@ -1,0 +1,10 @@
+<p class="input-wrapper" :class="{error: errorMessage}">
+  <input
+    :type="type"
+    :placeholder="placeholder"
+    :value="modelValue"
+    @input="$emit('update:modelValue', $event.target.value)"
+    :autocomplete="autocomplete"
+  />
+  <span v-if="errorMessage" class="error-message">{{ errorMessage }}</span>
+</p>

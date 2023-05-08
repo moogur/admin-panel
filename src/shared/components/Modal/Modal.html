@@ -2,15 +2,30 @@
   <div class="modal">
     <div class="modal-header">
       <h4 class="modal-title">{{title}}</h4>
-      <button @click="$emit('close')" class="close-icon"><SvgIcon icon="close"></SvgIcon></button>
+      <button v-if="!disabled" @click="$emit('close')" class="close-icon">
+        <SvgIcon icon="close"></SvgIcon>
+      </button>
     </div>
     <div class="modal-main">
       <slot></slot>
     </div>
     <div class="modal-footer">
-      <button @click="$emit('close')" class="close-button">Cancel</button>
-      <button v-if="!!form" type="submit" :form="form" class="ok-button">OK</button>
-      <button v-else @click="$emit('ok')" class="ok-button">OK</button>
+      <CustomButton
+        text="Cancel"
+        variant="secondary"
+        @click="$emit('close')"
+        class="close-button"
+        :disabled="disabled"
+      ></CustomButton>
+      <CustomButton
+        v-if="!!formName"
+        text="OK"
+        variant="primary"
+        type="submit"
+        :form="formName"
+        :disabled="disabled"
+      ></CustomButton>
+      <CustomButton v-else text="OK" variant="primary" @click="$emit('ok')" :disabled="disabled"></CustomButton>
     </div>
   </div>
 </section>

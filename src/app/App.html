@@ -1,13 +1,17 @@
 <MainLoader v-if="initialization"></MainLoader>
 <template v-else>
   <template v-if="isAuth && notLoginPage">
-    <header>
-      <span class="username">{{user?.username}}</span>
-    </header>
     <LeftMenu></LeftMenu>
-    <main>
-      <router-view></router-view>
-    </main>
+    <article class="container">
+      <header>
+        <Separator class="separator"></Separator>
+        <span class="username">{{user?.username}}</span>
+        <SvgIcon icon="defaultAdmin" class="icon"></SvgIcon>
+      </header>
+      <main>
+        <router-view></router-view>
+      </main>
+    </article>
   </template>
   <router-view v-else></router-view>
 </template>

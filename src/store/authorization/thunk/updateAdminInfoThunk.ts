@@ -1,21 +1,23 @@
-import { storeToRefs } from 'pinia';
-
 import { UpdateAdminBody } from '@api';
-import { errorNotification } from '@shared/utils';
+import { successNotification } from '@shared/utils';
 import { useAuthStore } from '@store/app';
+import { showErrorMessage } from '@store/utils';
 
 import { useUpdateAdminInfoStore } from '../slice';
 
 export async function updateAdminInfoThunk(body: UpdateAdminBody, successCallback?: () => void) {
   const updateAdminInfoStore = useUpdateAdminInfoStore();
-  const { error, data } = storeToRefs(updateAdminInfoStore);
 
-  await updateAdminInfoStore.thunk(body);
+  try {
+    await updateAdminInfoStore.thunk(body);
 
-  if (error.value) return errorNotification(error.value);
+    successNotification('User data updated successfully');
+    successCallback?.();
 
-  successCallback?.();
-  const auth = useAuthStore();
-  const { password, ...other } = body;
-  auth.updateUserInfo({ id: data.value?.id ?? '', ...other });
+    const auth = useAuthStore();
+    const { password, ...other } = body;
+    auth.updateUserInfo(other);
+  } catch (error) {
+    showErrorMessage(error);
+  }
 }

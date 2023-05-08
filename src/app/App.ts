@@ -2,7 +2,7 @@ import { storeToRefs } from 'pinia';
 import { defineComponent, onMounted, watch, ref } from 'vue';
 import { useRoute } from 'vue-router';
 
-import { LeftMenu, MainLoader, Notifications } from '@shared/components';
+import { LeftMenu, MainLoader, Notifications, SvgIcon, Separator } from '@shared/components';
 import { useAuthStore, getAdminInfoThunk } from '@store';
 
 const checkLoginPage = (path: string) => !path.startsWith('/login');
@@ -12,6 +12,8 @@ export default defineComponent({
     LeftMenu,
     MainLoader,
     Notifications,
+    SvgIcon,
+    Separator,
   },
   setup() {
     const route = useRoute();

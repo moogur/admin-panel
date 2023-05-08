@@ -1,3 +1,7 @@
+html {
+  font-size: 16px;
+}
+
 body {
   display: flex;
   flex-flow: row;
@@ -5,26 +9,30 @@ body {
   width: 100vw;
   height: 100vh;
 
-  background-color: #e4e9f7;
+  background-color: var(--body-bg);
 }
 
-main:before {
-  position: absolute;
-  z-index: -1;
+h2 {
 
-  background-color: #00000066;
-
-  opacity: 0;
-
-  transition: all 0.4s ease;
-
-  content: '';
-  inset: 0;
+  @include stylesForH(2rem);
 }
 
-aside:hover + main:before {
-  z-index: 8;
+h3 {
 
-  opacity: 1;
-  backdrop-filter: blur(2px);
+  @include stylesForH(1.75rem);
+}
+
+h4 {
+
+  @include stylesForH(1.5rem);
+}
+
+h5 {
+
+  @include stylesForH(1.25rem);
+}
+
+h6 {
+
+  @include stylesForH(1rem);
 }

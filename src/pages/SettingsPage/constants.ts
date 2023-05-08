@@ -5,8 +5,8 @@ export const tabs = [
     component: 'KeysSettings',
   },
   {
-    key: 'userInfo',
-    title: 'User info',
+    key: 'info',
+    title: 'Info',
     component: 'UserInfoSettings',
   },
 ] as const;

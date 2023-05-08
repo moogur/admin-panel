@@ -1,11 +1,12 @@
 aside {
   display: flex;
-  width: 65px;
-  border-right: 1px solid #00000066;
+  width: 70px;
+  padding-top: 70px;
 
   overflow: hidden;
 
-  background-color: #fafafa;
+  background-color: #ffffff;
+  box-shadow: 3px 0 28px 0 #3a3b4526;
 
   transition: all 0.4s ease;
 
@@ -19,7 +20,10 @@ aside {
   flex: 1;
   flex-direction: column;
   gap: 10px;
-  margin: 10px 0;
+  padding: 10px 0;
+  border-top: var(--border-width) solid #e3e6f0;
+
+  box-shadow: 0 3px 28px 0 #3a3b4526;
 }
 
 .nav-link {
@@ -40,13 +44,9 @@ aside {
   }
 
   a.link-active {
-    svg {
-      color: #695cfe;
-    }
+    color: #ffffff;
 
-    &:hover svg {
-      color: #ffffff;
-    }
+    background-color: #435ebe;
   }
 
   a,
@@ -55,12 +55,13 @@ aside {
     align-items: center;
     width: 100%;
     height: 100%;
+    padding-left: 5px;
     border: none;
     border-radius: 6px;
 
-    color: #707070;
+    color: #25396f;
     font-weight: 500;
-    font-size: 17px;
+    font-size: 1rem;
 
     text-decoration: none;
 
@@ -71,10 +72,8 @@ aside {
 
     transition: all 0.4s ease;
 
-    &:hover {
-      color: #ffffff;
-
-      background-color: #695cfe;
+    &:hover:not(.link-active) {
+      background-color: #f0f1f5;
     }
   }
 }

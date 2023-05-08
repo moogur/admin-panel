@@ -1,18 +1,19 @@
 import { storeToRefs } from 'pinia';
 
-import { errorNotification } from '@shared/utils';
-import { useAuthStore } from '@store/app';
+import { login } from '@shared/utils';
+import { showErrorMessage } from '@store/utils';
 
 import { useGetAdminInfoStore } from '../slice';
 
 export async function getAdminInfoThunk() {
   const getAdminInfoStore = useGetAdminInfoStore();
-  const { error, data } = storeToRefs(getAdminInfoStore);
+  const { data } = storeToRefs(getAdminInfoStore);
 
-  await getAdminInfoStore.thunk();
+  try {
+    await getAdminInfoStore.thunk();
 
-  if (error.value) return errorNotification(error.value);
-
-  const auth = useAuthStore();
-  auth.setAuth(data.value ?? { username: '', email: null, id: '' });
+    login({ data: data.value });
+  } catch (error) {
+    showErrorMessage(error);
+  }
 }

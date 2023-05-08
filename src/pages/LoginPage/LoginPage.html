@@ -1,12 +1,18 @@
 <form class="login-form" @submit.prevent="onSubmit" novalidate>
   <h2>Login</h2>
-  <p class="input-wrapper">
-    <input type="text" placeholder="Username" v-model="formData.username" />
-    <span v-if="v$.username.$error" class="error">{{ v$.username.$errors[0].$message }}</span>
-  </p>
-  <p class="input-wrapper">
-    <input type="password" placeholder="Password" v-model="formData.password" />
-    <span v-if="v$.password.$error" class="error">{{ v$.password.$errors[0].$message }}</span>
-  </p>
-  <button>Submit</button>
+  <FormInput
+    :errorMessage="v$.username.$errors[0]?.$message"
+    placeholder="Username"
+    type="text"
+    v-model="formData.username"
+    class="input"
+  />
+  <FormInput
+    :errorMessage="v$.password.$errors[0]?.$message"
+    placeholder="Password"
+    type="password"
+    v-model="formData.password"
+    class="input"
+  />
+  <CustomButton text="Submit" variant="info" class="button"></CustomButton>
 </form>

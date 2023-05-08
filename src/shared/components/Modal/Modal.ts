@@ -1,10 +1,12 @@
 import { defineComponent } from 'vue';
 
+import { CustomButton } from '../CustomButton';
 import { SvgIcon } from '../SvgIcon';
 
 export default defineComponent({
   components: {
     SvgIcon,
+    CustomButton,
   },
   props: {
     title: {
@@ -15,12 +17,10 @@ export default defineComponent({
       default: null,
       type: String,
     },
+    disabled: {
+      default: false,
+      type: Boolean,
+    },
   },
   emits: ['close', 'ok'],
-  setup(properties) {
-    return {
-      titleModal: properties.title,
-      form: properties.formName,
-    };
-  },
 });
