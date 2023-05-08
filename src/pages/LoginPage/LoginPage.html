@@ -6,6 +6,7 @@
     type="text"
     v-model="formData.username"
     class="input"
+    :disabled="loading"
   />
   <FormInput
     :errorMessage="v$.password.$errors[0]?.$message"
@@ -13,6 +14,7 @@
     type="password"
     v-model="formData.password"
     class="input"
+    :disabled="loading"
   />
-  <CustomButton text="Submit" variant="info" class="button"></CustomButton>
+  <CustomButton text="Submit" variant="info" class="button" :disabled="loading"></CustomButton>
 </form>

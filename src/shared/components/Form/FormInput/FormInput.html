@@ -1,10 +1,14 @@
 <p class="input-wrapper" :class="{error: errorMessage}">
-  <input
-    :type="type"
-    :placeholder="placeholder"
-    :value="modelValue"
-    @input="$emit('update:modelValue', $event.target.value)"
-    :autocomplete="autocomplete"
-  />
+  <label>
+    <template v-if="showLabel">{{ placeholder }}</template>
+    <input
+      :type="type"
+      :placeholder="placeholder"
+      :value="modelValue"
+      @input="$emit('update:modelValue', $event.target.value)"
+      :autocomplete="autocomplete"
+      :disabled="disabled"
+    />
+  </label>
   <span v-if="errorMessage" class="error-message">{{ errorMessage }}</span>
 </p>

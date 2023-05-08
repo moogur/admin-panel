@@ -1,4 +1,5 @@
 import useVuelidate from '@vuelidate/core';
+import { storeToRefs } from 'pinia';
 import { defineComponent, onMounted, reactive } from 'vue';
 
 import { LoginAdmin } from '@api';
@@ -13,8 +14,9 @@ export default defineComponent({
     CustomButton,
   },
   setup() {
-    const adminLoginStore = useAdminLoginStore();
     const getAdminInfoStore = useGetAdminInfoStore();
+    const adminLoginStore = useAdminLoginStore();
+    const { loading } = storeToRefs(adminLoginStore);
     const formData = reactive<LoginAdmin>({
       username: '',
       password: '',
@@ -34,6 +36,6 @@ export default defineComponent({
       adminLoginThunk({ data: formData });
     };
 
-    return { formData, v$, onSubmit };
+    return { formData, v$, onSubmit, loading };
   },
 });

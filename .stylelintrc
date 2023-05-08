@@ -37,7 +37,8 @@
         "border-in-box-model": true,
         "empty-line-between-groups": true
       }
-    ]
+    ],
+    "font-family-no-missing-generic-family-keyword": [true, { "ignoreFontFamilies": ["Nunito"] }]
   },
   "customSyntax": "postcss-scss",
   "overrides": [
