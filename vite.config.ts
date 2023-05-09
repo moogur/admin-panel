@@ -22,7 +22,12 @@ const build = {
   rollupOptions: {
     output: {
       manualChunks: (path) => {
-        if (/node_modules/.test(path)) return `lib.${path.split('node_modules/')[1]?.split('/')[0]?.replace('@', '')}`;
+        if (/node_modules/.test(path)) {
+          const libName = path.split('node_modules/')[1]?.split('/')[0]?.replace('@', '');
+          if (libName === 'vue' || libName === 'vue-router') return `lib.${libName}`;
+          return 'lib.other';
+        }
+        return 'app';
       },
       assetFileNames: ({ name }) => {
         switch (true) {
