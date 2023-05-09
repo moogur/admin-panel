@@ -3,7 +3,7 @@ import { storeToRefs } from 'pinia';
 import { defineComponent, onMounted, onUnmounted, ref, reactive } from 'vue';
 
 import { UpdateAdminBody } from '@api';
-import { Modal, FormInput, CustomButton } from '@shared/components';
+import { Modal, FormInput, CustomButton, List } from '@shared/components';
 import {
   useAuthStore,
   getAdminInfoThunk,
@@ -20,6 +20,7 @@ export default defineComponent({
     Modal,
     FormInput,
     CustomButton,
+    List,
   },
   setup() {
     const { user } = storeToRefs(useAuthStore());
@@ -60,9 +61,11 @@ export default defineComponent({
       });
     };
 
+    const data = list.map((item) => ({ title: item.title, value: user.value?.[item.key] ?? '-' }));
+
     return {
       user,
-      list,
+      data,
       infoLoading,
       updateLoading,
       showModal,

@@ -1,17 +1,6 @@
-<ul class="info-list">
-  <h4 class="info-title">User info</h4>
-  <li v-for="{title, key} in list">
-    <span class="text">{{ title }}</span>
-    <span class="value">{{ user?.[key] ?? '-' }}</span>
-  </li>
-  <CustomButton
-    text="Edit"
-    variant="primary"
-    :disabled="infoLoading"
-    @click="setShowModal(true)"
-    class="button"
-  ></CustomButton>
-</ul>
+<List :data="data" title="User info">
+  <CustomButton variant="primary" :disabled="infoLoading" @click="setShowModal(true)" class="button">Edit</CustomButton>
+</List>
 <Modal
   v-if="showModal"
   @close="setShowModal(false)"

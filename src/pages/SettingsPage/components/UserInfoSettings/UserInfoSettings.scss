@@ -1,24 +1,3 @@
-.info-list {
-
-  @include list-group;
-}
-
-.info-title {
-  margin-bottom: 25px;
-}
-
-.text {
-  min-width: 100px;
-
-  font-weight: bold;
-}
-
-.value {
-  flex: 1;
-
-  white-space: nowrap;
-}
-
 .button {
   margin-top: 25px;
 }

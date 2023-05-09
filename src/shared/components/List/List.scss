@@ -1,0 +1,25 @@
+.list {
+  @include list-group;
+}
+
+.title {
+  margin-bottom: 25px;
+}
+
+.text,
+.value {
+  min-width: 100px;
+}
+
+.text {
+  padding-right: 15px;
+
+  font-weight: bold;
+}
+
+.value {
+  flex: 1;
+  padding-left: 15px;
+
+  white-space: nowrap;
+}

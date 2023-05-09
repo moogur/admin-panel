@@ -10,22 +10,13 @@
       <slot></slot>
     </div>
     <div class="modal-footer">
-      <CustomButton
-        text="Cancel"
-        variant="secondary"
-        @click="$emit('close')"
-        class="close-button"
-        :disabled="disabled"
-      ></CustomButton>
-      <CustomButton
-        v-if="!!formName"
-        text="OK"
-        variant="primary"
-        type="submit"
-        :form="formName"
-        :disabled="disabled"
-      ></CustomButton>
-      <CustomButton v-else text="OK" variant="primary" @click="$emit('ok')" :disabled="disabled"></CustomButton>
+      <CustomButton variant="secondary" @click="$emit('close')" class="close-button" :disabled="disabled"
+        >Cancel</CustomButton
+      >
+      <CustomButton v-if="!!formName" variant="primary" type="submit" :form="formName" :disabled="disabled"
+        >OK</CustomButton
+      >
+      <CustomButton v-else variant="primary" @click="$emit('ok')" :disabled="disabled">OK</CustomButton>
     </div>
   </div>
 </section>

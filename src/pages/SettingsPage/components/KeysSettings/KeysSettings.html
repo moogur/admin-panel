@@ -2,6 +2,6 @@
   <h4 class="regenerate-title">Regenerate the secret key for:</h4>
   <li v-for="{title, action} in list">
     <span class="text">{{ title }}</span>
-    <CustomButton text="generate" variant="light" class="action" :disabled="loading" @click="action"></CustomButton>
+    <CustomButton variant="light" class="action" :disabled="loading" @click="action">generate</CustomButton>
   </li>
 </ul>
