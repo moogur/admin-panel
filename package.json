@@ -7,7 +7,7 @@
   "type": "module",
   "license": "UNLICENSED",
   "engines": {
-    "node": "16"
+    "node": "18.16.0"
   },
   "scripts": {
     "dev": "export $(cat env/.development.env | xargs) && vite",
