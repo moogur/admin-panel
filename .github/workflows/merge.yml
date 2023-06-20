@@ -1,0 +1,26 @@
+name: Create release drafter and update task
+
+on:
+  pull_request:
+    branches:
+      - master
+    types: [closed]
+
+jobs:
+  kanboard:
+    if: ${{ github.event.pull_request.merged }}
+    uses: moogur/all-workflows/.github/workflows/kanboard.yml@master
+    secrets: inherit
+    with:
+      kanboard_columns: '51,38,39,40,41,42,43'
+      project_type: 'multi_branch'
+      event_type: 'merge'
+
+  update-release-draft:
+    needs: kanboard
+    if: ${{ github.event.pull_request.merged }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: release-drafter/release-drafter@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

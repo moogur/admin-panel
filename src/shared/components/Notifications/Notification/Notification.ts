@@ -11,7 +11,7 @@ export default defineComponent({
     SvgIcon,
   },
   props: {
-    id: { type: String, required: true },
+    id: { type: Number, required: true },
     type: { type: String as () => NotificationType, required: true },
     title: { type: String, required: true },
     message: { type: String, required: true },

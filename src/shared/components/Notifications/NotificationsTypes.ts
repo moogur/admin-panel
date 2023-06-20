@@ -12,5 +12,5 @@ export interface Notification {
 }
 
 export interface NotificationWithId extends Notification {
-  id: string;
+  id: number;
 }

@@ -1,1 +1,1 @@
-export const AUTHORIZATION_BASEURL = '/authorization-api';
+export const AUTHORIZATION_BASEURL = import.meta.env['VITE_AUTHORIZATION_BASEURL'];

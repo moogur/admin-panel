@@ -66,15 +66,15 @@ function checkMaxLength() {
   fi
 }
 
-branch_name=$(git branch --show-current)
+branch_name=$(git rev-parse --abbrev-ref HEAD)
+commit_message_from_file=$(cat "$1")
 
 if [[ "$branch_name" == "master" ]]; then
   # variables
-  commit=$(cat "$1")
-  task_number=$(echo "$commit" | awk -F' ' '{print $1}')
-  type=$(echo "$commit" | awk -F'] ' '{print $2}' | awk -F'(' '{print $1}')
-  scope=$(echo "$commit" | awk -F'(' '{print $2}' | awk -F')' '{print $1}')
-  message=$(echo "$commit" | awk -F': ' '{print $2}')
+  task_number=$(echo "$commit_message_from_file" | awk -F' ' '{print $1}')
+  type=$(echo "$commit_message_from_file" | awk -F'] ' '{print $2}' | awk -F'(' '{print $1}')
+  scope=$(echo "$commit_message_from_file" | awk -F'(' '{print $2}' | awk -F')' '{print $1}')
+  message=$(echo "$commit_message_from_file" | awk -F': ' '{print $2}')
 
   # checking
   ## TASK NUMBER
@@ -93,15 +93,20 @@ if [[ "$branch_name" == "master" ]]; then
   checkLowercase "SUBJECT" "$message"
   checkMaxLength "SUBJECT" 125 "$message"
 else
-  ### variables
-  message=$(cat "$1")
-  mapfile -t message_chunks < <( echo "$message" | tr ' ' '\n' )
-  tail="${message_chunks[*]:1}"
+  if [[ "${commit_message_from_file:0:1}" == "[" ]]; then
+    mapfile -t message_chunks < <( echo "$commit_message_from_file" | tr ' ' '\n' )
+    tail=$(IFS=" " ; echo "${message_chunks[*]:1}")
+    validateTaskNumber "${message_chunks[0]}"
+  else
+    tail=$commit_message_from_file
+    task_number=$(git rev-parse --abbrev-ref HEAD | tr "/" " " | tr "_" " " | awk '{ print $2 }')
+    new_message="[$task_number] $commit_message_from_file"
+    sed -i "" -e "1s/.*/$new_message/" "$1"
+  fi
 
   ### checking
-  validateTaskNumber "${message_chunks[0]}"
   checkEmpty "BODY" "$tail"
-  checkMaxLength "COMMIT" 125 "$message"
+  checkMaxLength "COMMIT" 125 "$commit_message_from_file"
 fi
 
 ### lint and prettier checks

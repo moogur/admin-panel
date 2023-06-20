@@ -15,6 +15,7 @@
     "skipLibCheck": true,
     "noEmit": true,
     "removeComments": true,
+    "baseUrl": "./",
     "forceConsistentCasingInFileNames": false,
     "paths": {
       "@api": ["./src/api/index.ts"],
@@ -28,7 +29,7 @@
       "@store": ["./src/store/index.ts"],
       "@store/*": ["./src/store/*"],
       "@src/*": ["./src/*"]
-    },
+    }
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue"],
   "references": [{ "path": "./tsconfig.node.json" }]
