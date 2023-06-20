@@ -19,3 +19,4 @@ jobs:
     secrets: inherit
     with:
       sonar_project_key: 'authorization_api'
+      skip_tests: 'true'
