@@ -23,8 +23,8 @@ scanner.cli(
       'sonar.language': 'ts',
       'sonar.projectBaseDir': '.',
       'sonar.sources': 'src',
-      'sonar.tests': 'src',
       // TODO uncomment when tests are added
+      // 'sonar.tests': 'src',
       // 'sonar.exclusions': 'src/**/tests/**/*',
       // 'sonar.test.inclusions': 'src/**/tests/**/*.(spec|test).ts',
       // 'sonar.typescript.lcov.reportPaths': 'coverage/unit/lcov.info',
