@@ -5,6 +5,7 @@ import { createHtmlPlugin } from 'vite-plugin-html';
 import { visualizer } from 'rollup-plugin-visualizer';
 import viteImagemin from 'vite-plugin-imagemin';
 import path from 'node:path';
+import zlib from "zlib";
 
 import tsconfig from './tsconfig.json';
 
@@ -22,7 +23,7 @@ const alias = Object.entries(tsconfig.compilerOptions.paths).reduce<Array<{repla
 
     return accumulator;
   },
-  [],
+  [{find: '@fonts', replacement: path.resolve(__dirname, 'assets/fonts')}],
 );
 
 const build = {
@@ -45,6 +46,10 @@ const build = {
 
           case /\.css$/i.test(name ?? ''): {
             return `styles/[name].[hash][extname]`;
+          }
+
+          case /\.(ttf|otf|woff|woff2)$/i.test(name ?? ''): {
+            return `fonts/[name][extname]`;
           }
 
           default: {
@@ -139,6 +144,11 @@ export default defineConfig(({ mode }) => {
             filter: /\.(js|json|css|html|svg)$/i,
             deleteOriginFile: false,
             threshold: 512,
+            compressionOptions: {
+              params: {
+                [zlib.constants.GZIP]: 9,
+              },
+            }
           }),
           viteCompression({
             algorithm: 'brotliCompress',
@@ -146,6 +156,11 @@ export default defineConfig(({ mode }) => {
             filter: /\.(js|json|css|html|svg)$/i,
             deleteOriginFile: false,
             threshold: 512,
+            compressionOptions: {
+              params: {
+                [zlib.constants.BROTLI_PARAM_QUALITY]: 11,
+              },
+            }
           }),
         ],
         build,
