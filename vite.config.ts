@@ -6,16 +6,24 @@ import { visualizer } from 'rollup-plugin-visualizer';
 import viteImagemin from 'vite-plugin-imagemin';
 import path from 'node:path';
 
-const alias = [
-  { find: '@api', replacement: path.resolve(__dirname, 'src', 'api') },
-  { find: '@app', replacement: path.resolve(__dirname, 'src', 'app') },
-  { find: '@assets', replacement: path.resolve(__dirname, 'src', 'assets') },
-  { find: '@pages', replacement: path.resolve(__dirname, 'src', 'pages') },
-  { find: '@router', replacement: path.resolve(__dirname, 'src', 'router') },
-  { find: '@shared', replacement: path.resolve(__dirname, 'src', 'shared') },
-  { find: '@store', replacement: path.resolve(__dirname, 'src', 'store') },
-  { find: '@src', replacement: path.resolve(__dirname, 'src') },
-];
+import tsconfig from './tsconfig.json';
+
+const alias = Object.entries(tsconfig.compilerOptions.paths).reduce<Array<{replacement: string, find: string}>>(
+  (accumulator, [key, value]) => {
+    const preparedKey = key.split('/')[0];
+    const preparedPath = path.resolve(
+      __dirname,
+      value[0].replace(/(\*|index.ts)?$/, ''),
+    )
+
+    if (accumulator.every(item => item.replacement !== preparedPath)) {
+      accumulator.push({find: preparedKey, replacement: preparedPath});
+    }
+
+    return accumulator;
+  },
+  [],
+);
 
 const build = {
   sourcemap: false,
@@ -153,7 +161,7 @@ export default defineConfig(({ mode }) => {
         server: {
           port: 3000,
           proxy: {
-            '/authorization-api': 'http://test.admin.server.lan',
+            [process.env['VITE_AUTHORIZATION_BASEURL']]: 'http://test.admin.server.lan',
           },
         },
         resolve: { alias },

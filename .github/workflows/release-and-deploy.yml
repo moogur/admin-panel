@@ -1,4 +1,4 @@
-name: Release
+name: Release, deploy and update task
 
 on:
   push:
@@ -6,7 +6,16 @@ on:
       - v*.*.*
 
 jobs:
+  kanboard:
+    uses: moogur/all-workflows/.github/workflows/kanboard.yml@master
+    secrets: inherit
+    with:
+      kanboard_columns: '51,38,39,40,41,42,43'
+      project_type: 'multi_branch'
+      event_type: 'deploy'
+
   release:
+    needs: kanboard
     runs-on: ubuntu-latest
     steps:
       - name: 'Checkout'
@@ -16,11 +25,7 @@ jobs:
         id: version
         run: |
           tag=${GITHUB_REF/refs\/tags\//}
-          version=${tag#v}
-          major=${version%%.*}
-          echo "TAG=${tag}" >> $GITHUB_OUTPUT
-          echo "VERSION=${version}" >> $GITHUB_OUTPUT
-          echo "MAJOR=${major}" >> $GITHUB_OUTPUT
+          echo "VERSION=${tag#v}" >> $GITHUB_OUTPUT
 
       - name: 'Publish release'
         uses: release-drafter/release-drafter@v5
@@ -29,3 +34,8 @@ jobs:
           publish: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  deploy:
+    needs: release
+    uses: moogur/all-workflows/.github/workflows/deploy_for_frontend.yml@master
+    secrets: inherit

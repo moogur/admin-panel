@@ -2,19 +2,24 @@ import scanner from 'sonarqube-scanner';
 
 import { shaLatestCommit, latestTag, exec } from './helpers.js';
 
-const token =
-  process.env['SONAR_TOKEN'] ?? exec('export $(cat .env.development.local | xargs) && echo $VITE_SONAR_TOKEN');
-const serverUrl =
-  process.env['SONAR_SERVER_URL'] ??
-  exec('export $(cat .env.development.local | xargs) && echo $VITE_SONAR_SERVER_URL');
+// set variables
+const token = process.env['SONAR_TOKEN'] ?? exec('export $(cat env/.sonar.env | xargs) && echo $SONAR_TOKEN');
 
-scanner(
+const serverUrl = process.env['SONAR_HOST_URL'] ?? exec('export $(cat env/.sonar.env | xargs) && echo $SONAR_HOST_URL');
+
+const analyzeBranch = process.env['ANALYZE_BRANCH'] ?? branch;
+
+const version = process.env['LATEST_TAG'] ?? latestTag;
+
+// run scanner
+scanner.cli(
+  [`-Dsonar.login=${token}`, `-Dsonar.branch.name=${analyzeBranch}`],
   {
     serverUrl,
-    token,
     options: {
       'sonar.projectName': 'Admin panel UI',
-      'sonar.projectVersion': `${latestTag}-${shaLatestCommit}`,
+      'sonar.projectKey': 'authorization_ui',
+      'sonar.projectVersion': version,
       'sonar.language': 'ts',
       'sonar.projectBaseDir': '.',
       'sonar.sources': 'src',
