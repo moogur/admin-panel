@@ -10,7 +10,7 @@
     "node": "18.16.0"
   },
   "scripts": {
-    "dev": "export $(cat env/.development.env | xargs) && vite",
+    "start": "export $(cat env/.development.env | xargs) && vite",
     "build": "vue-tsc && export $(cat env/.production.env | xargs) && vite build && rm ./dist/index-dev.* && rm -fr ./dist/public",
     "visualizer": "vue-tsc && vite build --mode visualizer",
     "preview": "npm run build && vite preview",
