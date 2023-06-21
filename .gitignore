@@ -17,6 +17,7 @@ coverage
 # Environment
 env/*
 !env/.example.env
+!env/.production.env
 
 # Editor directories and files
 .vscode/*

@@ -9,7 +9,7 @@ export const useUpdateSecretStore = defineStore({
   state: getBaseInitialState<{ status: true }>(),
   actions: {
     thunk(type: SecretKeysEnum) {
-      return thunkRequestHelper(this, authorizationService.updateSecret, { data: { type } });
+      return thunkRequestHelper(this, authorizationService.updateSecret, { body: { type } });
     },
   },
 });

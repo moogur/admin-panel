@@ -29,7 +29,7 @@ export async function thunkRequestHelper<T, K extends BaseStore<T>, L>(
   try {
     const controller = new AbortController();
     that.abortController = controller;
-    that.data = await thunk({ ...parameter, abortSignal: controller.signal });
+    that.data = await thunk({ ...parameter, signal: controller.signal });
     Object.assign(that, additionToRequest);
   } catch (error) {
     const preparedError = prepareError(error);

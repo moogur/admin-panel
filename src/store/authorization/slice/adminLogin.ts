@@ -8,8 +8,8 @@ export const useAdminLoginStore = defineStore({
   id: 'adminLogin',
   state: getBaseInitialState<Admin>(),
   actions: {
-    thunk(data: LoginAdmin) {
-      return thunkRequestHelper(this, authorizationService.adminLogin, { data });
+    thunk(body: LoginAdmin) {
+      return thunkRequestHelper(this, authorizationService.adminLogin, { body });
     },
   },
 });
