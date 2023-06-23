@@ -4,6 +4,7 @@
     <LeftMenu></LeftMenu>
     <article class="container">
       <header>
+        <span v-if="version" class="version">v {{ version }}</span>
         <Separator class="separator"></Separator>
         <span class="username">{{user?.username}}</span>
         <SvgIcon icon="defaultAdmin" class="icon"></SvgIcon>

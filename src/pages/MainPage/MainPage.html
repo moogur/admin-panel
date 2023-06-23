@@ -1,4 +1,23 @@
 <article class="container">
-  <List :data="services" title="List of services"></List>
-  <List :data="swaggers" title="List of swaggers"></List>
+  <section class="services">
+    <h3 class="header">List of services</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Link to swagger</th>
+          <th>Version</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="{title, swaggerLink, key} in services">
+          <td>{{ title }}</td>
+          <td>
+            <a class="value" :href="swaggerLink" target="_blank" rel="noreferrer">{{ swaggerLink }}</a>
+          </td>
+          <td>{{ versions?.[key] }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
 </article>

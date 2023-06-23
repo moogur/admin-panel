@@ -3,7 +3,7 @@ import { OnlyId, RequestConfig, RequestConfigWithAbortSignal, SecretKeysEnum } f
 import { BaseApiService } from '../baseApi';
 import { AUTHORIZATION_BASEURL } from '../baseUrls';
 
-import { Admin, LoginAdmin, UpdateAdminBody } from './authorizationTypes';
+import { Admin, LoginAdmin, ServicesVersions, UpdateAdminBody } from './authorizationTypes';
 
 export class AuthorizationService extends BaseApiService {
   constructor() {
@@ -42,6 +42,13 @@ export class AuthorizationService extends BaseApiService {
     this.request({
       method: 'PATCH',
       url: '/admin',
+      ...config,
+    });
+
+  public getServicesVersions = (config: RequestConfigWithAbortSignal<undefined>): Promise<ServicesVersions> =>
+    this.request({
+      method: 'GET',
+      url: '/info/servicesVersions',
       ...config,
     });
 }

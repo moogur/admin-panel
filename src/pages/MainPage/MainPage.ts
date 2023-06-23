@@ -1,17 +1,18 @@
+import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
 
-import { List } from '@shared/components';
+import { useGetServicesVersionsStore } from '@store';
 
-import { services, swaggers } from './constants';
+import { services } from './constants';
 
 export default defineComponent({
-  components: {
-    List,
-  },
   setup() {
+    const getServicesVersionsStore = useGetServicesVersionsStore();
+    const { data } = storeToRefs(getServicesVersionsStore);
+
     return {
       services,
-      swaggers,
+      versions: data,
     };
   },
 });

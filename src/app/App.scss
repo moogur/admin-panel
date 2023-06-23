@@ -41,7 +41,11 @@ header {
 }
 
 .separator {
-  margin-right: 15px;
+  margin: 0 15px;
+}
+
+.version {
+  color: var(--h-font-color);
 }
 
 .username {
