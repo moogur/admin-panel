@@ -1,6 +1,6 @@
 import { ResponseType } from './response';
 
-export type RequestMethod = 'get' | 'post' | 'put' | 'delete' | 'patch';
+export type RequestMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
 
 export type RequestConfig<T> = T extends undefined
   ? {

@@ -12,35 +12,35 @@ export class AuthorizationService extends BaseApiService {
 
   public adminLogin = (config: RequestConfigWithAbortSignal<LoginAdmin>): Promise<Admin> =>
     this.request({
-      method: 'post',
+      method: 'POST',
       url: '/admin/login',
       ...config,
     });
 
   public adminLogout = (config: RequestConfigWithAbortSignal<undefined>): Promise<OnlyId> =>
     this.request({
-      method: 'post',
+      method: 'POST',
       url: '/admin/logout',
       ...config,
     });
 
   public getAdminInfo = (config: RequestConfigWithAbortSignal<undefined>): Promise<Admin> =>
     this.request({
-      method: 'get',
+      method: 'GET',
       url: '/admin',
       ...config,
     });
 
   public updateSecret = (config: RequestConfig<{ type: SecretKeysEnum }>): Promise<{ status: true }> =>
     this.request({
-      method: 'put',
+      method: 'PUT',
       url: '/secretOrToken',
       ...config,
     });
 
   public updateAdminInfo = (config: RequestConfig<UpdateAdminBody>): Promise<Admin> =>
     this.request({
-      method: 'patch',
+      method: 'PATCH',
       url: '/admin',
       ...config,
     });
