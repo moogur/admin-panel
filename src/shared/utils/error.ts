@@ -1,5 +1,5 @@
-import { ApiError, apiError520 } from '@api/baseApi';
+import { HTTPError, baseHttpError520 } from '@api/baseApi';
 
-export function prepareError(error: unknown): ApiError {
-  return error instanceof ApiError ? error : apiError520;
+export function prepareError(error: unknown): HTTPError {
+  return error instanceof HTTPError ? error : baseHttpError520;
 }

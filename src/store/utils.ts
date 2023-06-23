@@ -29,23 +29,23 @@ export async function thunkRequestHelper<T, K extends BaseStore<T>, L>(
   try {
     const controller = new AbortController();
     that.abortController = controller;
-    that.data = await thunk({ ...parameter, abortSignal: controller.signal });
+    that.data = await thunk({ ...parameter, signal: controller.signal });
     Object.assign(that, additionToRequest);
   } catch (error) {
     const preparedError = prepareError(error);
-    if (preparedError.statusCode === 401) {
+    if (preparedError.response.status === 401) {
       Object.assign(that, additionTo401Error);
       logout();
-    } else if (preparedError.statusCode === 499) {
+    } else if (preparedError.response.status === 499) {
       Object.assign(that, additionToAbort);
     } else {
       Object.assign(that, additionToError, { error: preparedError });
     }
-    throw preparedError;
+    throw error;
   }
 }
 
 export function showErrorMessage(error: unknown) {
   const preparedError = prepareError(error);
-  if (preparedError.statusCode !== 499) errorNotification(preparedError);
+  if (preparedError.response.status !== 499) errorNotification(preparedError);
 }

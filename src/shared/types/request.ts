@@ -1,19 +1,27 @@
-import { KyInstance } from 'ky/distribution/types/ky';
+import { ResponseType } from './response';
+
+export type RequestMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
 
 export type RequestConfig<T> = T extends undefined
   ? {
       headers?: Record<string, string>;
     }
   : {
-      data?: T;
+      body?: T;
       headers?: Record<string, string>;
     };
 
 export type RequestConfigWithAbortSignal<T> = {
-  abortSignal?: AbortSignal;
+  signal?: AbortSignal;
 } & RequestConfig<T>;
 
 export type AdvancedRequestConfig<T> = RequestConfigWithAbortSignal<T> & {
-  method: keyof Pick<KyInstance, 'get' | 'post' | 'put' | 'delete' | 'patch'>;
+  method: RequestMethod;
   url: string;
 };
+
+export interface ConfigForFetch {
+  baseUrl: string;
+  responseType: ResponseType;
+  headers?: Record<string, string>;
+}

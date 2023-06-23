@@ -8,8 +8,8 @@ export const useUpdateAdminInfoStore = defineStore({
   id: 'updateAdminInfo',
   state: getBaseInitialState<Admin>(),
   actions: {
-    thunk(data: UpdateAdminBody) {
-      return thunkRequestHelper(this, authorizationService.updateAdminInfo, { data });
+    thunk(body: UpdateAdminBody) {
+      return thunkRequestHelper(this, authorizationService.updateAdminInfo, { body });
     },
   },
 });
