@@ -5,25 +5,22 @@ import { createHtmlPlugin } from 'vite-plugin-html';
 import { visualizer } from 'rollup-plugin-visualizer';
 import viteImagemin from 'vite-plugin-imagemin';
 import path from 'node:path';
-import zlib from "zlib";
+import zlib from 'zlib';
 
 import tsconfig from './tsconfig.json';
 
-const alias = Object.entries(tsconfig.compilerOptions.paths).reduce<Array<{replacement: string, find: string}>>(
+const alias = Object.entries(tsconfig.compilerOptions.paths).reduce<Array<{ replacement: string; find: string }>>(
   (accumulator, [key, value]) => {
     const preparedKey = key.split('/')[0];
-    const preparedPath = path.resolve(
-      __dirname,
-      value[0].replace(/(\*|index.ts)?$/, ''),
-    )
+    const preparedPath = path.resolve(__dirname, value[0].replace(/(\*|index.ts)?$/, ''));
 
-    if (accumulator.every(item => item.replacement !== preparedPath)) {
-      accumulator.push({find: preparedKey, replacement: preparedPath});
+    if (accumulator.every((item) => item.replacement !== preparedPath)) {
+      accumulator.push({ find: preparedKey, replacement: preparedPath });
     }
 
     return accumulator;
   },
-  [{find: '@fonts', replacement: path.resolve(__dirname, 'assets/fonts')}],
+  [{ find: '@fonts', replacement: path.resolve(__dirname, 'assets/fonts') }],
 );
 
 const build = {
@@ -148,7 +145,7 @@ export default defineConfig(({ mode }) => {
               params: {
                 [zlib.constants.GZIP]: 9,
               },
-            }
+            },
           }),
           viteCompression({
             algorithm: 'brotliCompress',
@@ -160,7 +157,7 @@ export default defineConfig(({ mode }) => {
               params: {
                 [zlib.constants.BROTLI_PARAM_QUALITY]: 11,
               },
-            }
+            },
           }),
         ],
         build,
@@ -176,7 +173,11 @@ export default defineConfig(({ mode }) => {
         server: {
           port: 3000,
           proxy: {
-            [process.env['VITE_AUTHORIZATION_BASEURL']]: 'http://test.admin.server.lan',
+            [process.env['VITE_AUTHORIZATION_BASEURL']]: {
+              target: 'http://test.api.authorization.server.lan',
+              changeOrigin: true,
+              rewrite: (path) => path.replace(/^.*\//, '/'),
+            },
           },
         },
         resolve: { alias },
