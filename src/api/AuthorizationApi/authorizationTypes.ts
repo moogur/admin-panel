@@ -13,3 +13,7 @@ export interface Admin extends OnlyId {
 export interface UpdateAdminBody extends Omit<Admin, 'id'> {
   password?: string;
 }
+
+export interface ServicesVersions {
+  authorization: string | null;
+}

@@ -3,7 +3,7 @@ import { defineComponent, onMounted, watch, ref } from 'vue';
 import { useRoute } from 'vue-router';
 
 import { LeftMenu, MainLoader, Notifications, SvgIcon, Separator } from '@shared/components';
-import { useAuthStore, getAdminInfoThunk } from '@store';
+import { useAuthStore, getAdminInfoThunk, getServicesVersionsThunk } from '@store';
 
 const checkLoginPage = (path: string) => !path.startsWith('/login');
 
@@ -23,7 +23,7 @@ export default defineComponent({
     const notLoginPage = ref(checkLoginPage(route.path));
 
     onMounted(async () => {
-      if (isAuth.value) await getAdminInfoThunk();
+      if (isAuth.value) await Promise.allSettled([getAdminInfoThunk(), getServicesVersionsThunk()]);
       authStore.setWasInitialized();
     });
 
@@ -36,6 +36,7 @@ export default defineComponent({
       notLoginPage,
       user,
       isAuth,
+      version: import.meta.env['VITE_VERSION'],
     };
   },
 });

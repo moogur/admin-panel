@@ -176,7 +176,7 @@ export default defineConfig(({ mode }) => {
             [process.env['VITE_AUTHORIZATION_BASEURL']]: {
               target: 'http://test.api.authorization.server.lan',
               changeOrigin: true,
-              rewrite: (path) => path.replace(/^.*\//, '/'),
+              rewrite: (path) => path.replace(/^.{1,}?\//, '/'),
             },
           },
         },
