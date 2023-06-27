@@ -2,8 +2,8 @@ import { storeToRefs } from 'pinia';
 import { defineComponent, onMounted, watch, ref } from 'vue';
 import { useRoute } from 'vue-router';
 
-import { LeftMenu, MainLoader, Notifications, SvgIcon, Separator } from '@shared/components';
-import { useAuthStore, getAdminInfoThunk, getServicesVersionsThunk } from '@store';
+import { LeftMenu, MainLoader, Notifications, Separator, Avatar } from '@shared/components';
+import { useAuthStore, getAdminInfoThunk, requestsAfterLoginThunk } from '@store';
 
 const checkLoginPage = (path: string) => !path.startsWith('/login');
 
@@ -12,8 +12,8 @@ export default defineComponent({
     LeftMenu,
     MainLoader,
     Notifications,
-    SvgIcon,
     Separator,
+    Avatar,
   },
   setup() {
     const route = useRoute();
@@ -23,7 +23,7 @@ export default defineComponent({
     const notLoginPage = ref(checkLoginPage(route.path));
 
     onMounted(async () => {
-      if (isAuth.value) await Promise.allSettled([getAdminInfoThunk(), getServicesVersionsThunk()]);
+      if (isAuth.value) await Promise.allSettled([getAdminInfoThunk(false), requestsAfterLoginThunk()]);
       authStore.setWasInitialized();
     });
 

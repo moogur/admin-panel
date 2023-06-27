@@ -1,9 +1,12 @@
 <List :data="data" title="User info">
-  <CustomButton variant="primary" :disabled="infoLoading" @click="setShowModal(true)" class="button">Edit</CustomButton>
+  <CustomButton variant="primary" :disabled="infoLoading" @click="openInfoModal()" class="button">Edit</CustomButton>
+  <CustomButton variant="primary" :disabled="infoLoading" @click="openAvatarModal()" class="button"
+    >Change avatar</CustomButton
+  >
 </List>
 <Modal
-  v-if="showModal"
-  @close="setShowModal(false)"
+  v-if="showModal === 'info'"
+  @close="closeModal()"
   title="Edit information"
   formName="edit-info-form"
   :disabled="updateLoading"
@@ -37,4 +40,25 @@
       :disabled="updateLoading"
     />
   </form>
+</Modal>
+<Modal
+  v-if="showModal === 'avatar'"
+  @close="closeModal()"
+  @ok="changeAvatar()"
+  title="Change avatar"
+  :disabled="changeAvatarLoading"
+>
+  <div class="modal-avatar-wrapper" :class="{'show-upload-file': !changeAvatarLoading}">
+    <div class="input-wrapper" :class="{ 'full-opacity': !avatar.url }">
+      <SvgIcon
+        v-if="avatar.url && !changeAvatarLoading"
+        icon="close"
+        class="close-icon"
+        @click="removeAvatar()"
+      ></SvgIcon>
+      <input v-if="!changeAvatarLoading" type="file" @change="onFileChange" :accept="supportedImageTypesString" />
+      <SvgIcon icon="upload" class="upload-icon"></SvgIcon>
+    </div>
+    <img v-if="avatar.url" :src="avatar.url" alt="avatar" />
+  </div>
 </Modal>
