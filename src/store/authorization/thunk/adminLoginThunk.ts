@@ -6,7 +6,7 @@ import { showErrorMessage } from '@store/utils';
 
 import { useAdminLoginStore } from '../slice';
 
-import { getServicesVersionsThunk } from './getServicesVersionThunk';
+import { requestsAfterLoginThunk } from './requestsAfterLoginThunk';
 
 export async function adminLoginThunk(body: LoginAdmin) {
   const loginStore = useAdminLoginStore();
@@ -14,7 +14,7 @@ export async function adminLoginThunk(body: LoginAdmin) {
 
   try {
     await loginStore.thunk(body);
-    await getServicesVersionsThunk();
+    await requestsAfterLoginThunk();
 
     login({ data: data.value, needRedirect: true });
   } catch (error) {

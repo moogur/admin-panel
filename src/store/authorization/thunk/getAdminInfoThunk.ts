@@ -5,7 +5,7 @@ import { showErrorMessage } from '@store/utils';
 
 import { useGetAdminInfoStore } from '../slice';
 
-export async function getAdminInfoThunk() {
+export async function getAdminInfoThunk(showError = true) {
   const getAdminInfoStore = useGetAdminInfoStore();
   const { data } = storeToRefs(getAdminInfoStore);
 
@@ -14,6 +14,6 @@ export async function getAdminInfoThunk() {
 
     login({ data: data.value });
   } catch (error) {
-    showErrorMessage(error);
+    if (showError) showErrorMessage(error);
   }
 }

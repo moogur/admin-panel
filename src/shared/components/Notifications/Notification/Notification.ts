@@ -20,7 +20,7 @@ export default defineComponent({
     const timeoutId = ref<NodeJS.Timeout>();
 
     onMounted(() => {
-      timeoutId.value = setTimeout(() => removeNotifications(properties.id), 5 * 1000);
+      timeoutId.value = setTimeout(() => removeNotifications(properties.id), 5000);
     });
 
     onUnmounted(() => clearTimeout(timeoutId.value));
