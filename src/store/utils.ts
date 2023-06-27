@@ -1,5 +1,5 @@
 import { RequestConfig, RequestConfigWithAbortSignal } from '@shared/types';
-import { errorNotification, logout, prepareError } from '@shared/utils';
+import { backErrorNotification, logout, prepareError } from '@shared/utils';
 
 import { BaseStore } from './types';
 
@@ -47,5 +47,5 @@ export async function thunkRequestHelper<T, K extends BaseStore<T>, L>(
 
 export function showErrorMessage(error: unknown) {
   const preparedError = prepareError(error);
-  if (preparedError.response.status !== 499) errorNotification(preparedError);
+  if (preparedError.response.status !== 499) backErrorNotification(preparedError);
 }

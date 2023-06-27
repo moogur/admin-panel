@@ -1,0 +1,9 @@
+p {
+  display: inline-flex;
+  gap: 25px;
+  align-items: center;
+  padding: var(--card-cap-padding);
+  border-radius: var(--card-border-radius);
+
+  background-color: var(--card-bg);
+}

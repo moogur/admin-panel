@@ -73,4 +73,11 @@ export class AuthorizationService extends BaseApiService {
       },
       ...config,
     }).then(this.convertFileToUrl);
+
+  public getClientIp = (config?: RequestConfigForProperties): Promise<{ ip: string | null }> =>
+    this.request({
+      method: 'GET',
+      url: '/info/clientIp',
+      ...config,
+    });
 }

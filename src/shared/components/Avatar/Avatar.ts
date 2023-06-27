@@ -12,7 +12,7 @@ export default defineComponent({
     const avatarStore = useGetAvatarStore();
     const { data } = storeToRefs(avatarStore);
 
-    onUnmounted(avatarStore.$reset);
+    onUnmounted(() => avatarStore.$reset());
 
     return {
       data,
