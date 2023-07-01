@@ -5,6 +5,12 @@ export const links = {
     component: 'MainPage',
     icon: 'home',
   },
+  users: {
+    path: '/users',
+    title: 'Users',
+    component: 'UsersPage',
+    icon: 'users',
+  },
   settings: {
     path: '/settings',
     title: 'Settings',

@@ -20,10 +20,10 @@ const additionToRequest = { error: null, loaded: true, ...additionToAbort };
 const additionToError = { data: null, loaded: false, ...additionToAbort };
 const additionTo401Error = { error: null, ...additionToError };
 
-export async function thunkRequestHelper<T, K extends BaseStore<T>, L>(
+export async function thunkRequestHelper<T, K extends BaseStore<T>, L, M>(
   that: K,
-  thunk: (parameter: RequestConfigWithAbortSignal<L>) => Promise<T>,
-  parameter: RequestConfig<L>,
+  thunk: (parameter: RequestConfigWithAbortSignal<L, M>) => Promise<T>,
+  parameter: RequestConfig<L, M>,
 ) {
   that.loading = true;
   try {

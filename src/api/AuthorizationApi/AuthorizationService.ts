@@ -3,7 +3,15 @@ import { OnlyId, RequestConfigForProperties, SecretKeysEnum } from '@shared/type
 import { BaseApiService } from '../baseApi';
 import { AUTHORIZATION_BASEURL } from '../baseUrls';
 
-import { Admin, LoginAdmin, ServicesVersions, UpdateAdminBody, ServicesIps } from './authorizationTypes';
+import {
+  Admin,
+  LoginAdmin,
+  ServicesVersions,
+  UpdateAdminBody,
+  ServicesIps,
+  UsersWithPagination,
+  GetUsersQuery,
+} from './authorizationTypes';
 
 export class AuthorizationService extends BaseApiService {
   constructor() {
@@ -63,7 +71,7 @@ export class AuthorizationService extends BaseApiService {
     });
 
   public getAvatar = (config?: RequestConfigForProperties): Promise<string> =>
-    this.request<undefined, File>({
+    this.request<undefined, undefined, File>({
       method: 'GET',
       url: '/admin/avatar',
       convertResponse: 'blob',
@@ -85,6 +93,13 @@ export class AuthorizationService extends BaseApiService {
     this.request({
       method: 'GET',
       url: '/info/servicesIps',
+      ...config,
+    });
+
+  public getUsers = (config?: RequestConfigForProperties<undefined, GetUsersQuery>): Promise<UsersWithPagination> =>
+    this.request({
+      method: 'GET',
+      url: '/users',
       ...config,
     });
 }

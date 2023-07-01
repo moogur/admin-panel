@@ -18,7 +18,7 @@ export abstract class BaseApiService {
     };
   }
 
-  protected async request<T, K>(config: AdvancedRequestConfig<T>): Promise<K> {
+  protected async request<T, K, L>(config: AdvancedRequestConfig<T, K>): Promise<L> {
     let httpError = baseHttpError520;
 
     try {
@@ -41,7 +41,8 @@ export abstract class BaseApiService {
     return URL.createObjectURL(file);
   }
 
-  private prepareConfig<T>(externalConfig: AdvancedRequestConfig<T>) {
+  private prepareConfig<T, K>(externalConfig: AdvancedRequestConfig<T, K>) {
+    let url = this._config.baseUrl + externalConfig.url;
     const config: RequestInit = {
       method: externalConfig.method,
       signal: externalConfig.signal,
@@ -52,10 +53,32 @@ export abstract class BaseApiService {
       config.body = externalConfig.body instanceof FormData ? externalConfig.body : JSON.stringify(externalConfig.body);
     }
 
+    if ('queryParameters' in externalConfig) {
+      url += `${this.converterQueryToString(externalConfig.queryParameters)}`;
+    }
+
     return {
       config,
-      url: this._config.baseUrl + externalConfig.url,
+      url,
       convertResponse: externalConfig.convertResponse ?? this._config.convertResponse,
     };
+  }
+
+  private converterQueryToString<T>(queryParameters: T): string {
+    if (isObject(queryParameters)) {
+      return Object.entries(queryParameters).reduce<string>((accumulator, [key, value], index) => {
+        accumulator += this.convertValueToString(key, value, index);
+
+        return accumulator;
+      }, '');
+    }
+
+    return '';
+  }
+
+  private convertValueToString<T>(key: string, value: T, index: number): string {
+    const valueInString = `${key}=${String(value)}`;
+
+    return index ? `&${valueInString}` : `?${valueInString}`;
   }
 }

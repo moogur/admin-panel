@@ -8,3 +8,4 @@ export * from './getAvatar';
 export * from './changeAvatar';
 export * from './getClientIp';
 export * from './getServicesIps';
+export * from './getUsers';

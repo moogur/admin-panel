@@ -1,4 +1,4 @@
-import { OnlyId } from '@shared/types';
+import { BasePagination, GenderEnum, OnlyId, ResponseWithPagination, UserStatusEnum } from '@shared/types';
 
 export interface LoginAdmin {
   username: string;
@@ -21,3 +21,17 @@ export interface ServicesVersions {
 export interface ServicesIps extends ServicesVersions {
   server: string | null;
 }
+
+export interface User {
+  id: string;
+  username: string;
+  email: string;
+  status: UserStatusEnum;
+  createdDate: string | null;
+  updatedDate: string | null;
+  gender: GenderEnum;
+}
+
+export type UsersWithPagination = ResponseWithPagination<User>;
+
+export type GetUsersQuery = BasePagination;
