@@ -1,0 +1,9 @@
+<section class="wrapper" v-if="servicesIps?.server">
+  <h4 class="title">Server</h4>
+  <p>{{ servicesIps.server }}<Copy :text="servicesIps.server"></Copy></p>
+</section>
+
+<section class="wrapper" v-if="clientIp?.ip">
+  <h4 class="title">Client</h4>
+  <p>{{ clientIp.ip }}<Copy :text="clientIp.ip"></Copy></p>
+</section>

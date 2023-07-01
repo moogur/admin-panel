@@ -1,6 +1,6 @@
 import useVuelidate from '@vuelidate/core';
 import { storeToRefs } from 'pinia';
-import { defineComponent, onMounted, onUnmounted, ref, reactive } from 'vue';
+import { defineComponent, onUnmounted, ref, reactive } from 'vue';
 
 import { UpdateAdminBody } from '@api';
 import { Modal, FormInput, CustomButton, List, SvgIcon } from '@shared/components';
@@ -8,8 +8,6 @@ import { supportedImageTypesString } from '@shared/constants';
 import { InputFileEvent } from '@shared/types';
 import {
   useAuthStore,
-  getAdminInfoThunk,
-  useGetAdminInfoStore,
   updateAdminInfoThunk,
   useUpdateAdminInfoStore,
   useGetAvatarStore,
@@ -17,8 +15,8 @@ import {
   changeAvatarThunk,
 } from '@store';
 
-import { prepareFormData } from './UserInfoSettingsUtils';
-import { formValidationRules, list } from './constants';
+import { getData, prepareFormData } from './UserInfoSettingsUtils';
+import { formValidationRules } from './constants';
 
 export default defineComponent({
   components: {
@@ -31,14 +29,13 @@ export default defineComponent({
   setup() {
     const { user } = storeToRefs(useAuthStore());
     const updateInfoStore = useUpdateAdminInfoStore();
-    const infoStore = useGetAdminInfoStore();
     const avatarStore = useGetAvatarStore();
     const changeAvatarStore = useChangeAvatarStore();
     const { loading: updateLoading } = storeToRefs(updateInfoStore);
-    const { loading: infoLoading } = storeToRefs(infoStore);
     const { loading: changeAvatarLoading } = storeToRefs(changeAvatarStore);
     const showModal = ref<'info' | 'avatar' | null>(null);
     const avatar = ref<{ url: string | null; rawData: File | null }>({ url: avatarStore.data, rawData: null });
+    const data = ref(getData(user.value));
 
     const formData = reactive<Record<keyof UpdateAdminBody, string>>({
       username: '',
@@ -46,10 +43,7 @@ export default defineComponent({
       password: '',
     });
 
-    onMounted(getAdminInfoThunk);
     onUnmounted(() => {
-      infoStore.abortController?.abort();
-      infoStore.$reset();
       updateInfoStore.$reset();
     });
 
@@ -75,10 +69,9 @@ export default defineComponent({
 
       updateAdminInfoThunk(prepareFormData(formData), () => {
         showModal.value = null;
+        data.value = getData(user.value, formData);
       });
     };
-
-    const data = list.map((item) => ({ title: item.title, value: user.value?.[item.key] ?? '-' }));
 
     const onFileChange = (event: InputFileEvent) => {
       const file = event.target?.files?.[0];
@@ -103,7 +96,6 @@ export default defineComponent({
     return {
       user,
       data,
-      infoLoading,
       updateLoading,
       showModal,
       closeModal,

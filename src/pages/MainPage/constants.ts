@@ -1,9 +1,33 @@
-import { ServicesVersions } from '@api';
+import { h } from 'vue';
 
-export const services: Array<{ title: string; swaggerLink: string; key: keyof ServicesVersions }> = [
+import { ColumnsType } from '@shared/types';
+
+import { Service } from './MainPageTypes';
+
+export const columns: ColumnsType<Service> = [
   {
-    title: 'Authorization API',
-    swaggerLink: 'http://test.api.authorization.server.lan/swagger/',
-    key: 'authorization',
+    title: 'Name',
+    dataIndex: 'name',
+  },
+  {
+    title: 'Link to swagger',
+    dataIndex: 'swagger',
+    customRender: (value: string) => h('a', { href: value, target: '_blank', rel: 'noreferrer' }, value),
+  },
+  {
+    title: 'Version',
+    dataIndex: 'version',
+  },
+  {
+    title: 'IP',
+    dataIndex: 'ip',
   },
 ];
+
+export const baseDataSource = [
+  {
+    name: 'Authorization API',
+    swagger: 'http://test.api.authorization.server.lan/swagger/',
+    dataIndex: 'authorization',
+  },
+] as const;

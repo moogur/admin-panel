@@ -1,0 +1,22 @@
+.wrapper {
+  display: inline-block;
+  margin-right: 25px;
+  padding: var(--card-cap-padding);
+  border-radius: var(--card-border-radius);
+
+  background-color: var(--card-bg);
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.title {
+  margin-bottom: 25px;
+}
+
+p {
+  display: inline-flex;
+  gap: 25px;
+  align-items: center;
+}

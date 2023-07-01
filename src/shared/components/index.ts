@@ -8,3 +8,5 @@ export * from './Form';
 export * from './CustomButton';
 export * from './List';
 export * from './Avatar';
+export * from './Copy';
+export * from './CustomTable';

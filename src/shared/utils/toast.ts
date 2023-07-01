@@ -3,7 +3,7 @@ import { NotificationType } from '@shared/components/Notifications/Notifications
 
 import { createNotification } from '../components';
 
-export function errorNotification(error?: HTTPError | null) {
+export function backErrorNotification(error?: HTTPError | null) {
   if (!error) return;
   // if (error) {
   //   const message = Object.entries(error.errors)
@@ -18,6 +18,14 @@ export function errorNotification(error?: HTTPError | null) {
 }
 
 export function successNotification(title: string, message?: string) {
+  if (message) {
+    createNotification({ title, message, type: NotificationType.Success });
+  } else {
+    createNotification({ title, type: NotificationType.Success });
+  }
+}
+
+export function errorNotification(title: string, message?: string) {
   if (message) {
     createNotification({ title, message, type: NotificationType.Success });
   } else {

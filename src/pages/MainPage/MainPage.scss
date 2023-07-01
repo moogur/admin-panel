@@ -11,19 +11,3 @@
 
   background-color: var(--card-bg);
 }
-
-.header {
-  margin-bottom: 25px;
-}
-
-tr {
-  border-bottom: var(--border-width) solid var(--card-item-border-color);
-}
-
-th,
-td {
-  padding: 15px 20px;
-
-  color: var(--card-item-color);
-  text-align: start;
-}

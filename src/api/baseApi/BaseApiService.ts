@@ -19,25 +19,14 @@ export abstract class BaseApiService {
   }
 
   protected async request<T, K>(config: AdvancedRequestConfig<T>): Promise<K> {
-    const convertResponse = config.convertResponse ?? this._config.convertResponse;
     let httpError = baseHttpError520;
 
     try {
-      const mergedConfig: RequestInit = {
-        method: config.method,
-        signal: config.signal,
-        headers: config.headers ?? this._config.headers,
-      };
+      const preparedConfig = this.prepareConfig(config);
+      const response = await fetch(preparedConfig.url, preparedConfig.config);
 
-      if ('body' in config) {
-        mergedConfig.body = config.body instanceof FormData ? config.body : JSON.stringify(config.body);
-      }
-
-      const url = this._config.baseUrl + config.url;
-      const response = await fetch(url, mergedConfig);
-
-      if (response.ok) return await response[convertResponse]();
-      httpError = new HTTPError(response, new Request(url, mergedConfig));
+      if (response.ok) return await response[preparedConfig.convertResponse]();
+      httpError = new HTTPError(response, new Request(preparedConfig.url, preparedConfig.config));
     } catch (error) {
       if (isObject(error) && 'name' in error) {
         if (error.name === 'TimeoutError') httpError = baseHttpError524;
@@ -50,5 +39,23 @@ export abstract class BaseApiService {
 
   protected convertFileToUrl(file: File): string {
     return URL.createObjectURL(file);
+  }
+
+  private prepareConfig<T>(externalConfig: AdvancedRequestConfig<T>) {
+    const config: RequestInit = {
+      method: externalConfig.method,
+      signal: externalConfig.signal,
+      headers: externalConfig.headers ?? this._config.headers,
+    };
+
+    if ('body' in externalConfig) {
+      config.body = externalConfig.body instanceof FormData ? externalConfig.body : JSON.stringify(externalConfig.body);
+    }
+
+    return {
+      config,
+      url: this._config.baseUrl + externalConfig.url,
+      convertResponse: externalConfig.convertResponse ?? this._config.convertResponse,
+    };
   }
 }

@@ -1,12 +1,13 @@
 import { Ref, defineComponent, ref } from 'vue';
 
-import { KeysSettings, UserInfoSettings } from './components';
+import { KeysSettings, UserInfoSettings, IpsSettings } from './components';
 import { tabs } from './constants';
 
 export default defineComponent({
   components: {
     KeysSettings,
     UserInfoSettings,
+    IpsSettings,
   },
   setup() {
     const activeKeyItem: Ref<'keys' | 'info'> = ref(tabs[0]?.key);

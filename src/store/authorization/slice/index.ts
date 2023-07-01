@@ -6,3 +6,5 @@ export * from './updateAdminInfo';
 export * from './getServicesVersions';
 export * from './getAvatar';
 export * from './changeAvatar';
+export * from './getClientIp';
+export * from './getServicesIps';

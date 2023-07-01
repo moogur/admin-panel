@@ -1,0 +1,18 @@
+<section>
+  <h3 v-if="title" class="title">{{ title }}</h3>
+  <table>
+    <thead>
+      <tr>
+        <th v-for="{ title } in columns">{{ title }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="row in dataSource">
+        <td v-for="{ dataIndex, customRender } in columns">
+          <component v-if="customRender" :is="customRender(row[dataIndex], row)" />
+          <template v-else>{{ row[dataIndex] }}</template>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>

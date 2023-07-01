@@ -1,9 +1,9 @@
 <ul class="list">
   <h4 class="title">{{ title }}</h4>
-  <li v-for="{title, value, type} in data">
+  <li v-for="{title, value, customRender} in data">
     <span class="text">{{ title }}</span>
-    <a v-if="type === 'link'" class="value" :href="value" target="_blank" rel="noreferrer">{{ value }}</a>
-    <span v-else class="value">{{ value }}</span>
+    <component class="value" v-if="customRender" :is="customRender(title, value)" />
+    <span class="value" v-else-if="value">{{ value }}</span>
   </li>
   <slot></slot>
 </ul>

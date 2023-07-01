@@ -5,3 +5,4 @@ export * from './updateSecretThunk';
 export * from './updateAdminInfoThunk';
 export * from './changeAvatarThunk';
 export * from './requestsAfterLoginThunk';
+export * from './getClientIpThunk';
