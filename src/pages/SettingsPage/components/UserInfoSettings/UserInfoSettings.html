@@ -1,8 +1,6 @@
 <List :data="data" title="User info">
-  <CustomButton variant="primary" :disabled="infoLoading" @click="openInfoModal()" class="button">Edit</CustomButton>
-  <CustomButton variant="primary" :disabled="infoLoading" @click="openAvatarModal()" class="button"
-    >Change avatar</CustomButton
-  >
+  <CustomButton variant="primary" @click="openInfoModal()" class="button">Edit</CustomButton>
+  <CustomButton variant="primary" @click="openAvatarModal()" class="button">Change avatar</CustomButton>
 </List>
 <Modal
   v-if="showModal === 'info'"
@@ -49,7 +47,7 @@
   :disabled="changeAvatarLoading"
 >
   <div class="modal-avatar-wrapper" :class="{'show-upload-file': !changeAvatarLoading}">
-    <div class="input-wrapper" :class="{ 'full-opacity': !avatar.url }">
+    <div class="file-input-wrapper" :class="{ 'full-opacity': !avatar.url }">
       <SvgIcon
         v-if="avatar.url && !changeAvatarLoading"
         icon="close"

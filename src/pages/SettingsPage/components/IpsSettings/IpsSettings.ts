@@ -1,5 +1,5 @@
 import { storeToRefs } from 'pinia';
-import { defineComponent, onMounted } from 'vue';
+import { defineComponent, onMounted, onUnmounted } from 'vue';
 
 import { Copy } from '@shared/components';
 import { getClientIpThunk, useGetClientIpStore, useGetServicesIpsStore } from '@store';
@@ -15,6 +15,9 @@ export default defineComponent({
     const { data: servicesIps } = storeToRefs(getServicesIpsStore);
 
     onMounted(getClientIpThunk);
+    onUnmounted(() => {
+      getClientIpStore.abortController?.abort();
+    });
 
     return {
       clientIp,

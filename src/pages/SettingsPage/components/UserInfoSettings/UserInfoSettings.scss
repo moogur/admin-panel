@@ -10,7 +10,7 @@
   margin-bottom: 25px;
 }
 
-.input-wrapper {
+.file-input-wrapper {
   position: absolute;
   z-index: -1;
 
@@ -67,7 +67,7 @@
   }
 }
 
-.show-upload-file:hover .input-wrapper {
+.show-upload-file:hover .file-input-wrapper {
   z-index: 0;
 }
 
