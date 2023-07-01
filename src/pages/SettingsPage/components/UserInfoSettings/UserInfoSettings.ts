@@ -5,7 +5,7 @@ import { defineComponent, onMounted, onUnmounted, ref, reactive } from 'vue';
 import { UpdateAdminBody } from '@api';
 import { Modal, FormInput, CustomButton, List, SvgIcon } from '@shared/components';
 import { supportedImageTypesString } from '@shared/constants';
-import { InputFileEvent } from '@shared/types';
+import { InputFileEvent, ListItemsType } from '@shared/types';
 import {
   useAuthStore,
   getAdminInfoThunk,
@@ -78,7 +78,7 @@ export default defineComponent({
       });
     };
 
-    const data = list.map((item) => ({ title: item.title, value: user.value?.[item.key] ?? '-' }));
+    const data: ListItemsType = list.map((item) => ({ title: item.title, value: user.value?.[item.key] ?? '-' }));
 
     const onFileChange = (event: InputFileEvent) => {
       const file = event.target?.files?.[0];

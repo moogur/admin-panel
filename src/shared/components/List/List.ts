@@ -1,10 +1,12 @@
 import { defineComponent } from 'vue';
 
+import { ListItemType } from '@shared/types';
+
 export default defineComponent({
   props: {
     data: {
       required: true,
-      type: Array<{ title: string; value: unknown; type?: 'text' | 'link' }>,
+      type: Array<ListItemType>,
     },
     title: {
       required: true,
