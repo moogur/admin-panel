@@ -10,8 +10,8 @@ export const tabs = [
     component: 'UserInfoSettings',
   },
   {
-    key: 'clientIp',
-    title: 'Client IP',
-    component: 'ClientIpSettings',
+    key: 'ips',
+    title: 'IPs',
+    component: 'IpsSettings',
   },
 ] as const;

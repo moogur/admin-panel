@@ -17,3 +17,7 @@ export interface UpdateAdminBody extends Omit<Admin, 'id'> {
 export interface ServicesVersions {
   authorization: string | null;
 }
+
+export interface ServicesIps extends ServicesVersions {
+  server: string | null;
+}

@@ -1,3 +1,3 @@
 export * from './KeysSettings';
 export * from './UserInfoSettings';
-export * from './ClientIpSettings';
+export * from './IpsSettings';

@@ -2,7 +2,7 @@ import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
 
 import { CustomTable } from '@shared/components';
-import { useGetServicesVersionsStore } from '@store';
+import { useGetServicesVersionsStore, useGetServicesIpsStore } from '@store';
 
 import { Service } from './MainPageTypes';
 import { baseDataSource, columns } from './constants';
@@ -13,11 +13,14 @@ export default defineComponent({
   },
   setup() {
     const getServicesVersionsStore = useGetServicesVersionsStore();
-    const { data } = storeToRefs(getServicesVersionsStore);
+    const getServicesIpsStore = useGetServicesIpsStore();
+    const { data: versions } = storeToRefs(getServicesVersionsStore);
+    const { data: ips } = storeToRefs(getServicesIpsStore);
 
-    const dataSource: Service[] = baseDataSource.map(({ versionDataIndex, ...other }) => ({
+    const dataSource: Service[] = baseDataSource.map(({ dataIndex, ...other }) => ({
       ...other,
-      version: data.value?.[versionDataIndex],
+      version: versions.value?.[dataIndex],
+      ip: ips.value?.[dataIndex],
     }));
 
     return {

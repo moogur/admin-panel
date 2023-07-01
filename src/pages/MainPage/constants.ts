@@ -18,12 +18,16 @@ export const columns: ColumnsType<Service> = [
     title: 'Version',
     dataIndex: 'version',
   },
+  {
+    title: 'IP',
+    dataIndex: 'ip',
+  },
 ];
 
 export const baseDataSource = [
   {
     name: 'Authorization API',
     swagger: 'http://test.api.authorization.server.lan/swagger/',
-    versionDataIndex: 'authorization',
+    dataIndex: 'authorization',
   },
 ] as const;

@@ -3,7 +3,7 @@ import { OnlyId, RequestConfigForProperties, SecretKeysEnum } from '@shared/type
 import { BaseApiService } from '../baseApi';
 import { AUTHORIZATION_BASEURL } from '../baseUrls';
 
-import { Admin, LoginAdmin, ServicesVersions, UpdateAdminBody } from './authorizationTypes';
+import { Admin, LoginAdmin, ServicesVersions, UpdateAdminBody, ServicesIps } from './authorizationTypes';
 
 export class AuthorizationService extends BaseApiService {
   constructor() {
@@ -78,6 +78,13 @@ export class AuthorizationService extends BaseApiService {
     this.request({
       method: 'GET',
       url: '/info/clientIp',
+      ...config,
+    });
+
+  public getServicesIps = (config?: RequestConfigForProperties): Promise<ServicesIps> =>
+    this.request({
+      method: 'GET',
+      url: '/info/servicesIps',
       ...config,
     });
 }
