@@ -10,3 +10,4 @@ export * from './List';
 export * from './Avatar';
 export * from './Copy';
 export * from './CustomTable';
+export * from './Tag';
