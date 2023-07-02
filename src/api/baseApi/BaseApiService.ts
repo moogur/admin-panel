@@ -18,7 +18,9 @@ export abstract class BaseApiService {
     };
   }
 
-  protected async request<T, K, L>(config: AdvancedRequestConfig<T, K>): Promise<L> {
+  protected async request<Body, Url, Query, ReturnType>(
+    config: AdvancedRequestConfig<Body, Url, Query>,
+  ): Promise<ReturnType> {
     let httpError = baseHttpError520;
 
     try {
@@ -41,7 +43,7 @@ export abstract class BaseApiService {
     return URL.createObjectURL(file);
   }
 
-  private prepareConfig<T, K>(externalConfig: AdvancedRequestConfig<T, K>) {
+  private prepareConfig<Body, Url, Query>(externalConfig: AdvancedRequestConfig<Body, Url, Query>) {
     let url = this._config.baseUrl + externalConfig.url;
     const config: RequestInit = {
       method: externalConfig.method,

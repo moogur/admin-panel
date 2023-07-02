@@ -21,6 +21,10 @@ export default defineComponent({
       default: false,
       type: Boolean,
     },
+    showFooter: {
+      type: Boolean,
+      default: true,
+    },
   },
   emits: ['close', 'ok'],
 });

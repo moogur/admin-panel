@@ -13,7 +13,7 @@
 }
 
 .modal {
-  width: 500px;
+  width: 550px;
   border-radius: 8px;
 
   background-color: #ffffff;
@@ -27,6 +27,8 @@
 
 .modal-header {
   position: relative;
+
+  padding-bottom: 0;
 }
 
 .modal-title {
@@ -59,6 +61,7 @@
 .modal-footer {
   display: flex;
   justify-content: flex-end;
+  padding-top: 0;
 }
 
 .close-button {

@@ -1,0 +1,11 @@
+svg {
+  width: 18px;
+
+  color: #7c8db5;
+
+  cursor: pointer;
+}
+
+ul {
+  @include list-group;
+}

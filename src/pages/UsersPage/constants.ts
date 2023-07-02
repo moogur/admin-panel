@@ -1,8 +1,11 @@
-import { User, UserSortOrderFields } from '@api';
+import { h } from 'vue';
+
+import { BaseUser, UserSortOrderFields } from '@api';
 import { defaultPagination } from '@shared/constants';
 import { ColumnsType, TableChange } from '@shared/types';
-import { getDateToShowInTable } from '@shared/utils';
-import { convertGenderEnumToTag, convertStatusEnumToTag } from '@shared/utils/enum';
+import { getDateToShowInTable, convertGenderEnumToTag, convertStatusEnumToTag } from '@shared/utils';
+
+import { DetailModal } from './DetailModal';
 
 export const defaultQueryParameters: TableChange<UserSortOrderFields> = {
   action: null,
@@ -10,7 +13,7 @@ export const defaultQueryParameters: TableChange<UserSortOrderFields> = {
   sorter: { key: 'createdDate', sortOrder: 'ascend' },
 };
 
-export const columns: ColumnsType<User> = [
+export const columns: ColumnsType<BaseUser> = [
   {
     title: 'Username',
     dataIndex: 'username',
@@ -55,5 +58,12 @@ export const columns: ColumnsType<User> = [
     key: 'updatedDate',
     needSort: true,
     customRender: (value?: string) => getDateToShowInTable(value, '-'),
+  },
+  {
+    title: '',
+    dataIndex: 'id',
+    key: 'actions',
+    customRender: (value: string) =>
+      h('div', { style: { display: 'flex', gap: '5px' } }, [h(DetailModal, { userId: value })]),
   },
 ];

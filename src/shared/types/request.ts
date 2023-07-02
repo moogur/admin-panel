@@ -4,27 +4,31 @@ type RequestMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
 
 type ConvertResponseType = 'json' | 'blob';
 
-type BaseQueryParametersConfig<T> = T extends undefined ? object : { queryParameters?: T };
+type BaseQueryParametersConfig<Query> = Query extends undefined ? object : { queryParameters?: Query };
 
-export type RequestConfig<T, K> = T extends undefined
+type BaseUrlParametersConfig<Url, Query> = Url extends undefined
+  ? object & BaseQueryParametersConfig<Query>
+  : { urlParameters?: Url } & BaseQueryParametersConfig<Query>;
+
+export type RequestConfig<Body, Url, Query> = Body extends undefined
   ? {
       headers?: Record<string, string>;
-    } & BaseQueryParametersConfig<K>
+    } & BaseUrlParametersConfig<Url, Query>
   : {
-      body?: T;
+      body?: Body;
       headers?: Record<string, string>;
-    } & BaseQueryParametersConfig<K>;
+    } & BaseUrlParametersConfig<Url, Query>;
 
-export type RequestConfigWithAbortSignal<T = undefined, K = undefined> = {
+export type RequestConfigWithAbortSignal<Body = undefined, Url = undefined, Query = undefined> = {
   signal?: AbortSignal;
-} & RequestConfig<T, K>;
+} & RequestConfig<Body, Url, Query>;
 
-export type RequestConfigForProperties<T = undefined, K = undefined> = Omit<
-  RequestConfigWithAbortSignal<T, K>,
+export type RequestConfigForProperties<Body = undefined, Url = undefined, Query = undefined> = Omit<
+  RequestConfigWithAbortSignal<Body, Url, Query>,
   'headers'
 >;
 
-export type AdvancedRequestConfig<T, K> = RequestConfigWithAbortSignal<T, K> & {
+export type AdvancedRequestConfig<Body, Url, Query> = RequestConfigWithAbortSignal<Body, Url, Query> & {
   method: RequestMethod;
   url: string;
   convertResponse?: ConvertResponseType;

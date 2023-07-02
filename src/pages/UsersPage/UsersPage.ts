@@ -2,7 +2,7 @@ import { storeToRefs } from 'pinia';
 import { defineComponent, onMounted, onUnmounted } from 'vue';
 
 import { CustomTable } from '@shared/components';
-import { useGetUsersStore } from '@store';
+import { useGetUserInfoStore, useGetUsersStore } from '@store';
 
 import { tableChange } from './UsersPageUtils';
 import { columns } from './constants';
@@ -13,7 +13,9 @@ export default defineComponent({
   },
   setup() {
     const usersStore = useGetUsersStore();
-    const { data, sorter, loading } = storeToRefs(usersStore);
+    const userInfoStore = useGetUserInfoStore();
+    const { data, sorter, loading: usersLoading } = storeToRefs(usersStore);
+    const { loading: userInfoLoading } = storeToRefs(userInfoStore);
 
     onMounted(tableChange);
     onUnmounted(() => {
@@ -26,7 +28,8 @@ export default defineComponent({
       columns,
       tableChange,
       sorter,
-      loading,
+      usersLoading,
+      userInfoLoading,
     };
   },
 });
