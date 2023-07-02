@@ -6,18 +6,18 @@ type ConvertResponseType = 'json' | 'blob';
 
 type BaseQueryParametersConfig<Query> = Query extends undefined ? object : { queryParameters?: Query };
 
-type BaseUrlParametersConfig<Url, Query> = Url extends undefined
-  ? object & BaseQueryParametersConfig<Query>
-  : { urlParameters?: Url } & BaseQueryParametersConfig<Query>;
+type BaseUrlParametersConfig<Url> = Url extends undefined ? object : { urlParameters?: Url };
 
 export type RequestConfig<Body, Url, Query> = Body extends undefined
   ? {
       headers?: Record<string, string>;
-    } & BaseUrlParametersConfig<Url, Query>
+    } & BaseUrlParametersConfig<Url> &
+      BaseQueryParametersConfig<Query>
   : {
       body?: Body;
       headers?: Record<string, string>;
-    } & BaseUrlParametersConfig<Url, Query>;
+    } & BaseUrlParametersConfig<Url> &
+      BaseQueryParametersConfig<Query>;
 
 export type RequestConfigWithAbortSignal<Body = undefined, Url = undefined, Query = undefined> = {
   signal?: AbortSignal;

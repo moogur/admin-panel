@@ -3,7 +3,9 @@ import { backErrorNotification, logout, prepareError } from '@shared/utils';
 
 import { BaseStore } from './types';
 
-export function getBaseInitialState<T, K extends object | undefined = undefined>(additionalField?: K) {
+export function getBaseInitialState<Data, AddFields extends object | undefined = undefined>(
+  additionalField?: AddFields,
+) {
   return function () {
     return {
       data: null,
@@ -12,7 +14,7 @@ export function getBaseInitialState<T, K extends object | undefined = undefined>
       loading: false,
       abortController: null,
       ...additionalField,
-    } as BaseStore<T, K>;
+    } as BaseStore<Data, AddFields>;
   };
 }
 
@@ -21,10 +23,10 @@ const additionToRequest = { error: null, loaded: true, ...additionToAbort };
 const additionToError = { data: null, loaded: false, ...additionToAbort };
 const additionTo401Error = { error: null, ...additionToError };
 
-export async function thunkRequestHelper<T, K extends BaseStore<T>, L, M>(
-  that: K,
-  thunk: (parameter: RequestConfigWithAbortSignal<L, M>) => Promise<T>,
-  parameter: RequestConfig<L, M>,
+export async function thunkRequestHelper<ThunkReturnType, This extends BaseStore<ThunkReturnType>, Body, Url, Query>(
+  that: This,
+  thunk: (parameter: RequestConfigWithAbortSignal<Body, Url, Query>) => Promise<ThunkReturnType>,
+  parameter: RequestConfig<Body, Url, Query>,
 ) {
   that.loading = true;
   try {
