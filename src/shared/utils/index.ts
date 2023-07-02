@@ -4,3 +4,4 @@ export * from './toast';
 export * from './login';
 export * from './error';
 export * from './date';
+export * from './table';

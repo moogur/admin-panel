@@ -4,4 +4,8 @@
   title="List of users"
   :dataSource="tableData.list"
   :columns="columns"
+  :pagination="tableData.pagination"
+  :sorter="sorter"
+  :loading="loading"
+  @tableChange="tableChange"
 ></CustomTable>

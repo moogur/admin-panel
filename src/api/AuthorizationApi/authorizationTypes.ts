@@ -34,4 +34,13 @@ export interface User {
 
 export type UsersWithPagination = ResponseWithPagination<User>;
 
-export type GetUsersQuery = BasePagination;
+export type BackSortOrder = 'ASC' | 'DESC' | undefined;
+
+export interface BackSorter<T extends string> {
+  sortOrder?: BackSortOrder;
+  sortField?: T;
+}
+
+export type UserSortOrderFields = keyof Omit<User, 'id'>;
+
+export type GetUsersQuery = BasePagination & BackSorter<UserSortOrderFields>;

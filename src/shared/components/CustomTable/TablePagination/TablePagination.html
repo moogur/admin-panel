@@ -1,0 +1,27 @@
+<ul>
+  <li class="pagination-message">{{ preparedData.message }}</li>
+
+  <li v-if="preparedData.prevPage - 1 > 1" class="page-item page-icon" @click="setFirstPage()">
+    <SvgIcon icon="double-left"></SvgIcon>
+  </li>
+  <template v-if="preparedData.prevPage > 0">
+    <li v-if="preparedData.prevPage > 1" class="page-item page-icon" @click="pageMinusOne()">
+      <SvgIcon icon="left"></SvgIcon>
+    </li>
+    <li class="page-item border-right-none pagination-margin-left" @click="pageMinusOne()">
+      {{ preparedData.prevPage }}
+    </li>
+  </template>
+  <li class="page-item active">{{ pagination.pageNumber }}</li>
+  <template v-if="preparedData.nextPage <= pagination.pageCount">
+    <li class="page-item border-left-none pagination-margin-right" @click="pagePlusOne()">
+      {{ preparedData.nextPage }}
+    </li>
+    <li v-if="preparedData.nextPage < pagination.pageCount" class="page-item page-icon" @click="pagePlusOne()">
+      <SvgIcon icon="right"></SvgIcon>
+    </li>
+  </template>
+  <li v-if="preparedData.nextPage + 1 < pagination.pageCount" class="page-item page-icon" @click="setLastPage()">
+    <SvgIcon icon="double-right"></SvgIcon>
+  </li>
+</ul>

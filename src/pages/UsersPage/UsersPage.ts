@@ -2,8 +2,9 @@ import { storeToRefs } from 'pinia';
 import { defineComponent, onMounted, onUnmounted } from 'vue';
 
 import { CustomTable } from '@shared/components';
-import { getUsersThunk, useGetUsersStore } from '@store';
+import { useGetUsersStore } from '@store';
 
+import { tableChange } from './UsersPageUtils';
 import { columns } from './constants';
 
 export default defineComponent({
@@ -12,9 +13,9 @@ export default defineComponent({
   },
   setup() {
     const usersStore = useGetUsersStore();
-    const { data } = storeToRefs(usersStore);
+    const { data, sorter, loading } = storeToRefs(usersStore);
 
-    onMounted(() => getUsersThunk({ pageNumber: 1, pageSize: 10 }));
+    onMounted(tableChange);
     onUnmounted(() => {
       usersStore.abortController?.abort();
       usersStore.$reset();
@@ -23,6 +24,9 @@ export default defineComponent({
     return {
       tableData: data,
       columns,
+      tableChange,
+      sorter,
+      loading,
     };
   },
 });

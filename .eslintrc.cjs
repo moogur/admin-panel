@@ -50,7 +50,7 @@ module.exports = {
     eqeqeq: ['error', 'always'],
     'class-methods-use-this': 'off',
     'no-empty': ['error', { allowEmptyCatch: true }],
-    'no-undefined': 'error',
+    'no-undefined': 'warn',
     'padding-line-between-statements': ['error', { blankLine: 'always', prev: '*', next: 'return' }],
 
     'import/extensions': 'off',

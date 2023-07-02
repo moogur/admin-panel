@@ -1,13 +1,15 @@
-import { GetUsersQuery } from '@api';
+import { GetUsersQuery, UserSortOrderFields } from '@api';
+import { Sort } from '@shared/types';
 import { showErrorMessage } from '@store/utils';
 
 import { useGetUsersStore } from '../slice';
 
-export async function getUsersThunk(queryParameters: GetUsersQuery) {
-  const getUsersInfoStore = useGetUsersStore();
+export async function getUsersThunk(queryParameters: GetUsersQuery, sorter: Sort<UserSortOrderFields>) {
+  const getUsersStore = useGetUsersStore();
 
   try {
-    await getUsersInfoStore.thunk(queryParameters);
+    await getUsersStore.thunk(queryParameters);
+    getUsersStore.$patch({ sorter });
   } catch (error) {
     showErrorMessage(error);
   }

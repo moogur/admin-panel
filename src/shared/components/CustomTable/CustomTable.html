@@ -1,9 +1,15 @@
 <section>
+  <div v-if="loading" class="spinner-wrapper"></div>
   <h3 v-if="title" class="title">{{ title }}</h3>
   <table>
     <thead>
       <tr>
-        <th v-for="{ title } in columns">{{ title }}</th>
+        <th v-for="{ title, needSort, key } in columns">
+          <span v-if="needSort" :class="['sorter', key === sorter?.key && sorter.sortOrder]" @click="changeSorter(key)"
+            >{{ title }}</span
+          >
+          <template v-else>{{ title }}</template>
+        </th>
       </tr>
     </thead>
     <tbody>
@@ -15,5 +21,6 @@
       </tr>
     </tbody>
   </table>
+  <TablePagination v-if="pagination" :pagination="pagination" @paginationChange="changePagination"></TablePagination>
   <slot></slot>
 </section>

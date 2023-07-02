@@ -3,15 +3,16 @@ import { backErrorNotification, logout, prepareError } from '@shared/utils';
 
 import { BaseStore } from './types';
 
-export function getBaseInitialState<T>() {
-  return function (): BaseStore<T> {
+export function getBaseInitialState<T, K extends object | undefined = undefined>(additionalField?: K) {
+  return function () {
     return {
       data: null,
       error: null,
       loaded: false,
       loading: false,
       abortController: null,
-    };
+      ...additionalField,
+    } as BaseStore<T, K>;
   };
 }
 
