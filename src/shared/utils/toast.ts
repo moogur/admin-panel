@@ -3,6 +3,14 @@ import { NotificationType } from '@shared/components/Notifications/Notifications
 
 import { createNotification } from '../components';
 
+function baseNotification(type: NotificationType, title: string, message?: string) {
+  if (message) {
+    createNotification({ title, message, type });
+  } else {
+    createNotification({ title, type });
+  }
+}
+
 export function backErrorNotification(error?: HTTPError | null) {
   if (!error) return;
   // if (error) {
@@ -14,21 +22,13 @@ export function backErrorNotification(error?: HTTPError | null) {
   // } else {
   //   createNotification({ title: error?.response.statusText, type: NotificationType.Error });
   // }
-  createNotification({ title: error?.response.statusText, type: NotificationType.Error });
+  baseNotification(NotificationType.Error, error.response.statusText);
 }
 
 export function successNotification(title: string, message?: string) {
-  if (message) {
-    createNotification({ title, message, type: NotificationType.Success });
-  } else {
-    createNotification({ title, type: NotificationType.Success });
-  }
+  baseNotification(NotificationType.Success, title, message);
 }
 
 export function errorNotification(title: string, message?: string) {
-  if (message) {
-    createNotification({ title, message, type: NotificationType.Success });
-  } else {
-    createNotification({ title, type: NotificationType.Success });
-  }
+  baseNotification(NotificationType.Error, title, message);
 }
