@@ -9,7 +9,7 @@
     <div class="modal-main">
       <slot></slot>
     </div>
-    <div class="modal-footer">
+    <div v-if="showFooter" class="modal-footer">
       <CustomButton variant="secondary" @click="$emit('close')" class="close-button" :disabled="disabled"
         >Cancel</CustomButton
       >

@@ -9,8 +9,12 @@ export default defineComponent({
       type: Array<ListItemType>,
     },
     title: {
-      required: true,
+      default: '',
       type: String,
+    },
+    needBackground: {
+      type: Boolean,
+      default: false,
     },
   },
 });

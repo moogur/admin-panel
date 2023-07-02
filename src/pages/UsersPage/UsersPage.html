@@ -6,6 +6,6 @@
   :columns="columns"
   :pagination="tableData.pagination"
   :sorter="sorter"
-  :loading="loading"
+  :loading="usersLoading || userInfoLoading"
   @tableChange="tableChange"
 ></CustomTable>

@@ -5,3 +5,11 @@
 
   background-color: var(--card-bg);
 }
+
+.users-table-actions {
+  display: flex;
+
+  svg {
+    width: 10px;
+  }
+}

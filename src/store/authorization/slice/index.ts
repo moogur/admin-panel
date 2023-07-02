@@ -9,3 +9,4 @@ export * from './changeAvatar';
 export * from './getClientIp';
 export * from './getServicesIps';
 export * from './getUsers';
+export * from './getUserInfo';

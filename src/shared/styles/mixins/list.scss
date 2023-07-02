@@ -1,12 +1,7 @@
 @mixin list-group {
-  width: fit-content;
-  padding: var(--card-cap-padding);
-  border-radius: var(--card-border-radius);
-
-  background-color: var(--card-bg);
-
   li {
     display: flex;
+    gap: 15px;
     padding: 15px;
     border-bottom: var(--border-width) solid var(--card-item-border-color);
 
@@ -14,6 +9,18 @@
 
     &:last-child {
       border-bottom: none;
+    }
+
+    > span {
+      min-width: 130px;
+
+      &:first-child {
+        font-weight: bold;
+      }
+
+      &:last-child {
+        flex: 1;
+      }
     }
   }
 }

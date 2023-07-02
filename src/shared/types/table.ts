@@ -2,20 +2,21 @@ import { VNode } from 'vue';
 
 export type SortOrder = 'descend' | 'ascend' | null;
 
-export interface Sort<T extends string> {
-  key: T;
+export interface Sort<SortKey extends string> {
+  key: SortKey;
   sortOrder: SortOrder;
 }
 
-export interface ColumnType<T> {
+export interface ColumnType<Data> {
   key: string;
-  dataIndex?: keyof T;
+  dataIndex?: keyof Data;
   title: string;
   needSort?: boolean;
-  customRender?: (value: any, record: T) => VNode;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  customRender?: (value: any, record: Data) => VNode;
 }
 
-export type ColumnsType<T> = Array<ColumnType<T>>;
+export type ColumnsType<Data> = Array<ColumnType<Data>>;
 
 export interface TablePaginationConfig {
   pageNumber: number;
@@ -24,8 +25,8 @@ export interface TablePaginationConfig {
   pageCount: number;
 }
 
-export interface TableChange<T extends string> {
+export interface TableChange<SortKey extends string> {
   action: 'sorter' | 'pagination' | null;
   pagination: TablePaginationConfig;
-  sorter: Sort<T>;
+  sorter: Sort<SortKey>;
 }

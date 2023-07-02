@@ -22,8 +22,7 @@ export interface ServicesIps extends ServicesVersions {
   server: string | null;
 }
 
-export interface User {
-  id: string;
+export interface BaseUser extends OnlyId {
   username: string;
   email: string;
   status: UserStatusEnum;
@@ -32,7 +31,15 @@ export interface User {
   gender: GenderEnum;
 }
 
-export type UsersWithPagination = ResponseWithPagination<User>;
+export interface User extends BaseUser {
+  name: string | null;
+  surname: string | null;
+  patronymic: string | null;
+  biography: string | null;
+  birthDate: string | null;
+}
+
+export type UsersWithPagination = ResponseWithPagination<BaseUser>;
 
 export type BackSortOrder = 'ASC' | 'DESC' | undefined;
 
@@ -41,6 +48,6 @@ export interface BackSorter<T extends string> {
   sortField?: T;
 }
 
-export type UserSortOrderFields = keyof Omit<User, 'id'>;
+export type UserSortOrderFields = keyof Omit<BaseUser, 'id'>;
 
 export type GetUsersQuery = BasePagination & BackSorter<UserSortOrderFields>;

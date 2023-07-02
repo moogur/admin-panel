@@ -11,6 +11,7 @@ import {
   ServicesIps,
   UsersWithPagination,
   GetUsersQuery,
+  User,
 } from './authorizationTypes';
 
 export class AuthorizationService extends BaseApiService {
@@ -71,7 +72,7 @@ export class AuthorizationService extends BaseApiService {
     });
 
   public getAvatar = (config?: RequestConfigForProperties): Promise<string> =>
-    this.request<undefined, undefined, File>({
+    this.request<undefined, undefined, undefined, File>({
       method: 'GET',
       url: '/admin/avatar',
       convertResponse: 'blob',
@@ -96,10 +97,19 @@ export class AuthorizationService extends BaseApiService {
       ...config,
     });
 
-  public getUsers = (config?: RequestConfigForProperties<undefined, GetUsersQuery>): Promise<UsersWithPagination> =>
+  public getUsers = (
+    config?: RequestConfigForProperties<undefined, undefined, GetUsersQuery>,
+  ): Promise<UsersWithPagination> =>
     this.request({
       method: 'GET',
       url: '/users',
+      ...config,
+    });
+
+  public getUserInfo = (config?: RequestConfigForProperties<undefined, OnlyId>): Promise<User> =>
+    this.request({
+      method: 'GET',
+      url: `/users/${config?.urlParameters?.id}`,
       ...config,
     });
 }

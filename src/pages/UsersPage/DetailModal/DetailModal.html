@@ -1,0 +1,49 @@
+<SvgIcon icon="info" @click="openModal"></SvgIcon>
+<Modal v-if="showModal" title="User information" :showFooter="false" @close="showModal = false">
+  <ul>
+    <li>
+      <span>ID</span>
+      <span>{{ userInfo?.id }}</span>
+    </li>
+    <li>
+      <span>Username</span>
+      <span>{{ userInfo?.username }}</span>
+    </li>
+    <li>
+      <span>Status</span>
+      <span><component :is="convertStatusEnumToTag(userInfo?.status)" /></span>
+    </li>
+    <li>
+      <span>Email</span>
+      <span>{{ userInfo?.email }}</span>
+    </li>
+    <li>
+      <span>Name</span>
+      <span>{{ userInfo?.name || '-' }}</span>
+    </li>
+    <li>
+      <span>Surname</span>
+      <span>{{ userInfo?.surname || '-' }}</span>
+    </li>
+    <li>
+      <span>Patronymic</span>
+      <span>{{ userInfo?.patronymic || '-' }}</span>
+    </li>
+    <li>
+      <span>Gender</span>
+      <span><component :is="convertGenderEnumToTag(userInfo?.gender)" /></span>
+    </li>
+    <li>
+      <span>Birth date</span>
+      <span>{{ getDateToShow(userInfo?.birthDate, '-') }}</span>
+    </li>
+    <li>
+      <span>Created date</span>
+      <span>{{ getDateToShow(userInfo?.createdDate, '-') }}</span>
+    </li>
+    <li>
+      <span>Updated date</span>
+      <span>{{ getDateToShow(userInfo?.updatedDate, '-') }}</span>
+    </li>
+  </ul>
+</Modal>
