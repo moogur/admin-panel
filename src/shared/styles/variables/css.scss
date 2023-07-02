@@ -59,4 +59,29 @@
   --tag-warning: #ffc107;
   --tag-danger: #dc3545;
   --tag-dark: #131313;
+  // table
+  --table-bg: transparent;
+  --table-border-width: 1px;
+  --table-tbody-border-color: #eeeeee;
+  --table-thead-border-color: #dedede;
+  --table-tr-striped-bg: #0000000d;
+  --table-cell-color: #607080;
+  --table-spinner-color: #364b98;
+  // table pagination
+  --table-pagination-padding-x: 0.75rem;
+  --table-pagination-padding-y: 0.375rem;
+  --table-pagination-font-size: 1rem;
+  --table-pagination-color: #435ebe;
+  --table-pagination-bg: transparent;
+  --table-pagination-border-radius: 0.25rem;
+  --table-pagination-hover-color: #000000;
+  --table-pagination-hover-bg: #e9ecef;
+  --table-pagination-hover-border-color: #dee2e6;
+  --table-pagination-active-color: #ffffff;
+  --table-pagination-active-bg: #435ebe;
+  --table-pagination-message-color: #607080;
+  // table spinner
+  --table-spinner-width: 3rem;
+  --table-spinner-border-width: 0.75em;
+  --table-spinner-animation-speed: 0.75s;
 }
