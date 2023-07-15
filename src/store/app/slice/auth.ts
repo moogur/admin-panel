@@ -33,8 +33,8 @@ export const useAuthStore = defineStore({
       this.isAuth = true;
       this.user = user;
     },
-    updateUserInfo(user: Omit<Admin, 'id'>) {
-      this.user = { id: this.user?.id ?? '', ...user };
+    updateUserInfo(user: Omit<Admin, 'id' | 'hasAvatar'>) {
+      this.user = { id: this.user?.id ?? '', hasAvatar: Boolean(this.user?.hasAvatar), ...user };
     },
   },
 });
