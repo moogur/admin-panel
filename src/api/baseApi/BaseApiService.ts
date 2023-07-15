@@ -14,7 +14,7 @@ export abstract class BaseApiService {
         Accept: 'application/json; charset=utf-8',
         'Content-Type': 'application/json; charset=utf-8',
       },
-      ...config,
+      baseUrl: config.baseUrl,
     };
   }
 

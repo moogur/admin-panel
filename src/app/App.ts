@@ -23,7 +23,10 @@ export default defineComponent({
     const notLoginPage = ref(checkLoginPage(route.path));
 
     onMounted(async () => {
-      if (isAuth.value) await Promise.allSettled([getAdminInfoThunk(), requestsAfterLoginThunk()]);
+      if (isAuth.value) {
+        await getAdminInfoThunk();
+        await requestsAfterLoginThunk();
+      }
       authStore.setWasInitialized();
     });
 
