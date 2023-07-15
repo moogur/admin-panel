@@ -7,7 +7,7 @@ export function login({ data, needRedirect }: { data: Admin | null; needRedirect
   const authStore = useAuthStore();
 
   localStorage.setItem(AUTH_KEY, 'true');
-  authStore.setAuth(data ?? { username: '', email: null, id: '' });
+  authStore.setAuth(data ?? { username: '', email: null, id: '', hasAvatar: false });
 
   if (needRedirect) {
     router.push(authStore.url ?? links.main.path);

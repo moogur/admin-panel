@@ -8,9 +8,10 @@ export interface LoginAdmin {
 export interface Admin extends OnlyId {
   username: string;
   email: string | null;
+  hasAvatar: boolean;
 }
 
-export interface UpdateAdminBody extends Omit<Admin, 'id'> {
+export interface UpdateAdminBody extends Omit<Admin, 'id' | 'hasAvatar'> {
   password?: string;
 }
 
