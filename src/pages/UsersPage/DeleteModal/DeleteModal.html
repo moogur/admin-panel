@@ -1,0 +1,4 @@
+<SvgIcon icon="delete" @click="showModal = true"></SvgIcon>
+<Modal v-if="showModal" title="Deleting a user" @close="showModal = false" @ok="deleteUser" :disabled="loading">
+  <p>Do you really want to delete user <span class="username">{{ username }}</span> ?</p>
+</Modal>

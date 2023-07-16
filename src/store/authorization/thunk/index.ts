@@ -8,3 +8,4 @@ export * from './requestsAfterLoginThunk';
 export * from './getClientIpThunk';
 export * from './getUsersThunk';
 export * from './getUserInfoThunk';
+export * from './deleteUsersThunk';

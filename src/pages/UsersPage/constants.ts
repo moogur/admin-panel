@@ -1,17 +1,11 @@
-import { h } from 'vue';
+import { Fragment, h } from 'vue';
 
-import { BaseUser, UserSortOrderFields } from '@api';
-import { defaultPagination } from '@shared/constants';
-import { ColumnsType, TableChange } from '@shared/types';
+import { BaseUser } from '@api';
+import { ColumnsType, UserStatusEnum } from '@shared/types';
 import { getDateToShowInTable, convertGenderEnumToTag, convertStatusEnumToTag } from '@shared/utils';
 
+import { DeleteModal } from './DeleteModal';
 import { DetailModal } from './DetailModal';
-
-export const defaultQueryParameters: TableChange<UserSortOrderFields> = {
-  action: null,
-  pagination: defaultPagination,
-  sorter: { key: 'createdDate', sortOrder: 'ascend' },
-};
 
 export const columns: ColumnsType<BaseUser> = [
   {
@@ -63,7 +57,11 @@ export const columns: ColumnsType<BaseUser> = [
     title: '',
     dataIndex: 'id',
     key: 'actions',
-    customRender: (value: string) =>
-      h('div', { style: { display: 'flex', gap: '5px' } }, [h(DetailModal, { userId: value })]),
+    tdStyle: 'padding-top: 0px; padding-bottom: 0px; vertical-align: middle;',
+    customRender: (value: string, record) =>
+      h(Fragment, null, [
+        h(DetailModal, { userId: value }),
+        record.status === UserStatusEnum.Active && h(DeleteModal, { userId: value, username: record.username }),
+      ]),
   },
 ];

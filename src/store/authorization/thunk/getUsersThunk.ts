@@ -1,15 +1,23 @@
-import { GetUsersQuery, UserSortOrderFields } from '@api';
-import { Sort } from '@shared/types';
+import { UserSortOrderFields } from '@api';
+import { defaultPagination } from '@shared/constants';
+import { TableChange } from '@shared/types';
+import { prepareQuery } from '@shared/utils';
 import { showErrorMessage } from '@store/utils';
 
 import { useGetUsersStore } from '../slice';
 
-export async function getUsersThunk(queryParameters: GetUsersQuery, sorter: Sort<UserSortOrderFields>) {
+export async function getUsersThunk(values: Partial<TableChange<UserSortOrderFields>> = {}) {
   const getUsersStore = useGetUsersStore();
 
   try {
-    await getUsersStore.thunk(queryParameters);
-    getUsersStore.$patch({ sorter });
+    const mergedValues = {
+      action: values.action ?? null,
+      pagination: values.pagination ?? getUsersStore.data?.pagination ?? defaultPagination,
+      sorter: values.sorter ?? getUsersStore.sorter,
+    };
+
+    await getUsersStore.thunk(prepareQuery(mergedValues));
+    getUsersStore.$patch({ sorter: mergedValues.sorter });
   } catch (error) {
     showErrorMessage(error);
   }
