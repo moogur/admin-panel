@@ -14,6 +14,8 @@ export interface ColumnType<Data> {
   needSort?: boolean;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   customRender?: (value: any, record: Data) => VNode;
+  tdStyle?: string;
+  thStyle?: string;
 }
 
 export type ColumnsType<Data> = Array<ColumnType<Data>>;

@@ -52,3 +52,7 @@ export interface BackSorter<T extends string> {
 export type UserSortOrderFields = keyof Omit<BaseUser, 'id'>;
 
 export type GetUsersQuery = BasePagination & BackSorter<UserSortOrderFields>;
+
+export interface DeleteUsers {
+  ids: string[];
+}

@@ -13,7 +13,7 @@ export function getBaseInitialState<Data, AddFields extends object | undefined =
       loaded: false,
       loading: false,
       abortController: null,
-      ...additionalField,
+      ...structuredClone(additionalField),
     } as BaseStore<Data, AddFields>;
   };
 }

@@ -12,6 +12,7 @@ import {
   UsersWithPagination,
   GetUsersQuery,
   User,
+  DeleteUsers,
 } from './authorizationTypes';
 
 export class AuthorizationService extends BaseApiService {
@@ -110,6 +111,13 @@ export class AuthorizationService extends BaseApiService {
     this.request({
       method: 'GET',
       url: `/users/${config?.urlParameters?.id}`,
+      ...config,
+    });
+
+  public deleteUsers = (config?: RequestConfigForProperties<undefined, undefined, DeleteUsers>): Promise<DeleteUsers> =>
+    this.request({
+      method: 'DELETE',
+      url: '/users',
       ...config,
     });
 }
