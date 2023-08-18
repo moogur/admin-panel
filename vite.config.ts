@@ -30,7 +30,7 @@ const build = {
       manualChunks: (path) => {
         if (/node_modules/.test(path)) {
           const libName = path.split('node_modules/')[1]?.split('/')[0]?.replace('@', '');
-          if (libName === 'vue' || libName === 'vue-router') return `lib.${libName}`;
+          if (libName === 'vue' || libName === 'vue-router') return `lib.vue`;
           return 'lib.other';
         }
         return 'app';
@@ -71,7 +71,7 @@ const css = {
 
 export default defineConfig(({ mode }) => {
   switch (mode) {
-    case 'visualizer':
+    case 'analyze':
       return {
         css,
         plugins: [

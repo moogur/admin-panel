@@ -15,9 +15,9 @@ export async function adminLoginThunk(body: LoginAdmin) {
   try {
     await loginStore.thunk(body);
 
-    login({ data: data.value, needRedirect: true });
+    await requestsAfterLoginThunk(data.value);
 
-    await requestsAfterLoginThunk();
+    login({ data: data.value, needRedirect: true });
   } catch (error) {
     showErrorMessage(error);
   }

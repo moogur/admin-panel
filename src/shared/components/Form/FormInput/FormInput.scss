@@ -5,12 +5,8 @@ input {
   line-height: 1.5;
 }
 
-label {
-  font-weight: 600;
-}
-
 input {
-  width: -webkit-fill-available;
+  width: 100%;
   padding: 10px 15px;
   border: var(--border-width) solid #dce7f1;
   border-radius: 3px;
@@ -39,8 +35,12 @@ input {
   }
 }
 
-.input-wrapper {
-  position: relative;
+label {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+
+  font-weight: 600;
 
   &:not(.error) input:focus {
     border-color: #a1afdf;
@@ -50,9 +50,23 @@ input {
   }
 }
 
+.input-container {
+  position: relative;
+
+  flex: 1;
+}
+
+.label {
+  width: 100px;
+}
+
+.asterisk {
+  color: #dc3545;
+}
+
 .error-message {
   position: absolute;
-  bottom: -18px;
+  bottom: -20px;
   left: 0;
 
   color: #dc3545;

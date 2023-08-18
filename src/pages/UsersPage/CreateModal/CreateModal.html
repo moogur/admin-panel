@@ -1,0 +1,37 @@
+<CustomButton variant="primary" class="create-button" @click="openModal">Create</CustomButton>
+
+<Modal v-if="showModal" @close="showModal = false" title="Create user" formName="create-user-form">
+  <form class="create-info-form" @submit.prevent="onSubmit" novalidate id="create-user-form">
+    <FormInput
+      required
+      placeholder="Username"
+      type="text"
+      v-model="formData.username"
+      class="input"
+      autocomplete="off"
+      :disabled="loading"
+      :errorMessage="v$.username.$errors[0]?.$message"
+    />
+    <FormInput
+      required
+      placeholder="Email"
+      type="text"
+      v-model="formData.email"
+      class="input"
+      autocomplete="off"
+      :disabled="loading"
+      :errorMessage="v$.email.$errors[0]?.$message"
+    />
+    <FormInput
+      required
+      placeholder="Password"
+      type="password"
+      v-model="formData.password"
+      class="input"
+      autocomplete="new-password"
+      :disabled="loading"
+      :errorMessage="v$.password.$errors[0]?.$message"
+    />
+    <FormSelect label="Gender" :options="genderOptions" v-model="formData.gender" :disabled="loading" />
+  </form>
+</Modal>

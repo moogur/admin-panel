@@ -11,3 +11,5 @@ export * from './getServicesIps';
 export * from './getUsers';
 export * from './getUserInfo';
 export * from './deleteUsers';
+export * from './createUser';
+export * from './updateUser';

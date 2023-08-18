@@ -30,5 +30,9 @@ export default defineComponent({
       default: true,
       type: Boolean,
     },
+    required: {
+      default: false,
+      type: Boolean,
+    },
   },
 });

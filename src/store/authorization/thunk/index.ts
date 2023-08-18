@@ -9,3 +9,5 @@ export * from './getClientIpThunk';
 export * from './getUsersThunk';
 export * from './getUserInfoThunk';
 export * from './deleteUsersThunk';
+export * from './updateUserThunk';
+export * from './createUserThunk';

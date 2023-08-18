@@ -1,7 +1,11 @@
-<p class="input-wrapper" :class="{error: errorMessage}">
-  <label>
-    <template v-if="showLabel">{{ placeholder }}</template>
+<label :class="{error: errorMessage}">
+  <span v-if="showLabel" class="label"
+    >{{ placeholder }}
+    <span v-if="required" class="asterisk">*</span>
+  </span>
+  <span class="input-container">
     <input
+      :class="{'with-label': showLabel}"
       :type="type"
       :placeholder="placeholder"
       :value="modelValue"
@@ -9,6 +13,6 @@
       :autocomplete="autocomplete"
       :disabled="disabled"
     />
-  </label>
-  <span v-if="errorMessage" class="error-message">{{ errorMessage }}</span>
-</p>
+    <span v-if="errorMessage" class="error-message">{{ errorMessage }}</span>
+  </span>
+</label>

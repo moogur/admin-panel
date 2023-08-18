@@ -4,7 +4,7 @@ export const enum SecretKeysEnum {
   Server = 'SERVER',
 }
 
-export const enum GenderEnum {
+export enum GenderEnum {
   Male = 'MALE',
   Female = 'FEMALE',
 }

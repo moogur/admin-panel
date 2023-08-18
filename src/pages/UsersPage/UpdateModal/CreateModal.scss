@@ -1,0 +1,15 @@
+.edit-button {
+  width: 28px;
+
+  color: #198754;
+
+  cursor: pointer;
+}
+
+.username {
+  font-weight: bold;
+}
+
+.input:not(:last-child) {
+  margin-bottom: 25px;
+}

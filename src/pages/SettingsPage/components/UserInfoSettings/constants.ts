@@ -1,6 +1,7 @@
-import { required, minLength, email } from '@vuelidate/validators';
+import { minLength, email } from '@vuelidate/validators';
 
-import { checkUsernameWithRegexp, checkPasswordWithRegexp } from '@shared/validators';
+import { loginFormValidationRules } from '@shared/rules';
+import { checkPasswordWithRegexp } from '@shared/validators';
 
 export const list = [
   {
@@ -18,7 +19,7 @@ export const list = [
 ] as const;
 
 export const formValidationRules = {
-  username: { required, minLength: minLength(5), checkUsernameWithRegexp },
+  username: loginFormValidationRules.username,
   email: { minLength: minLength(10), email },
   password: { minLength: minLength(10), checkPasswordWithRegexp },
 } as const;

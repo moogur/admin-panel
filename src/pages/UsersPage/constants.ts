@@ -1,4 +1,4 @@
-import { Fragment, h } from 'vue';
+import { h } from 'vue';
 
 import { BaseUser } from '@api';
 import { ColumnsType, UserStatusEnum } from '@shared/types';
@@ -58,10 +58,14 @@ export const columns: ColumnsType<BaseUser> = [
     dataIndex: 'id',
     key: 'actions',
     tdStyle: 'padding-top: 0px; padding-bottom: 0px; vertical-align: middle;',
-    customRender: (value: string, record) =>
-      h(Fragment, null, [
+    customRender: (value: string, record) => {
+      const showButtons = record.status === UserStatusEnum.Active;
+
+      return h('div', { style: 'display: flex; gap: 8px; justify-content: center;' }, [
+        // showButtons && h(CreateModal),
         h(DetailModal, { userId: value }),
-        record.status === UserStatusEnum.Active && h(DeleteModal, { userId: value, username: record.username }),
-      ]),
+        showButtons && h(DeleteModal, { userId: value, username: record.username }),
+      ]);
+    },
   },
 ];

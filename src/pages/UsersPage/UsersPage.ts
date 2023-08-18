@@ -4,11 +4,13 @@ import { defineComponent, onMounted, onUnmounted } from 'vue';
 import { CustomTable } from '@shared/components';
 import { getUsersThunk, useGetUserInfoStore, useGetUsersStore } from '@store';
 
+import { CreateModal } from './CreateModal';
 import { columns } from './constants';
 
 export default defineComponent({
   components: {
     CustomTable,
+    CreateModal,
   },
   setup() {
     const usersStore = useGetUsersStore();

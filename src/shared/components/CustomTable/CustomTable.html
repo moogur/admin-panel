@@ -1,6 +1,7 @@
 <section>
   <div v-if="loading" class="spinner-wrapper"></div>
   <h3 v-if="title" class="title">{{ title }}</h3>
+  <slot></slot>
   <table>
     <thead>
       <tr>
@@ -22,5 +23,4 @@
     </tbody>
   </table>
   <TablePagination v-if="pagination" :pagination="pagination" @paginationChange="changePagination"></TablePagination>
-  <slot></slot>
 </section>
