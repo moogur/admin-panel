@@ -1,6 +1,11 @@
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
+
+import { SvgIcon } from '@shared/components';
 
 export default defineComponent({
+  components: {
+    SvgIcon,
+  },
   props: {
     errorMessage: {
       default: '',
@@ -30,5 +35,10 @@ export default defineComponent({
       default: false,
       type: Boolean,
     },
+  },
+  setup() {
+    const type = ref<'text' | 'password'>('password');
+
+    return { type };
   },
 });

@@ -3,15 +3,15 @@ import { storeToRefs } from 'pinia';
 import { defineComponent, onMounted, reactive } from 'vue';
 
 import { LoginAdmin } from '@api';
-import { FormInput, CustomButton } from '@shared/components';
+import { FormInput, CustomButton, FormPassword } from '@shared/components';
+import { getPasswordValidationRules, getUsernameValidationRules } from '@shared/rules';
 import { adminLoginThunk, useAdminLoginStore, useGetAdminInfoStore } from '@store';
-
-import { formValidationRules } from './constants';
 
 export default defineComponent({
   components: {
     FormInput,
     CustomButton,
+    FormPassword,
   },
   setup() {
     const getAdminInfoStore = useGetAdminInfoStore();
@@ -27,7 +27,14 @@ export default defineComponent({
       getAdminInfoStore.$reset();
     });
 
-    const v$ = useVuelidate(formValidationRules, formData, { $lazy: true });
+    const v$ = useVuelidate(
+      {
+        username: getUsernameValidationRules(true),
+        password: getPasswordValidationRules(true),
+      },
+      formData,
+      { $lazy: true },
+    );
 
     const onSubmit = () => {
       v$.value.$touch();

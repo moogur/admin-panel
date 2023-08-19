@@ -1,7 +1,8 @@
+import { Admin } from '@api';
 import { successNotification } from '@shared/utils';
 import { useAuthStore, useGetAvatarStore, useGetServicesIpsStore, useGetServicesVersionsStore } from '@store';
 
-export async function requestsAfterLoginThunk() {
+export async function requestsAfterLoginThunk(authData?: Admin | null) {
   const getServicesVersionsStore = useGetServicesVersionsStore();
   const getServicesIpsStore = useGetServicesIpsStore();
   const getAvatarStore = useGetAvatarStore();
@@ -9,7 +10,7 @@ export async function requestsAfterLoginThunk() {
 
   const promises = [getServicesVersionsStore.thunk(), getServicesIpsStore.thunk()];
 
-  if (authStore.$state.user?.hasAvatar) promises.push(getAvatarStore.thunk());
+  if (authData?.hasAvatar || authStore.$state.user?.hasAvatar) promises.push(getAvatarStore.thunk());
 
   const results = await Promise.allSettled(promises);
 

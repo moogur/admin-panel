@@ -13,6 +13,8 @@ import {
   GetUsersQuery,
   User,
   DeleteUsers,
+  CreateUser,
+  UpdateUser,
 } from './authorizationTypes';
 
 export class AuthorizationService extends BaseApiService {
@@ -118,6 +120,20 @@ export class AuthorizationService extends BaseApiService {
     this.request({
       method: 'DELETE',
       url: '/users',
+      ...config,
+    });
+
+  public createUser = (config?: RequestConfigForProperties<CreateUser>): Promise<User> =>
+    this.request({
+      method: 'POST',
+      url: '/users',
+      ...config,
+    });
+
+  public updateUser = (config?: RequestConfigForProperties<UpdateUser, OnlyId>): Promise<User> =>
+    this.request({
+      method: 'PATCH',
+      url: `/users/${config?.urlParameters?.id}`,
       ...config,
     });
 }

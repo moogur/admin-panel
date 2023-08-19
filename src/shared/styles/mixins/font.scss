@@ -7,7 +7,7 @@
 
 @mixin fontFaceNunito($weight) {
   font-weight: $weight;
-  font-family: Nunito;
+  font-family: Nunito, sans-serif;
   font-style: normal;
   src: url('@fonts/nunito-#{$weight}-normal.woff2') format('woff2');
   font-display: swap;

@@ -1,11 +1,12 @@
-import { Fragment, h } from 'vue';
+import { h } from 'vue';
 
-import { BaseUser } from '@api';
-import { ColumnsType, UserStatusEnum } from '@shared/types';
+import { BaseUser, CreateUser } from '@api';
+import { ColumnsType, GenderEnum, UserStatusEnum } from '@shared/types';
 import { getDateToShowInTable, convertGenderEnumToTag, convertStatusEnumToTag } from '@shared/utils';
 
 import { DeleteModal } from './DeleteModal';
 import { DetailModal } from './DetailModal';
+import { UpdateModal } from './UpdateModal';
 
 export const columns: ColumnsType<BaseUser> = [
   {
@@ -58,10 +59,32 @@ export const columns: ColumnsType<BaseUser> = [
     dataIndex: 'id',
     key: 'actions',
     tdStyle: 'padding-top: 0px; padding-bottom: 0px; vertical-align: middle;',
-    customRender: (value: string, record) =>
-      h(Fragment, null, [
+    customRender: (value: string, record) => {
+      const showButtons = record.status === UserStatusEnum.Active;
+
+      return h('div', { style: 'display: flex; gap: 8px; justify-content: center;' }, [
+        showButtons && h(UpdateModal, { user: record }),
         h(DetailModal, { userId: value }),
-        record.status === UserStatusEnum.Active && h(DeleteModal, { userId: value, username: record.username }),
-      ]),
+        showButtons && h(DeleteModal, { userId: value, username: record.username }),
+      ]);
+    },
   },
 ];
+
+export const genderOptions = [
+  {
+    label: 'Male',
+    value: GenderEnum.Male,
+  },
+  {
+    label: 'Female',
+    value: GenderEnum.Female,
+  },
+] as const;
+
+export const initialValues: CreateUser = {
+  username: '',
+  email: '',
+  password: '',
+  gender: GenderEnum.Male,
+};

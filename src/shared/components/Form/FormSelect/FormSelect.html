@@ -1,0 +1,6 @@
+<p class="select-wrapper">
+  <span v-if="label" class="label">{{ label }}</span>
+  <select :value="modelValue" @change="$emit('update:modelValue', $event.target.value)" :disabled="disabled">
+    <option v-for="{ label, value } in options" :value="value">{{ label }}</option>
+  </select>
+</p>

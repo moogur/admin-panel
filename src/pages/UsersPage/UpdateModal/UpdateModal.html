@@ -1,0 +1,33 @@
+<SvgIcon icon="edit" @click="openModal" class="edit-button"></SvgIcon>
+
+<Modal v-if="showModal" @close="showModal = false" title="Edit user" formName="edit-user-form">
+  <form class="edit-info-form" @submit.prevent="onSubmit" novalidate id="edit-user-form">
+    <FormInput
+      required
+      placeholder="Username"
+      v-model="formData.username"
+      class="input"
+      autocomplete="off"
+      :disabled="loading"
+      :errorMessage="v$.username.$errors[0]?.$message"
+    />
+    <FormInput
+      required
+      placeholder="Email"
+      v-model="formData.email"
+      class="input"
+      autocomplete="off"
+      :disabled="loading"
+      :errorMessage="v$.email.$errors[0]?.$message"
+    />
+    <FormPassword
+      placeholder="Password"
+      v-model="formData.password"
+      class="input"
+      autocomplete="new-password"
+      :disabled="loading"
+      :errorMessage="v$.password.$errors[0]?.$message"
+    />
+    <FormSelect label="Gender" :options="genderOptions" v-model="formData.gender" :disabled="loading" />
+  </form>
+</Modal>

@@ -1,4 +1,11 @@
-import { BasePagination, GenderEnum, OnlyId, ResponseWithPagination, UserStatusEnum } from '@shared/types';
+import {
+  BasePagination,
+  GenderEnum,
+  OnlyId,
+  ResponseWithPagination,
+  SomeOptional,
+  UserStatusEnum,
+} from '@shared/types';
 
 export interface LoginAdmin {
   username: string;
@@ -56,3 +63,7 @@ export type GetUsersQuery = BasePagination & BackSorter<UserSortOrderFields>;
 export interface DeleteUsers {
   ids: string[];
 }
+
+export type CreateUser = LoginAdmin & Pick<BaseUser, 'email' | 'gender'>;
+
+export type UpdateUser = SomeOptional<CreateUser, 'password' | 'gender'>;

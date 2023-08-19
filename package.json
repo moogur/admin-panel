@@ -12,7 +12,7 @@
   "scripts": {
     "start": "export $(cat env/.development.env | xargs) && vite",
     "build": "vue-tsc && export $(cat env/.production.env | xargs) && vite build && rm ./dist/index-dev.* && rm -fr ./dist/public",
-    "visualizer": "vue-tsc && vite build --mode visualizer",
+    "analyze": "vue-tsc && vite build --mode analyze",
     "preview": "npm run build && vite preview",
     "lint": "eslint \"src/**/*.{ts,vue,json}\" --fix",
     "stylelint": "stylelint 'src/**/*.{css,scss}' --fix",
