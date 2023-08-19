@@ -2,14 +2,13 @@ import useVuelidate from '@vuelidate/core';
 import { storeToRefs } from 'pinia';
 import { defineComponent, onUnmounted, reactive, ref } from 'vue';
 
-import { SvgIcon, Modal, CustomButton, FormInput, FormSelect } from '@shared/components';
+import { Modal, CustomButton, FormInput, FormSelect } from '@shared/components';
 import { createUserThunk, useCreateUserStore } from '@store';
 
 import { initialValues, genderOptions, createFormValidationRules } from './CreateModalConstants';
 
 export default defineComponent({
   components: {
-    SvgIcon,
     Modal,
     CustomButton,
     FormInput,

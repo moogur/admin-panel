@@ -1,1 +1,1 @@
-export { default as CreateModal } from './CreateModal.vue';
+export { default as UpdateModal } from './UpdateModal.vue';

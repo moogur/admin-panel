@@ -6,6 +6,7 @@ import { getDateToShowInTable, convertGenderEnumToTag, convertStatusEnumToTag } 
 
 import { DeleteModal } from './DeleteModal';
 import { DetailModal } from './DetailModal';
+import { UpdateModal } from './UpdateModal';
 
 export const columns: ColumnsType<BaseUser> = [
   {
@@ -62,7 +63,7 @@ export const columns: ColumnsType<BaseUser> = [
       const showButtons = record.status === UserStatusEnum.Active;
 
       return h('div', { style: 'display: flex; gap: 8px; justify-content: center;' }, [
-        // showButtons && h(CreateModal),
+        showButtons && h(UpdateModal, { userId: value }),
         h(DetailModal, { userId: value }),
         showButtons && h(DeleteModal, { userId: value, username: record.username }),
       ]);
