@@ -5,7 +5,6 @@
     <FormInput
       required
       placeholder="Username"
-      type="text"
       v-model="formData.username"
       class="input"
       autocomplete="off"
@@ -15,17 +14,15 @@
     <FormInput
       required
       placeholder="Email"
-      type="text"
       v-model="formData.email"
       class="input"
       autocomplete="off"
       :disabled="loading"
       :errorMessage="v$.email.$errors[0]?.$message"
     />
-    <FormInput
+    <FormPassword
       required
       placeholder="Password"
-      type="password"
       v-model="formData.password"
       class="input"
       autocomplete="new-password"

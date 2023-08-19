@@ -3,7 +3,7 @@ import { storeToRefs } from 'pinia';
 import { defineComponent, onUnmounted, ref, reactive } from 'vue';
 
 import { UpdateAdminBody } from '@api';
-import { Modal, FormInput, CustomButton, List, SvgIcon } from '@shared/components';
+import { Modal, FormInput, CustomButton, List, SvgIcon, FormPassword } from '@shared/components';
 import { supportedImageTypesString } from '@shared/constants';
 import { InputFileEvent } from '@shared/types';
 import {
@@ -25,6 +25,7 @@ export default defineComponent({
     CustomButton,
     List,
     SvgIcon,
+    FormPassword,
   },
   setup() {
     const { user } = storeToRefs(useAuthStore());

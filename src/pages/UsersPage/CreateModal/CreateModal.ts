@@ -2,7 +2,7 @@ import useVuelidate from '@vuelidate/core';
 import { storeToRefs } from 'pinia';
 import { defineComponent, onUnmounted, reactive, ref } from 'vue';
 
-import { Modal, CustomButton, FormInput, FormSelect } from '@shared/components';
+import { Modal, CustomButton, FormInput, FormSelect, FormPassword } from '@shared/components';
 import { getEmailValidationRules, getPasswordValidationRules, getUsernameValidationRules } from '@shared/rules';
 import { createUserThunk, useCreateUserStore } from '@store';
 
@@ -14,6 +14,7 @@ export default defineComponent({
     CustomButton,
     FormInput,
     FormSelect,
+    FormPassword,
   },
   setup() {
     const createUserStore = useCreateUserStore();

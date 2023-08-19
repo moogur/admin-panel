@@ -3,16 +3,14 @@
   <FormInput
     :errorMessage="v$.username.$errors[0]?.$message"
     placeholder="Username"
-    type="text"
     v-model="formData.username"
     class="input"
     :disabled="loading"
     required
   />
-  <FormInput
+  <FormPassword
     :errorMessage="v$.password.$errors[0]?.$message"
     placeholder="Password"
-    type="password"
     v-model="formData.password"
     class="input"
     :disabled="loading"

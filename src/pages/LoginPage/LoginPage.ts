@@ -3,7 +3,7 @@ import { storeToRefs } from 'pinia';
 import { defineComponent, onMounted, reactive } from 'vue';
 
 import { LoginAdmin } from '@api';
-import { FormInput, CustomButton } from '@shared/components';
+import { FormInput, CustomButton, FormPassword } from '@shared/components';
 import { getPasswordValidationRules, getUsernameValidationRules } from '@shared/rules';
 import { adminLoginThunk, useAdminLoginStore, useGetAdminInfoStore } from '@store';
 
@@ -11,6 +11,7 @@ export default defineComponent({
   components: {
     FormInput,
     CustomButton,
+    FormPassword,
   },
   setup() {
     const getAdminInfoStore = useGetAdminInfoStore();

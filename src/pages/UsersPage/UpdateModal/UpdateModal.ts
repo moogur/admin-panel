@@ -3,7 +3,7 @@ import { storeToRefs } from 'pinia';
 import { defineComponent, onUnmounted, reactive, ref } from 'vue';
 
 import { BaseUser, CreateUser } from '@api';
-import { SvgIcon, Modal, FormInput, FormSelect } from '@shared/components';
+import { SvgIcon, Modal, FormInput, FormSelect, FormPassword } from '@shared/components';
 import { getEmailValidationRules, getPasswordValidationRules, getUsernameValidationRules } from '@shared/rules';
 import { updateUserThunk, useUpdateUserStore } from '@store';
 
@@ -17,6 +17,7 @@ export default defineComponent({
     Modal,
     FormInput,
     FormSelect,
+    FormPassword,
   },
   props: {
     user: {
