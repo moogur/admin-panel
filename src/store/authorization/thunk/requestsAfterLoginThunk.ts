@@ -2,7 +2,7 @@ import { Admin } from '@api';
 import { successNotification } from '@shared/utils';
 import { useAuthStore, useGetAvatarStore, useGetServicesIpsStore, useGetServicesVersionsStore } from '@store';
 
-export async function requestsAfterLoginThunk(authData: Admin | null) {
+export async function requestsAfterLoginThunk(authData?: Admin | null) {
   const getServicesVersionsStore = useGetServicesVersionsStore();
   const getServicesIpsStore = useGetServicesIpsStore();
   const getAvatarStore = useGetAvatarStore();
