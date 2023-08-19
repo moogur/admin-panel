@@ -1,7 +1,7 @@
 import { h } from 'vue';
 
-import { BaseUser } from '@api';
-import { ColumnsType, UserStatusEnum } from '@shared/types';
+import { BaseUser, CreateUser } from '@api';
+import { ColumnsType, GenderEnum, UserStatusEnum } from '@shared/types';
 import { getDateToShowInTable, convertGenderEnumToTag, convertStatusEnumToTag } from '@shared/utils';
 
 import { DeleteModal } from './DeleteModal';
@@ -63,10 +63,28 @@ export const columns: ColumnsType<BaseUser> = [
       const showButtons = record.status === UserStatusEnum.Active;
 
       return h('div', { style: 'display: flex; gap: 8px; justify-content: center;' }, [
-        showButtons && h(UpdateModal, { userId: value }),
+        showButtons && h(UpdateModal, { user: record }),
         h(DetailModal, { userId: value }),
         showButtons && h(DeleteModal, { userId: value, username: record.username }),
       ]);
     },
   },
 ];
+
+export const genderOptions = [
+  {
+    label: 'Male',
+    value: GenderEnum.Male,
+  },
+  {
+    label: 'Female',
+    value: GenderEnum.Female,
+  },
+] as const;
+
+export const initialValues: CreateUser = {
+  username: '',
+  email: '',
+  password: '',
+  gender: GenderEnum.Male,
+};

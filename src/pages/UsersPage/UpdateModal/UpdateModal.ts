@@ -1,11 +1,15 @@
 import useVuelidate from '@vuelidate/core';
 import { storeToRefs } from 'pinia';
-import { computed, defineComponent, onUnmounted, reactive, ref } from 'vue';
+import { defineComponent, onUnmounted, reactive, ref } from 'vue';
 
+import { BaseUser, CreateUser } from '@api';
 import { SvgIcon, Modal, FormInput, FormSelect } from '@shared/components';
-import { updateUserThunk, useGetUsersStore, useUpdateUserStore } from '@store';
+import { getEmailValidationRules, getPasswordValidationRules, getUsernameValidationRules } from '@shared/rules';
+import { updateUserThunk, useUpdateUserStore } from '@store';
 
-import { initialValues, updateFormValidationRules, genderOptions } from './UpdateModalConstants';
+import { genderOptions, initialValues } from '../UsersPageConstants';
+
+import { transformValues } from './UpdateModalUtils';
 
 export default defineComponent({
   components: {
@@ -15,15 +19,14 @@ export default defineComponent({
     FormSelect,
   },
   props: {
-    userId: {
-      type: String,
-      default: '',
+    user: {
+      type: Object as () => BaseUser,
+      required: true,
     },
   },
   setup(properties) {
     const updateUserStore = useUpdateUserStore();
     const { loading } = storeToRefs(updateUserStore);
-    const { data } = storeToRefs(useGetUsersStore());
     const showModal = ref(false);
 
     onUnmounted(() => {
@@ -31,15 +34,26 @@ export default defineComponent({
       updateUserStore.$reset();
     });
 
-    const formData = reactive({ ...initialValues });
+    const formData: CreateUser = reactive({ ...initialValues });
 
-    const v$ = useVuelidate(updateFormValidationRules, formData as any, { $lazy: true });
-
-    const user = computed(() => data.value?.list.find((item) => item.id === properties.userId));
+    const v$ = useVuelidate(
+      {
+        username: getUsernameValidationRules(true),
+        password: getPasswordValidationRules(false),
+        email: getEmailValidationRules(true),
+      },
+      formData,
+      { $lazy: true },
+    );
 
     const openModal = () => {
-      Object.assign(formData, initialValues, { username: user.value?.username, email: user.value?.email });
       v$.value.$reset();
+      Object.assign(formData, {
+        username: properties.user.username,
+        email: properties.user.email,
+        gender: properties.user.gender,
+        password: initialValues.password,
+      });
 
       showModal.value = true;
     };
@@ -47,7 +61,7 @@ export default defineComponent({
     const onSubmit = () => {
       v$.value.$touch();
       if (v$.value.$invalid) return;
-      updateUserThunk(properties.userId, formData, () => (showModal.value = false));
+      updateUserThunk(properties.user.id, transformValues(formData), () => (showModal.value = false));
     };
 
     return {
@@ -58,7 +72,6 @@ export default defineComponent({
       formData,
       genderOptions,
       v$,
-      user,
     };
   },
 });

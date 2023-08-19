@@ -4,7 +4,7 @@ import { defineComponent, onMounted, reactive } from 'vue';
 
 import { LoginAdmin } from '@api';
 import { FormInput, CustomButton } from '@shared/components';
-import { loginFormValidationRules } from '@shared/rules';
+import { getPasswordValidationRules, getUsernameValidationRules } from '@shared/rules';
 import { adminLoginThunk, useAdminLoginStore, useGetAdminInfoStore } from '@store';
 
 export default defineComponent({
@@ -26,7 +26,14 @@ export default defineComponent({
       getAdminInfoStore.$reset();
     });
 
-    const v$ = useVuelidate(loginFormValidationRules, formData, { $lazy: true });
+    const v$ = useVuelidate(
+      {
+        username: getUsernameValidationRules(true),
+        password: getPasswordValidationRules(true),
+      },
+      formData,
+      { $lazy: true },
+    );
 
     const onSubmit = () => {
       v$.value.$touch();

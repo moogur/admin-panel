@@ -4,7 +4,7 @@ export default defineComponent({
   props: {
     options: {
       required: true,
-      type: Array<{ label: string; value: string | number }>,
+      type: Array<{ label: string; value: string }>,
     },
     label: {
       type: String,
@@ -14,9 +14,9 @@ export default defineComponent({
       default: false,
       type: Boolean,
     },
-    defaultValue: {
-      default: undefined,
-      type: Object as () => string | number,
+    modelValue: {
+      required: true,
+      type: String,
     },
   },
 });

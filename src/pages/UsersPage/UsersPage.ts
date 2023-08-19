@@ -5,7 +5,7 @@ import { CustomTable } from '@shared/components';
 import { getUsersThunk, useGetUserInfoStore, useGetUsersStore } from '@store';
 
 import { CreateModal } from './CreateModal';
-import { columns } from './constants';
+import { columns } from './UsersPageConstants';
 
 export default defineComponent({
   components: {

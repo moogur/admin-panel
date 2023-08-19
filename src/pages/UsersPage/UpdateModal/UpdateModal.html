@@ -31,12 +31,6 @@
       :disabled="loading"
       :errorMessage="v$.password.$errors[0]?.$message"
     />
-    <FormSelect
-      label="Gender"
-      :options="genderOptions"
-      v-model="formData.gender"
-      :disabled="loading"
-      :defaultValue="user.gender"
-    />
+    <FormSelect label="Gender" :options="genderOptions" v-model="formData.gender" :disabled="loading" />
   </form>
 </Modal>

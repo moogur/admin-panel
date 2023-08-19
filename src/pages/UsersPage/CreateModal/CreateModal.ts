@@ -3,9 +3,10 @@ import { storeToRefs } from 'pinia';
 import { defineComponent, onUnmounted, reactive, ref } from 'vue';
 
 import { Modal, CustomButton, FormInput, FormSelect } from '@shared/components';
+import { getEmailValidationRules, getPasswordValidationRules, getUsernameValidationRules } from '@shared/rules';
 import { createUserThunk, useCreateUserStore } from '@store';
 
-import { initialValues, genderOptions, createFormValidationRules } from './CreateModalConstants';
+import { genderOptions, initialValues } from '../UsersPageConstants';
 
 export default defineComponent({
   components: {
@@ -26,7 +27,15 @@ export default defineComponent({
 
     const formData = reactive({ ...initialValues });
 
-    const v$ = useVuelidate(createFormValidationRules, formData, { $lazy: true });
+    const v$ = useVuelidate(
+      {
+        username: getUsernameValidationRules(true),
+        password: getPasswordValidationRules(true),
+        email: getEmailValidationRules(true),
+      },
+      formData,
+      { $lazy: true },
+    );
 
     const openModal = () => {
       Object.assign(formData, initialValues);
