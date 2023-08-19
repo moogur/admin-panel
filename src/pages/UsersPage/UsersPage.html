@@ -1,5 +1,6 @@
+<Loader v-if="!loaded && usersLoading"></Loader>
 <CustomTable
-  v-if="tableData"
+  v-else-if="tableData"
   class="table-wrapper"
   title="List of users"
   :dataSource="tableData.list"
@@ -11,3 +12,4 @@
 >
   <CreateModal></CreateModal>
 </CustomTable>
+<MainError v-else-if="error"></MainError>

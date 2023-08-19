@@ -1,4 +1,4 @@
-import { RequestConfig, RequestConfigWithAbortSignal } from '@shared/types';
+import { RequestConfig, RequestConfigForProperties } from '@shared/types';
 import { backErrorNotification, logout, prepareError } from '@shared/utils';
 
 import { BaseStore } from './types';
@@ -23,9 +23,15 @@ const additionToRequest = { error: null, loaded: true, ...additionToAbort };
 const additionToError = { data: null, loaded: false, ...additionToAbort };
 const additionTo401Error = { error: null, ...additionToError };
 
-export async function thunkRequestHelper<ThunkReturnType, This extends BaseStore<ThunkReturnType>, Body, Url, Query>(
+export async function thunkRequestHelper<
+  ThunkReturnType,
+  This extends BaseStore<ThunkReturnType>,
+  Body = undefined,
+  Url = undefined,
+  Query = undefined,
+>(
   that: This,
-  thunk: (parameter: RequestConfigWithAbortSignal<Body, Url, Query>) => Promise<ThunkReturnType>,
+  thunk: (parameter: RequestConfigForProperties<Body, Url, Query>) => Promise<ThunkReturnType>,
   parameter: RequestConfig<Body, Url, Query>,
 ) {
   that.loading = true;
@@ -46,6 +52,13 @@ export async function thunkRequestHelper<ThunkReturnType, This extends BaseStore
     }
     throw error;
   }
+}
+
+export function thunkRequestHelperWithoutParameters<ThunkReturnType, This extends BaseStore<ThunkReturnType>>(
+  that: This,
+  thunk: (parameter: RequestConfigForProperties) => Promise<ThunkReturnType>,
+) {
+  return thunkRequestHelper(that, thunk, {});
 }
 
 export function showErrorMessage(error: unknown) {

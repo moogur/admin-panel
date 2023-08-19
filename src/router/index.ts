@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 
-import { links } from '@shared/constants';
+import { AUTH_KEY, links } from '@shared/constants';
 import { useAuthStore } from '@store/app';
 
 const routes = Object.values(links).map(({ path, component }) => ({
@@ -18,7 +18,7 @@ router.beforeEach((to) => {
   const auth = useAuthStore();
 
   if (auth.isAuth) {
-    if (isLoginPage) return links.main.path;
+    if (isLoginPage && localStorage.getItem(AUTH_KEY) === 'true') return links.main.path;
   } else {
     if (!isLoginPage) {
       auth.setRedirectUrl(to.fullPath);

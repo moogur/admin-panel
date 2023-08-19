@@ -14,7 +14,7 @@
       </main>
     </article>
   </template>
-  <template v-else-if="isAuth && !user">ERROR</template>
+  <MainError v-else-if="isAuth && !user" class="error"></MainError>
   <router-view v-else></router-view>
 </template>
 <Notifications></Notifications>

@@ -18,11 +18,18 @@ main:before {
   inset: 0;
 }
 
-aside:hover + .container main:before {
-  z-index: $z-index-main-blur;
+aside {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: $z-index-left-panel;
 
-  opacity: 1;
-  backdrop-filter: blur($blur-background);
+  &:hover + .container main:before {
+    z-index: $z-index-main-blur;
+
+    opacity: 1;
+    backdrop-filter: blur($blur-background);
+  }
 }
 
 header {
@@ -63,5 +70,9 @@ main {
   display: flex;
 
   flex: 1;
-  padding: 15px;
+  padding: 15px 15px 15px 85px;
+}
+
+.error {
+  margin: auto;
 }

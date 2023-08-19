@@ -2,6 +2,7 @@ import { OnlyId, RequestConfigForProperties, SecretKeysEnum } from '@shared/type
 
 import { BaseApiService } from '../baseApi';
 import { AUTHORIZATION_BASEURL } from '../baseUrls';
+import { headersForImage } from '../utils';
 
 import {
   Admin,
@@ -22,49 +23,49 @@ export class AuthorizationService extends BaseApiService {
     super({ baseUrl: AUTHORIZATION_BASEURL });
   }
 
-  public adminLogin = (config?: RequestConfigForProperties<LoginAdmin>): Promise<Admin> =>
+  public adminLogin = (config: RequestConfigForProperties<LoginAdmin>): Promise<Admin> =>
     this.request({
       method: 'POST',
       url: '/admin/login',
       ...config,
     });
 
-  public adminLogout = (config?: RequestConfigForProperties): Promise<OnlyId> =>
+  public adminLogout = (config: RequestConfigForProperties): Promise<OnlyId> =>
     this.request({
       method: 'POST',
       url: '/admin/logout',
       ...config,
     });
 
-  public getAdminInfo = (config?: RequestConfigForProperties): Promise<Admin> =>
+  public getAdminInfo = (config: RequestConfigForProperties): Promise<Admin> =>
     this.request({
       method: 'GET',
       url: '/admin',
       ...config,
     });
 
-  public updateSecret = (config?: RequestConfigForProperties<{ type: SecretKeysEnum }>): Promise<{ status: true }> =>
+  public updateSecret = (config: RequestConfigForProperties<{ type: SecretKeysEnum }>): Promise<{ status: true }> =>
     this.request({
       method: 'PUT',
       url: '/secretOrToken',
       ...config,
     });
 
-  public updateAdminInfo = (config?: RequestConfigForProperties<UpdateAdminBody>): Promise<Admin> =>
+  public updateAdminInfo = (config: RequestConfigForProperties<UpdateAdminBody>): Promise<Admin> =>
     this.request({
       method: 'PATCH',
       url: '/admin',
       ...config,
     });
 
-  public getServicesVersions = (config?: RequestConfigForProperties): Promise<ServicesVersions> =>
+  public getServicesVersions = (config: RequestConfigForProperties): Promise<ServicesVersions> =>
     this.request({
       method: 'GET',
       url: '/info/servicesVersions',
       ...config,
     });
 
-  public changeAvatar = (config?: RequestConfigForProperties<FormData>): Promise<{ result: true }> =>
+  public changeAvatar = (config: RequestConfigForProperties<FormData>): Promise<{ result: true }> =>
     this.request({
       method: 'PUT',
       url: '/admin/avatar',
@@ -74,26 +75,23 @@ export class AuthorizationService extends BaseApiService {
       ...config,
     });
 
-  public getAvatar = (config?: RequestConfigForProperties): Promise<string> =>
-    this.request<undefined, undefined, undefined, File>({
+  public getAvatar = (config: RequestConfigForProperties): Promise<string> =>
+    this.request<File>({
       method: 'GET',
       url: '/admin/avatar',
       convertResponse: 'blob',
-      headers: {
-        Accept: 'image/avif,image/webp,image/apng,image/svg+xml,image/*',
-        'Content-Type': 'application/json; charset=utf-8',
-      },
+      headers: headersForImage,
       ...config,
     }).then(this.convertFileToUrl);
 
-  public getClientIp = (config?: RequestConfigForProperties): Promise<{ ip: string | null }> =>
+  public getClientIp = (config: RequestConfigForProperties): Promise<{ ip: string | null }> =>
     this.request({
       method: 'GET',
       url: '/info/clientIp',
       ...config,
     });
 
-  public getServicesIps = (config?: RequestConfigForProperties): Promise<ServicesIps> =>
+  public getServicesIps = (config: RequestConfigForProperties): Promise<ServicesIps> =>
     this.request({
       method: 'GET',
       url: '/info/servicesIps',
@@ -101,7 +99,7 @@ export class AuthorizationService extends BaseApiService {
     });
 
   public getUsers = (
-    config?: RequestConfigForProperties<undefined, undefined, GetUsersQuery>,
+    config: RequestConfigForProperties<undefined, undefined, GetUsersQuery>,
   ): Promise<UsersWithPagination> =>
     this.request({
       method: 'GET',
@@ -109,31 +107,31 @@ export class AuthorizationService extends BaseApiService {
       ...config,
     });
 
-  public getUserInfo = (config?: RequestConfigForProperties<undefined, OnlyId>): Promise<User> =>
+  public getUserInfo = (config: RequestConfigForProperties<undefined, OnlyId>): Promise<User> =>
     this.request({
       method: 'GET',
-      url: `/users/${config?.urlParameters?.id}`,
+      url: `/users/${config?.urlParameters.id}`,
       ...config,
     });
 
-  public deleteUsers = (config?: RequestConfigForProperties<undefined, undefined, DeleteUsers>): Promise<DeleteUsers> =>
+  public deleteUsers = (config: RequestConfigForProperties<undefined, undefined, DeleteUsers>): Promise<DeleteUsers> =>
     this.request({
       method: 'DELETE',
       url: '/users',
       ...config,
     });
 
-  public createUser = (config?: RequestConfigForProperties<CreateUser>): Promise<User> =>
+  public createUser = (config: RequestConfigForProperties<CreateUser>): Promise<User> =>
     this.request({
       method: 'POST',
       url: '/users',
       ...config,
     });
 
-  public updateUser = (config?: RequestConfigForProperties<UpdateUser, OnlyId>): Promise<User> =>
+  public updateUser = (config: RequestConfigForProperties<UpdateUser, OnlyId>): Promise<User> =>
     this.request({
       method: 'PATCH',
-      url: `/users/${config?.urlParameters?.id}`,
+      url: `/users/${config?.urlParameters.id}`,
       ...config,
     });
 }

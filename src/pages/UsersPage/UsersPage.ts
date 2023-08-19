@@ -1,7 +1,7 @@
 import { storeToRefs } from 'pinia';
 import { defineComponent, onMounted, onUnmounted } from 'vue';
 
-import { CustomTable } from '@shared/components';
+import { CustomTable, MainError, Loader } from '@shared/components';
 import { getUsersThunk, useGetUserInfoStore, useGetUsersStore } from '@store';
 
 import { CreateModal } from './CreateModal';
@@ -11,10 +11,12 @@ export default defineComponent({
   components: {
     CustomTable,
     CreateModal,
+    MainError,
+    Loader,
   },
   setup() {
     const usersStore = useGetUsersStore();
-    const { data, sorter, loading: usersLoading } = storeToRefs(usersStore);
+    const { data, sorter, loading: usersLoading, loaded, error } = storeToRefs(usersStore);
     const { loading: userInfoLoading } = storeToRefs(useGetUserInfoStore());
 
     onMounted(getUsersThunk);
@@ -30,6 +32,8 @@ export default defineComponent({
       sorter,
       usersLoading,
       userInfoLoading,
+      loaded,
+      error,
     };
   },
 });

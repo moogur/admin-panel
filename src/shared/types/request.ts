@@ -4,23 +4,20 @@ type RequestMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
 
 type ConvertResponseType = 'json' | 'blob';
 
-type BaseQueryParametersConfig<Query> = Query extends undefined ? object : { queryParameters?: Query };
+type BaseQueryParametersConfig<Query = undefined> = Query extends undefined ? object : { queryParameters: Query };
 
-type BaseUrlParametersConfig<Url> = Url extends undefined ? object : { urlParameters?: Url };
+type BaseUrlParametersConfig<Url = undefined> = Url extends undefined ? object : { urlParameters: Url };
 
-export type RequestConfig<Body, Url, Query> = Body extends undefined
-  ? {
-      headers?: Record<string, string>;
-    } & BaseUrlParametersConfig<Url> &
-      BaseQueryParametersConfig<Query>
+export type RequestConfig<Body = undefined, Url = undefined, Query = undefined> = Body extends undefined
+  ? BaseUrlParametersConfig<Url> & BaseQueryParametersConfig<Query>
   : {
-      body?: Body;
-      headers?: Record<string, string>;
+      body: Body;
     } & BaseUrlParametersConfig<Url> &
       BaseQueryParametersConfig<Query>;
 
 export type RequestConfigWithAbortSignal<Body = undefined, Url = undefined, Query = undefined> = {
-  signal?: AbortSignal;
+  signal: AbortSignal;
+  headers?: Record<string, string>;
 } & RequestConfig<Body, Url, Query>;
 
 export type RequestConfigForProperties<Body = undefined, Url = undefined, Query = undefined> = Omit<
@@ -28,7 +25,11 @@ export type RequestConfigForProperties<Body = undefined, Url = undefined, Query 
   'headers'
 >;
 
-export type AdvancedRequestConfig<Body, Url, Query> = RequestConfigWithAbortSignal<Body, Url, Query> & {
+export type AdvancedRequestConfig<Body = undefined, Url = undefined, Query = undefined> = RequestConfigWithAbortSignal<
+  Body,
+  Url,
+  Query
+> & {
   method: RequestMethod;
   url: string;
   convertResponse?: ConvertResponseType;

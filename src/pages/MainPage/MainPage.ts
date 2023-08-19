@@ -12,10 +12,8 @@ export default defineComponent({
     CustomTable,
   },
   setup() {
-    const getServicesVersionsStore = useGetServicesVersionsStore();
-    const getServicesIpsStore = useGetServicesIpsStore();
-    const { data: versions } = storeToRefs(getServicesVersionsStore);
-    const { data: ips } = storeToRefs(getServicesIpsStore);
+    const { data: versions } = storeToRefs(useGetServicesVersionsStore());
+    const { data: ips } = storeToRefs(useGetServicesIpsStore());
 
     const dataSource: Service[] = baseDataSource.map(({ dataIndex, ...other }) => ({
       ...other,
