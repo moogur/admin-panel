@@ -1,5 +1,4 @@
-import { successNotification } from '@shared/utils';
-import { showErrorMessage } from '@store/utils';
+import { showErrorMessage, successNotification } from '@shared/utils';
 
 import { useChangeAvatarStore, useGetAvatarStore } from '../slice';
 

@@ -1,9 +1,11 @@
 import router from '@router';
-import { AUTH_KEY, links } from '@shared/constants';
+import { links } from '@shared/constants';
 import { useAuthStore, useGetServicesVersionsStore, useGetServicesIpsStore, useGetClientIpStore } from '@store';
 
+import { setAuthToLS } from './localStorage';
+
 export async function logout() {
-  localStorage.setItem(AUTH_KEY, 'false');
+  setAuthToLS(false);
   await router.push(links.login.path);
 
   useAuthStore().$reset();

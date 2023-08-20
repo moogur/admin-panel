@@ -1,7 +1,6 @@
 import { UpdateAdminBody } from '@api';
-import { successNotification } from '@shared/utils';
+import { successNotification, showErrorMessage } from '@shared/utils';
 import { useAuthStore } from '@store/app';
-import { showErrorMessage } from '@store/utils';
 
 import { useUpdateAdminInfoStore } from '../slice';
 

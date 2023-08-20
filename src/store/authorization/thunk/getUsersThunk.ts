@@ -1,8 +1,7 @@
 import { UserSortOrderFields } from '@api';
 import { defaultPagination } from '@shared/constants';
 import { TableChange } from '@shared/types';
-import { prepareQuery } from '@shared/utils';
-import { showErrorMessage } from '@store/utils';
+import { prepareQuery, showErrorMessage } from '@shared/utils';
 
 import { useGetUsersStore } from '../slice';
 

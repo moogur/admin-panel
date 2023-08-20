@@ -5,7 +5,7 @@ import { getBaseInitialState, thunkRequestHelperWithoutParameters } from '@store
 
 export const useGetClientIpStore = defineStore({
   id: 'getClientIp',
-  state: getBaseInitialState<{ ip: string | null }>(),
+  state: getBaseInitialState<{ ip: string | null }>(true),
   actions: {
     thunk() {
       return thunkRequestHelperWithoutParameters(this, authorizationService.getClientIp);

@@ -7,7 +7,7 @@ import { getBaseInitialState, thunkRequestHelper } from '@store/utils';
 
 export const useGetUsersStore = defineStore({
   id: 'getUsers',
-  state: getBaseInitialState<UsersWithPagination, { sorter: Sort<UserSortOrderFields> }>({
+  state: getBaseInitialState<UsersWithPagination, { sorter: Sort<UserSortOrderFields> }>(false, {
     sorter: { key: 'createdDate', sortOrder: 'ascend' },
   }),
   actions: {

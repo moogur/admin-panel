@@ -1,5 +1,5 @@
 import { CreateUser } from '@api';
-import { showErrorMessage } from '@store/utils';
+import { showErrorMessage } from '@shared/utils';
 
 import { useCreateUserStore } from '../slice';
 

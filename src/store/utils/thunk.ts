@@ -1,27 +1,9 @@
 import { RequestConfig, RequestConfigForProperties } from '@shared/types';
-import { backErrorNotification, logout, prepareError } from '@shared/utils';
+import { logout, prepareError } from '@shared/utils';
 
-import { BaseStore } from './types';
+import { BaseStore } from '../types';
 
-export function getBaseInitialState<Data, AddFields extends object | undefined = undefined>(
-  additionalField?: AddFields,
-) {
-  return function () {
-    return {
-      data: null,
-      error: null,
-      loaded: false,
-      loading: false,
-      abortController: null,
-      ...structuredClone(additionalField),
-    } as BaseStore<Data, AddFields>;
-  };
-}
-
-const additionToAbort = { loading: false, abortController: null };
-const additionToRequest = { error: null, loaded: true, ...additionToAbort };
-const additionToError = { data: null, loaded: false, ...additionToAbort };
-const additionTo401Error = { error: null, ...additionToError };
+import { additionTo401Error, additionToAbort, additionToError, additionToRequest } from './store';
 
 export async function thunkRequestHelper<
   ThunkReturnType,
@@ -34,6 +16,7 @@ export async function thunkRequestHelper<
   thunk: (parameter: RequestConfigForProperties<Body, Url, Query>) => Promise<ThunkReturnType>,
   parameter: RequestConfig<Body, Url, Query>,
 ) {
+  if (that.cacheRequest && that.loaded) return;
   that.loading = true;
   try {
     const controller = new AbortController();
@@ -59,9 +42,4 @@ export function thunkRequestHelperWithoutParameters<ThunkReturnType, This extend
   thunk: (parameter: RequestConfigForProperties) => Promise<ThunkReturnType>,
 ) {
   return thunkRequestHelper(that, thunk, {});
-}
-
-export function showErrorMessage(error: unknown) {
-  const preparedError = prepareError(error);
-  if (preparedError.response.status !== 499) backErrorNotification(preparedError);
 }

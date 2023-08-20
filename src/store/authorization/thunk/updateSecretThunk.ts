@@ -1,6 +1,5 @@
 import { SecretKeysEnum } from '@shared/types';
-import { successNotification } from '@shared/utils';
-import { showErrorMessage } from '@store/utils';
+import { successNotification, showErrorMessage } from '@shared/utils';
 
 import { useUpdateSecretStore } from '../slice';
 

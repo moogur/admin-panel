@@ -6,7 +6,7 @@ import { getBaseInitialState, thunkRequestHelperWithoutParameters } from '@store
 
 export const useGetServicesVersionsStore = defineStore({
   id: 'getServicesVersions',
-  state: getBaseInitialState<ServicesVersions>(),
+  state: getBaseInitialState<ServicesVersions>(true),
   actions: {
     thunk() {
       return thunkRequestHelperWithoutParameters(this, authorizationService.getServicesVersions);

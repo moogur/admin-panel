@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 
 import { Admin } from '@api/AuthorizationApi';
-import { AUTH_KEY } from '@shared/constants';
+import { getAuthFromLS } from '@shared/utils';
 
 export type RedirectStore = {
   initialization: boolean;
@@ -14,7 +14,7 @@ export const useAuthStore = defineStore({
   id: 'redirect',
   state: (): RedirectStore => ({
     url: null,
-    isAuth: localStorage.getItem(AUTH_KEY) === 'true',
+    isAuth: getAuthFromLS(),
     initialization: true,
     user: null,
   }),
