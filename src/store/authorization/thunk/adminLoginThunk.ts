@@ -1,8 +1,7 @@
 import { storeToRefs } from 'pinia';
 
 import { LoginAdmin } from '@api';
-import { login } from '@shared/utils';
-import { showErrorMessage } from '@store/utils';
+import { login, showErrorMessage } from '@shared/utils';
 
 import { useAdminLoginStore } from '../slice';
 

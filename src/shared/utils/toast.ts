@@ -3,6 +3,8 @@ import { NotificationType } from '@shared/components/Notifications/Notifications
 
 import { createNotification } from '../components';
 
+import { prepareError } from './error';
+
 function baseNotification(type: NotificationType, title: string, message?: string) {
   if (message) {
     createNotification({ title, message, type });
@@ -31,4 +33,9 @@ export function successNotification(title: string, message?: string) {
 
 export function errorNotification(title: string, message?: string) {
   baseNotification(NotificationType.Error, title, message);
+}
+
+export function showErrorMessage(error: unknown) {
+  const preparedError = prepareError(error);
+  if (preparedError.response.status !== 499) backErrorNotification(preparedError);
 }

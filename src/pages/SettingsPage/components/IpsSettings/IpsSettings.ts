@@ -1,27 +1,43 @@
 import { storeToRefs } from 'pinia';
-import { defineComponent, onMounted, onUnmounted } from 'vue';
+import { computed, defineComponent, onMounted, onUnmounted } from 'vue';
 
-import { Copy } from '@shared/components';
-import { getClientIpThunk, useGetClientIpStore, useGetServicesIpsStore } from '@store';
+import { Copy, MainError, Loader } from '@shared/components';
+import { getAggStatesError, getAggStatesLoaded, getAggStatesLoading } from '@shared/utils';
+import { useGetClientIpStore, useGetServicesIpsStore } from '@store';
 
 export default defineComponent({
   components: {
     Copy,
+    MainError,
+    Loader,
   },
   setup() {
     const getClientIpStore = useGetClientIpStore();
+    const clientIpStoreReference = storeToRefs(getClientIpStore);
     const getServicesIpsStore = useGetServicesIpsStore();
-    const { data: clientIp } = storeToRefs(getClientIpStore);
-    const { data: servicesIps } = storeToRefs(getServicesIpsStore);
+    const servicesIpsStoreReference = storeToRefs(getServicesIpsStore);
 
-    onMounted(getClientIpThunk);
+    onMounted(() => {
+      getClientIpStore.thunk();
+      getServicesIpsStore.thunk();
+    });
     onUnmounted(() => {
       getClientIpStore.abortController?.abort();
+      getServicesIpsStore.abortController?.abort();
     });
 
+    const loading = computed(() => getAggStatesLoading(clientIpStoreReference, servicesIpsStoreReference));
+
+    const loaded = computed(() => getAggStatesLoaded(clientIpStoreReference, servicesIpsStoreReference));
+
+    const error = computed(() => getAggStatesError(clientIpStoreReference, servicesIpsStoreReference));
+
     return {
-      clientIp,
-      servicesIps,
+      clientIp: clientIpStoreReference.data,
+      servicesIps: servicesIpsStoreReference.data,
+      loading,
+      loaded,
+      error,
     };
   },
 });

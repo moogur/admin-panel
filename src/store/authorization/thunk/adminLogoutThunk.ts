@@ -1,5 +1,4 @@
-import { logout } from '@shared/utils';
-import { showErrorMessage } from '@store/utils';
+import { logout, showErrorMessage } from '@shared/utils';
 
 import { useAdminLogoutStore } from '../slice';
 

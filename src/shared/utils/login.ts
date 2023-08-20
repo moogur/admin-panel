@@ -1,12 +1,14 @@
 import { Admin } from '@api';
 import router from '@router';
-import { AUTH_KEY, links } from '@shared/constants';
+import { links } from '@shared/constants';
 import { useAuthStore } from '@store';
+
+import { setAuthToLS } from './localStorage';
 
 export function login({ data, needRedirect }: { data: Admin | null; needRedirect?: boolean }) {
   const authStore = useAuthStore();
 
-  localStorage.setItem(AUTH_KEY, 'true');
+  setAuthToLS(true);
   authStore.setAuth(data ?? { username: '', email: null, id: '', hasAvatar: false });
 
   if (needRedirect) {

@@ -1,31 +1,55 @@
 import { storeToRefs } from 'pinia';
-import { defineComponent } from 'vue';
+import { computed, defineComponent, onMounted, onUnmounted } from 'vue';
 
-import { CustomTable } from '@shared/components';
+import { CustomTable, MainError, Loader } from '@shared/components';
+import { getAggStatesError, getAggStatesLoaded, getAggStatesLoading } from '@shared/utils';
 import { useGetServicesVersionsStore, useGetServicesIpsStore } from '@store';
 
-import { Service } from './MainPageTypes';
 import { baseDataSource, columns } from './constants';
 
 export default defineComponent({
   components: {
     CustomTable,
+    MainError,
+    Loader,
   },
   setup() {
     const getServicesVersionsStore = useGetServicesVersionsStore();
+    const servicesVersionsStoreReference = storeToRefs(getServicesVersionsStore);
     const getServicesIpsStore = useGetServicesIpsStore();
-    const { data: versions } = storeToRefs(getServicesVersionsStore);
-    const { data: ips } = storeToRefs(getServicesIpsStore);
+    const servicesIpsStoreReference = storeToRefs(getServicesIpsStore);
 
-    const dataSource: Service[] = baseDataSource.map(({ dataIndex, ...other }) => ({
-      ...other,
-      version: versions.value?.[dataIndex],
-      ip: ips.value?.[dataIndex],
-    }));
+    onMounted(() => {
+      getServicesVersionsStore.thunk();
+      getServicesIpsStore.thunk();
+    });
+    onUnmounted(() => {
+      getServicesVersionsStore.abortController?.abort();
+      getServicesIpsStore.abortController?.abort();
+    });
+
+    const dataSource = computed(() => {
+      if (!servicesVersionsStoreReference.data.value || !servicesIpsStoreReference.data.value) return [];
+
+      return baseDataSource.map(({ dataIndex, ...other }) => ({
+        ...other,
+        version: servicesVersionsStoreReference.data.value?.[dataIndex],
+        ip: servicesIpsStoreReference.data.value?.[dataIndex],
+      }));
+    });
+
+    const loading = computed(() => getAggStatesLoading(servicesVersionsStoreReference, servicesIpsStoreReference));
+
+    const loaded = computed(() => getAggStatesLoaded(servicesVersionsStoreReference, servicesIpsStoreReference));
+
+    const error = computed(() => getAggStatesError(servicesVersionsStoreReference, servicesIpsStoreReference));
 
     return {
       dataSource,
       columns,
+      loading,
+      loaded,
+      error,
     };
   },
 });

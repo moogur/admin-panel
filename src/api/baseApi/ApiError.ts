@@ -1,5 +1,3 @@
-import { emptyResponse } from '@shared/constants';
-
 export class HTTPError extends Error {
   public response: Response;
 
@@ -18,6 +16,22 @@ export class HTTPError extends Error {
     this.request = request;
   }
 }
+
+const emptyResponse = {
+  ok: false,
+  redirected: false,
+  type: 'error',
+  url: '',
+  clone: () => new Response(),
+  arrayBuffer: () => Promise.resolve(new ArrayBuffer(0)),
+  headers: new Headers(),
+  formData: () => Promise.resolve(new FormData()),
+  blob: () => Promise.resolve(new Blob()),
+  json: () => Promise.resolve(),
+  text: () => Promise.resolve(''),
+  body: null,
+  bodyUsed: false,
+} as const;
 
 export const baseHttpError499 = new HTTPError({ ...emptyResponse, status: 499, statusText: 'AbortError' }, null);
 export const baseHttpError520 = new HTTPError({ ...emptyResponse, status: 520, statusText: 'Unknown Error' }, null);

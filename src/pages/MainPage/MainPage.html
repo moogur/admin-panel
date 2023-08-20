@@ -1,3 +1,5 @@
-<article class="container">
-  <CustomTable class="services" title="List of services" :columns="columns" :dataSource="dataSource"> </CustomTable>
+<Loader v-if="!loaded && loading"></Loader>
+<article v-else-if="loaded" class="container">
+  <CustomTable class="services" title="List of services" :columns="columns" :dataSource="dataSource"></CustomTable>
 </article>
+<MainError v-else-if="error"></MainError>

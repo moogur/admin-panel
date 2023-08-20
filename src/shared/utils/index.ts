@@ -6,3 +6,5 @@ export * from './error';
 export * from './date';
 export * from './table';
 export * from './enum';
+export * from './aggStates';
+export * from './localStorage';

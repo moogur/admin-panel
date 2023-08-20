@@ -1,0 +1,97 @@
+.loader {
+  position: relative;
+
+  display: block;
+  width: 100%;
+  height: 8px;
+  border-radius: 3px;
+  overflow: hidden;
+
+  background-color: #435ebe;
+  opacity: 0.65;
+}
+
+.indeterminate {
+  background-color: #0dcaf0;
+
+  &::before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+
+    background-color: inherit;
+
+    animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+
+    content: '';
+    will-change: left, right;
+  }
+
+  &::after {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+
+    background-color: inherit;
+
+    animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+    -webkit-animation-delay: 1.15s;
+    animation-delay: 1.15s;
+
+    content: '';
+    will-change: left, right;
+  }
+}
+
+@-webkit-keyframes indeterminate {
+  0% {
+    right: 100%;
+    left: -35%;
+  }
+
+  60% {
+    right: -90%;
+    left: 100%;
+  }
+
+  100% {
+    right: -90%;
+    left: 100%;
+  }
+}
+
+@keyframes indeterminate {
+  0% {
+    right: 100%;
+    left: -35%;
+  }
+
+  60% {
+    right: -90%;
+    left: 100%;
+  }
+
+  100% {
+    right: -90%;
+    left: 100%;
+  }
+}
+
+@keyframes indeterminate-short {
+  0% {
+    right: 100%;
+    left: -200%;
+  }
+
+  60% {
+    right: -8%;
+    left: 107%;
+  }
+
+  100% {
+    right: -8%;
+    left: 107%;
+  }
+}

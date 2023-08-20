@@ -18,7 +18,7 @@ export abstract class BaseApiService {
     };
   }
 
-  protected async request<Body, Url, Query, ReturnType>(
+  protected async request<ReturnType, Body = undefined, Url = undefined, Query = undefined>(
     config: AdvancedRequestConfig<Body, Url, Query>,
   ): Promise<ReturnType> {
     let httpError = baseHttpError520;

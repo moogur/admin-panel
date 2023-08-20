@@ -1,5 +1,5 @@
 import { UpdateUser } from '@api';
-import { showErrorMessage } from '@store/utils';
+import { showErrorMessage } from '@shared/utils';
 
 import { useUpdateUserStore } from '../slice';
 

@@ -1,6 +1,7 @@
 import { h } from 'vue';
 
 import { BaseUser, CreateUser } from '@api';
+import { genderMessage } from '@shared/messages';
 import { ColumnsType, GenderEnum, UserStatusEnum } from '@shared/types';
 import { getDateToShowInTable, convertGenderEnumToTag, convertStatusEnumToTag } from '@shared/utils';
 
@@ -73,11 +74,11 @@ export const columns: ColumnsType<BaseUser> = [
 
 export const genderOptions = [
   {
-    label: 'Male',
+    label: genderMessage[GenderEnum.Male],
     value: GenderEnum.Male,
   },
   {
-    label: 'Female',
+    label: genderMessage[GenderEnum.Female],
     value: GenderEnum.Female,
   },
 ] as const;

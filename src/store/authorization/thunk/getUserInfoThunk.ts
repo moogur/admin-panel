@@ -1,4 +1,4 @@
-import { showErrorMessage } from '@store/utils';
+import { showErrorMessage } from '@shared/utils';
 
 import { useGetUserInfoStore } from '../slice';
 

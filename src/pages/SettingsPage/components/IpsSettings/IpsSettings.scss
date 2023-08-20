@@ -9,14 +9,14 @@
   &:last-child {
     margin-right: 0;
   }
+
+  p {
+    display: inline-flex;
+    gap: 25px;
+    align-items: center;
+  }
 }
 
 .title {
   margin-bottom: 25px;
-}
-
-p {
-  display: inline-flex;
-  gap: 25px;
-  align-items: center;
 }

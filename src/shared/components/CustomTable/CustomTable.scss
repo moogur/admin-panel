@@ -81,29 +81,24 @@ td {
   &:before,
   &:after {
     position: absolute;
-    right: -10px;
+    right: -15px;
 
-    width: 0;
-    height: 0;
-    border-right: 4px solid transparent;
-    border-left: 4px solid transparent;
+    font-size: 0.8em;
+    line-height: 9px;
 
-    opacity: 0.2;
-
-    content: '';
+    opacity: 0.125;
   }
 
   &:before {
-    top: 12px;
+    bottom: 60%;
 
-    border-top: 4px solid #000000;
+    content: '▲';
   }
 
   &:after {
-    top: 2px;
+    top: 60%;
 
-    border-top: 4px solid transparent;
-    border-bottom: 4px solid #000000;
+    content: '▼';
   }
 }
 
