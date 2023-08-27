@@ -1,1 +1,2 @@
-export const AUTHORIZATION_BASEURL = import.meta.env['VITE_AUTHORIZATION_BASEURL'];
+export const AUTHORIZATION_BASE_URL = import.meta.env['VITE_AUTHORIZATION_BASE_URL'];
+export const LOCALIZATION_BASE_URL = import.meta.env['VITE_LOCALIZATION_BASE_URL'];

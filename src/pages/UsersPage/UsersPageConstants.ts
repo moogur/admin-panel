@@ -7,6 +7,7 @@ import { getDateToShowInTable, convertGenderEnumToTag, convertStatusEnumToTag } 
 
 import { DeleteModal } from './DeleteModal';
 import { DetailModal } from './DetailModal';
+import { RestoreModal } from './RestoreModal';
 import { UpdateModal } from './UpdateModal';
 
 export const columns: ColumnsType<BaseUser> = [
@@ -61,12 +62,14 @@ export const columns: ColumnsType<BaseUser> = [
     key: 'actions',
     tdStyle: 'padding-top: 0px; padding-bottom: 0px; vertical-align: middle;',
     customRender: (value: string, record) => {
-      const showButtons = record.status === UserStatusEnum.Active;
+      const isActiveStatus = record.status === UserStatusEnum.Active;
+      const isDeletedStatus = record.status === UserStatusEnum.Deleted;
 
-      return h('div', { style: 'display: flex; gap: 8px; justify-content: center;' }, [
-        showButtons && h(UpdateModal, { user: record }),
+      return h('div', { style: 'display: flex; gap: 8px; justify-content: flex-end;' }, [
+        isActiveStatus && h(UpdateModal, { user: record }),
         h(DetailModal, { userId: value }),
-        showButtons && h(DeleteModal, { userId: value, username: record.username }),
+        isActiveStatus && h(DeleteModal, { userId: value, username: record.username }),
+        isDeletedStatus && h(RestoreModal, { userId: value, username: record.username }),
       ]);
     },
   },

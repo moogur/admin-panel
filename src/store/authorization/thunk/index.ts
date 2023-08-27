@@ -10,3 +10,4 @@ export * from './getUserInfoThunk';
 export * from './deleteUsersThunk';
 export * from './updateUserThunk';
 export * from './createUserThunk';
+export * from './restoreUsersThunk';

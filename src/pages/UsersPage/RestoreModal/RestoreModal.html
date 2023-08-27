@@ -1,0 +1,4 @@
+<SvgIcon icon="restore" @click="showModal = true"></SvgIcon>
+<Modal v-if="showModal" title="User recovery" @close="showModal = false" @ok="restoreUser" :disabled="loading">
+  <p>Do you really want to restore user <span class="username">{{ username }}</span> ?</p>
+</Modal>
