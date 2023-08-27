@@ -173,10 +173,14 @@ export default defineConfig(({ mode }) => {
         server: {
           port: 3000,
           proxy: {
-            [process.env['VITE_AUTHORIZATION_BASEURL']]: {
+            [process.env['VITE_AUTHORIZATION_BASE_URL']]: {
               target: 'http://test.api.authorization.server.lan',
               changeOrigin: true,
               rewrite: (path) => path.replace(/^.{1,}?\//, '/'),
+            },
+            [process.env['VITE_LOCALIZATION_BASE_URL']]: {
+              target: 'http://test.admin.server.lan',
+              changeOrigin: true,
             },
           },
         },

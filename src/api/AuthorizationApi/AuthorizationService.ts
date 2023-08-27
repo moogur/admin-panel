@@ -1,7 +1,7 @@
 import { OnlyId, RequestConfigForProperties, SecretKeysEnum } from '@shared/types';
 
 import { BaseApiService } from '../baseApi';
-import { AUTHORIZATION_BASEURL } from '../baseUrls';
+import { AUTHORIZATION_BASE_URL } from '../baseUrls';
 import { headersForImage } from '../utils';
 
 import {
@@ -20,7 +20,7 @@ import {
 
 export class AuthorizationService extends BaseApiService {
   constructor() {
-    super({ baseUrl: AUTHORIZATION_BASEURL });
+    super({ baseUrl: AUTHORIZATION_BASE_URL });
   }
 
   public adminLogin = (config: RequestConfigForProperties<LoginAdmin>): Promise<Admin> =>
@@ -117,6 +117,13 @@ export class AuthorizationService extends BaseApiService {
   public deleteUsers = (config: RequestConfigForProperties<undefined, undefined, DeleteUsers>): Promise<DeleteUsers> =>
     this.request({
       method: 'DELETE',
+      url: '/users',
+      ...config,
+    });
+
+  public restoreUsers = (config: RequestConfigForProperties<undefined, undefined, DeleteUsers>): Promise<DeleteUsers> =>
+    this.request({
+      method: 'PATCH',
       url: '/users',
       ...config,
     });

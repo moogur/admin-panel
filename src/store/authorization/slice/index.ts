@@ -13,3 +13,4 @@ export * from './getUserInfo';
 export * from './deleteUsers';
 export * from './createUser';
 export * from './updateUser';
+export * from './restoreUsers';
