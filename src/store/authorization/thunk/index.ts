@@ -11,3 +11,6 @@ export * from './deleteUsersThunk';
 export * from './updateUserThunk';
 export * from './createUserThunk';
 export * from './restoreUsersThunk';
+export * from './addLanguageToDictionaryThunk';
+export * from './deleteLanguageFromDictionaryThunk';
+export * from './updateLanguageInDictionaryThunk';

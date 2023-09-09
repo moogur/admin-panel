@@ -5,18 +5,27 @@
   <table>
     <thead>
       <tr>
-        <th v-for="{ title, needSort, key, thStyle } in columns" :style="thStyle">
-          <span v-if="needSort" :class="['sorter', key === sorter?.key && sorter.sortOrder]" @click="changeSorter(key)"
-            >{{ title }}</span
-          >
-          <template v-else>{{ title }}</template>
+        <th
+          v-for="{ title, needSort, key, thStyle } in columns"
+          :style="thStyle"
+          :class="{sorter: needSort}"
+          @[needSort&&`click`]="changeSorter(key)"
+        >
+          {{ title }}
+          <span v-if="needSort" :class="[key === sorter?.key && sorter.sortOrder]"></span>
         </th>
       </tr>
     </thead>
     <tbody>
-      <tr v-for="row in dataSource">
+      <tr v-if="dataSource.length === 0" class="empty">
+        <td :colspan="columns.length">
+          <SvgIcon class="empty-icon" icon="main-error"></SvgIcon>
+          <p>No data</p>
+        </td>
+      </tr>
+      <tr v-else v-for="(row, index) in dataSource">
         <td v-for="{ dataIndex, customRender, tdStyle } in columns" :style="tdStyle">
-          <component v-if="customRender" :is="customRender(row[dataIndex], row)" />
+          <component v-if="customRender" :is="customRender(row[dataIndex], row, index)" />
           <template v-else>{{ row[dataIndex] }}</template>
         </td>
       </tr>

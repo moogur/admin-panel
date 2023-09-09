@@ -1,0 +1,25 @@
+<SvgIcon icon="edit" @click="openModal" class="edit-button"></SvgIcon>
+
+<Modal v-if="showModal" @close="showModal = false" title="Edit language" formName="edit-language-form">
+  <form @submit.prevent="onSubmit" novalidate id="edit-language-form">
+    <FormInput
+      required
+      placeholder="Name english"
+      v-model="formData.nameEn"
+      class="input"
+      autocomplete="off"
+      :disabled="loading"
+      :errorMessage="v$.nameEn.$errors[0]?.$message"
+      labelWidth="125"
+    />
+    <FormInput
+      placeholder="Name self"
+      v-model="formData.nameSelf"
+      class="input"
+      autocomplete="off"
+      :disabled="loading"
+      :errorMessage="v$.nameSelf.$errors[0]?.$message"
+      labelWidth="125"
+    />
+  </form>
+</Modal>

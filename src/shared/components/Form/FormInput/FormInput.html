@@ -1,5 +1,5 @@
 <label :class="{error: errorMessage}">
-  <span v-if="showLabel" class="label"
+  <span v-if="showLabel" :style="{width: labelWidth + 'px'}"
     >{{ placeholder }}
     <span v-if="required" class="asterisk">*</span>
   </span>
