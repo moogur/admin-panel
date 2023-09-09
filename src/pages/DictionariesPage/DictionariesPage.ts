@@ -1,7 +1,6 @@
-import { defineComponent, onUnmounted } from 'vue';
+import { defineComponent } from 'vue';
 
 import { SubPages } from '@shared/components';
-import { useGetLanguageDictionaryStore } from '@store';
 
 import { tabs } from './DictionariesPageConstants';
 
@@ -10,12 +9,6 @@ export default defineComponent({
     SubPages,
   },
   setup() {
-    const getLanguageDictionaryStore = useGetLanguageDictionaryStore();
-
-    onUnmounted(() => {
-      getLanguageDictionaryStore.$reset();
-    });
-
     return {
       tabs,
     };
