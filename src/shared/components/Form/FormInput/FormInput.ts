@@ -30,5 +30,9 @@ export default defineComponent({
       default: false,
       type: Boolean,
     },
+    labelWidth: {
+      default: 100,
+      type: Number,
+    },
   },
 });

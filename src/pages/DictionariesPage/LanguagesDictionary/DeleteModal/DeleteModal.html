@@ -1,0 +1,7 @@
+<SvgIcon icon="delete" @click="showModal = true"></SvgIcon>
+<Modal v-if="showModal" title="Delete a language" @close="showModal = false" @ok="deleteLanguage" :disabled="loading">
+  <p>
+    Do you really want to delete this language -
+    <span class="language-name">{{ language.nameEn }} ({{ language.code }})</span> ?
+  </p>
+</Modal>

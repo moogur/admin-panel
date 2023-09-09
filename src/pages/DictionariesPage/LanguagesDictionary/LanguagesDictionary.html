@@ -1,0 +1,5 @@
+<Loader v-if="!loaded && loading"></Loader>
+<CustomTable v-else-if="loaded" class="table-wrapper" :dataSource="data" :columns="columns">
+  <AddModal></AddModal>
+</CustomTable>
+<MainError v-else-if="error"></MainError>

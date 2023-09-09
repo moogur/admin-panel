@@ -14,3 +14,7 @@ export * from './deleteUsers';
 export * from './createUser';
 export * from './updateUser';
 export * from './restoreUsers';
+export * from './getLanguageDictionary';
+export * from './addLanguageToDictionary';
+export * from './updateLanguageInDictionary';
+export * from './deleteLanguageFromDictionary';

@@ -13,7 +13,7 @@ export interface ColumnType<Data> {
   title: string;
   needSort?: boolean;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  customRender?: (value: any, record: Data) => VNode;
+  customRender?: (value: any, record: Data, index: number) => VNode;
   tdStyle?: string;
   thStyle?: string;
 }

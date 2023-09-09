@@ -13,3 +13,4 @@ export * from './CustomTable';
 export * from './Tag';
 export * from './MainError';
 export * from './Loader';
+export * from './SubPages';

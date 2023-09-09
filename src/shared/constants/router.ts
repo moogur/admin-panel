@@ -11,6 +11,12 @@ export const links = {
     component: 'UsersPage',
     icon: 'users',
   },
+  dictionaries: {
+    path: '/dictionaries',
+    title: 'Dictionaries',
+    component: 'DictionariesPage',
+    icon: 'dictionaries',
+  },
   settings: {
     path: '/settings',
     title: 'Settings',

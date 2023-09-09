@@ -53,6 +53,16 @@ module.exports = {
     'no-undefined': 'off',
     'padding-line-between-statements': ['error', { blankLine: 'always', prev: '*', next: 'return' }],
 
+    '@typescript-eslint/ban-types': [
+      'error',
+      {
+        types: {
+          '{}': false,
+        },
+        extendDefaults: true,
+      },
+    ],
+
     'import/extensions': 'off',
     'import/no-unresolved': 'off',
     'import/order': [

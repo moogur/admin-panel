@@ -1,0 +1,35 @@
+<CustomButton variant="primary" class="add-button" @click="openModal">Add</CustomButton>
+
+<Modal v-if="showModal" @close="showModal = false" title="Add language" formName="add-language-form">
+  <form @submit.prevent="onSubmit" novalidate id="add-language-form">
+    <FormInput
+      required
+      placeholder="Code"
+      v-model="formData.code"
+      class="input"
+      autocomplete="off"
+      :disabled="loading"
+      :errorMessage="v$.code.$errors[0]?.$message"
+      :labelWidth="125"
+    />
+    <FormInput
+      required
+      placeholder="Name english"
+      v-model="formData.nameEn"
+      class="input"
+      autocomplete="off"
+      :disabled="loading"
+      :errorMessage="v$.nameEn.$errors[0]?.$message"
+      :labelWidth="125"
+    />
+    <FormInput
+      placeholder="Name self"
+      v-model="formData.nameSelf"
+      class="input"
+      autocomplete="off"
+      :disabled="loading"
+      :errorMessage="v$.nameSelf.$errors[0]?.$message"
+      :labelWidth="125"
+    />
+  </form>
+</Modal>

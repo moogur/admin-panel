@@ -67,3 +67,16 @@ export interface DeleteUsers {
 export type CreateUser = LoginAdmin & Pick<BaseUser, 'email' | 'gender'>;
 
 export type UpdateUser = SomeOptional<CreateUser, 'password' | 'gender'>;
+
+export interface DeleteLanguageDictionary {
+  code: string;
+}
+
+export interface UpdateLanguageDictionary {
+  nameEn: string;
+  nameSelf?: string | null;
+}
+
+export type AddLanguageDictionary = UpdateLanguageDictionary & DeleteLanguageDictionary;
+
+export type LanguageDictionary = OnlyId & AddLanguageDictionary;

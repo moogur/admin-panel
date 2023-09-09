@@ -16,6 +16,10 @@ import {
   DeleteUsers,
   CreateUser,
   UpdateUser,
+  LanguageDictionary,
+  AddLanguageDictionary,
+  DeleteLanguageDictionary,
+  UpdateLanguageDictionary,
 } from './authorizationTypes';
 
 export class AuthorizationService extends BaseApiService {
@@ -138,7 +142,41 @@ export class AuthorizationService extends BaseApiService {
   public updateUser = (config: RequestConfigForProperties<UpdateUser, OnlyId>): Promise<User> =>
     this.request({
       method: 'PATCH',
-      url: `/users/${config?.urlParameters.id}`,
+      url: `/users/${config.urlParameters.id}`,
+      ...config,
+    });
+
+  public getLanguageDictionary = (config: RequestConfigForProperties): Promise<LanguageDictionary[]> =>
+    this.request({
+      method: 'GET',
+      url: '/languageDictionary',
+      ...config,
+    });
+
+  public addLanguageToDictionary = (
+    config: RequestConfigForProperties<AddLanguageDictionary>,
+  ): Promise<LanguageDictionary> =>
+    this.request({
+      method: 'POST',
+      url: '/languageDictionary',
+      ...config,
+    });
+
+  public updateLanguageInDictionary = (
+    config: RequestConfigForProperties<UpdateLanguageDictionary, OnlyId>,
+  ): Promise<LanguageDictionary> =>
+    this.request({
+      method: 'PUT',
+      url: `/languageDictionary/${config.urlParameters.id}`,
+      ...config,
+    });
+
+  public deleteLanguageFromDictionary = (
+    config: RequestConfigForProperties<undefined, DeleteLanguageDictionary>,
+  ): Promise<{ result: true }> =>
+    this.request({
+      method: 'DELETE',
+      url: `/languageDictionary/${config.urlParameters.code}`,
       ...config,
     });
 }
