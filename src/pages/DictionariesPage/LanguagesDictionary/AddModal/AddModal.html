@@ -10,7 +10,7 @@
       autocomplete="off"
       :disabled="loading"
       :errorMessage="v$.code.$errors[0]?.$message"
-      labelWidth="125"
+      :labelWidth="125"
     />
     <FormInput
       required
@@ -20,7 +20,7 @@
       autocomplete="off"
       :disabled="loading"
       :errorMessage="v$.nameEn.$errors[0]?.$message"
-      labelWidth="125"
+      :labelWidth="125"
     />
     <FormInput
       placeholder="Name self"
@@ -29,7 +29,7 @@
       autocomplete="off"
       :disabled="loading"
       :errorMessage="v$.nameSelf.$errors[0]?.$message"
-      labelWidth="125"
+      :labelWidth="125"
     />
   </form>
 </Modal>
