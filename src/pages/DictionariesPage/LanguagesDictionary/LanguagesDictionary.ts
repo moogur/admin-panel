@@ -1,5 +1,5 @@
 import { storeToRefs } from 'pinia';
-import { defineComponent, onMounted, onUnmounted } from 'vue';
+import { defineComponent, onMounted } from 'vue';
 
 import { MainError, Loader, CustomTable } from '@shared/components';
 import { useGetLanguageDictionaryStore } from '@store';
@@ -20,9 +20,6 @@ export default defineComponent({
 
     onMounted(() => {
       getLanguageDictionaryStore.thunk();
-    });
-    onUnmounted(() => {
-      getLanguageDictionaryStore.abortController?.abort();
     });
 
     return {

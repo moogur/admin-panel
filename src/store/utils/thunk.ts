@@ -16,7 +16,7 @@ export async function thunkRequestHelper<
   thunk: (parameter: RequestConfigForProperties<Body, Url, Query>) => Promise<ThunkReturnType>,
   parameter: RequestConfig<Body, Url, Query>,
 ) {
-  if (that.cacheRequest && that.loaded) return;
+  if ((that.cacheRequest && that.loaded) || that.loading) return;
   that.loading = true;
   try {
     const controller = new AbortController();
