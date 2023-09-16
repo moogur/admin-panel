@@ -42,6 +42,20 @@ label {
 
   font-weight: 600;
 
+  &.top {
+    flex-direction: column;
+    gap: 0;
+    align-items: normal;
+    overflow: hidden;
+
+    .label {
+      overflow: hidden;
+
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+
   &:not(.error) input:focus {
     border-color: #a1afdf;
 

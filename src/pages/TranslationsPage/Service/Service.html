@@ -1,0 +1,3 @@
+<Loader v-if="!loaded && loading"></Loader>
+<Tabs v-else-if="loaded" :data="tabs" type="horizontal" :prefix="service" @change="updateCodeKey"></Tabs>
+<MainError v-else-if="error"></MainError>

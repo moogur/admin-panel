@@ -1,6 +1,6 @@
 import { DefineComponent } from 'vue';
 
-export interface SubPage {
+export interface Tab {
   key: string;
   title: string;
   component: DefineComponent<

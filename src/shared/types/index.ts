@@ -7,4 +7,4 @@ export * from './image';
 export * from './table';
 export * from './list';
 export * from './utils';
-export * from './subPage';
+export * from './tabs';

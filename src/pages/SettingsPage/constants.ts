@@ -1,8 +1,8 @@
-import { SubPage } from '@shared/types';
+import { Tab } from '@shared/types';
 
 import { IpsSettings, KeysSettings, UserInfoSettings } from './components';
 
-export const tabs: SubPage[] = [
+export const tabs: Tab[] = [
   {
     key: 'keys',
     title: 'Keys',

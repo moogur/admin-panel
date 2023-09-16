@@ -1,0 +1,17 @@
+<ul class="tabs" :class="type">
+  <li v-for="({ title, key, component }, index) in data" :class="'tab-' + type">
+    <input
+      type="radio"
+      :name="prefix + 'tabs'"
+      :id="key"
+      :checked="activeKeyItem === key"
+      :class="'tab-switch-' + type"
+      @change="changeActiveKey(key)"
+    />
+    <label :for="key" :class="'tab-label-' + type">{{ title }}</label>
+    <section v-if="activeKeyItem === key" :class="'tab-content-' + type">
+      <slot></slot>
+      <component :is="component"></component>
+    </section>
+  </li>
+</ul>

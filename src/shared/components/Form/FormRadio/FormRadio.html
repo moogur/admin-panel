@@ -1,0 +1,10 @@
+<label :class="['radio', {disabled}]">
+  <input
+    class="radio-input"
+    type="radio"
+    :disabled="disabled"
+    :value="value"
+    :checked="modelValue === value"
+    @change="$emit('update:modelValue', $event.target.value)"
+  />{{ label }}
+</label>

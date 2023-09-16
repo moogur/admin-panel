@@ -1,0 +1,30 @@
+<Loader v-if="!loaded && getLoading"></Loader>
+<form
+  v-else-if="loaded || error?.response.status === 404"
+  @submit.prevent="onSubmit"
+  novalidate
+  id="change-localization-form"
+>
+  <section class="content-wrapper">
+    <template v-for="(value, key, index) in form.data">
+      <div v-if="isShowItem(key)" class="form-item">
+        <p class="count">{{ index + 1 }}</p>
+        <p class="key">{{ key }}</p>
+        <FormInput
+          :placeholder="value"
+          class="value"
+          autocomplete="off"
+          v-model="form.data[key]"
+          :showPlaceholder="false"
+          labelPlacement="top"
+          :disabled="updateLoading"
+        />
+      </div>
+    </template>
+  </section>
+  <div class="buttons-wrapper">
+    <CustomButton variant="primary" :disabled="updateLoading">Update</CustomButton>
+    <DeleteModal @onSuccess="successCallback" :disabled="isDeleteDisabled || updateLoading"></DeleteModal>
+  </div>
+</form>
+<MainError v-else-if="error"></MainError>

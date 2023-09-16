@@ -33,7 +33,7 @@ export async function thunkRequestHelper<
     } else {
       Object.assign(that, additionToError, { error: preparedError });
     }
-    throw error;
+    if (that.throwExceptionOnError) throw error;
   }
 }
 

@@ -14,3 +14,7 @@ export const enum UserStatusEnum {
   Deleted = 'DELETED',
   NotDefined = 'NOT_DEFINED',
 }
+
+export const enum FrontendServices {
+  AdminPanel = 'adminPanel',
+}

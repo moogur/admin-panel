@@ -1,8 +1,9 @@
-import { BaseStore } from '../types';
+import { BaseStore, Store } from '../types';
 
 export function getBaseInitialState<Data, AddFields extends object | undefined = undefined>(
-  cacheRequest?: boolean,
-  additionalField?: AddFields,
+  config?: Partial<Pick<Store, 'cacheRequest' | 'throwExceptionOnError'>> & {
+    additionalField?: AddFields;
+  },
 ) {
   return function () {
     return {
@@ -11,8 +12,9 @@ export function getBaseInitialState<Data, AddFields extends object | undefined =
       loaded: false,
       loading: false,
       abortController: null,
-      cacheRequest: cacheRequest ?? false,
-      ...structuredClone(additionalField),
+      cacheRequest: config?.cacheRequest ?? false,
+      throwExceptionOnError: config?.throwExceptionOnError ?? true,
+      ...structuredClone(config?.additionalField),
     } as BaseStore<Data, AddFields>;
   };
 }

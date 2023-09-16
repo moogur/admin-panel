@@ -1,8 +1,8 @@
-import { SubPage } from '@shared/types';
+import { Tab } from '@shared/types';
 
 import { LanguagesDictionary } from './LanguagesDictionary';
 
-export const tabs: SubPage[] = [
+export const tabs: Tab[] = [
   {
     key: 'languageDictionary',
     title: 'Languages',
