@@ -6,7 +6,7 @@ import { getBaseInitialState, thunkRequestHelperWithoutParameters } from '@store
 
 export const useGetLanguageDictionaryStore = defineStore({
   id: 'getLanguageDictionary',
-  state: getBaseInitialState<LanguageDictionary[]>(true),
+  state: getBaseInitialState<LanguageDictionary[]>({ cacheRequest: true, throwExceptionOnError: false }),
   actions: {
     thunk() {
       return thunkRequestHelperWithoutParameters(this, authorizationService.getLanguageDictionary);

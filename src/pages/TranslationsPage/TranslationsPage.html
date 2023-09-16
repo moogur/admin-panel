@@ -1,0 +1,23 @@
+<Loader v-if="!loaded && loading"></Loader>
+<Tabs v-else-if="loaded" :data="tabs" type="vertical" @change="updateServiceKey">
+  <form>
+    <span>Show keys:</span>
+    <FormRadio label="All" v-model="formData.type" :value="TranslationFilterShowEnum.All" class="form-item" />
+    <FormRadio
+      label="Only empty"
+      v-model="formData.type"
+      :value="TranslationFilterShowEnum.OnlyEmpty"
+      class="form-item"
+    />
+    <FormRadio label="Certain:" v-model="formData.type" :value="TranslationFilterShowEnum.Certain" class="form-item" />
+    <FormInput
+      placeholder="Search"
+      v-model="formData.search"
+      class="input"
+      autocomplete="off"
+      :showLabel="false"
+      :disabled="formData.type !== TranslationFilterShowEnum.Certain"
+    />
+  </form>
+</Tabs>
+<MainError v-else-if="error"></MainError>

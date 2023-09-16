@@ -1,0 +1,10 @@
+<SvgIcon icon="trash" @click="showModal = true" :class="{disabled}"></SvgIcon>
+<Modal
+  v-if="showModal"
+  title="Delete a translation"
+  @close="showModal = false"
+  @ok="deleteTranslation"
+  :disabled="loading"
+>
+  <p>Do you really want to delete the <span class="language-name">{{ translationStore.nameEn }}</span> translation?</p>
+</Modal>

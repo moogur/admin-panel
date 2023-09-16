@@ -17,6 +17,12 @@ export const links = {
     component: 'DictionariesPage',
     icon: 'dictionaries',
   },
+  translations: {
+    path: '/translations',
+    title: 'Translations',
+    component: 'TranslationsPage',
+    icon: 'language',
+  },
   settings: {
     path: '/settings',
     title: 'Settings',

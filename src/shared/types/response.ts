@@ -6,3 +6,7 @@ export interface ResponseWithPagination<T> {
   list: T[];
   pagination: Pagination;
 }
+
+export interface SuccessResult {
+  result: true;
+}

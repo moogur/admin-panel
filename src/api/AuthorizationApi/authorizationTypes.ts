@@ -1,5 +1,6 @@
 import {
   BasePagination,
+  FrontendServices,
   GenderEnum,
   OnlyId,
   ResponseWithPagination,
@@ -80,3 +81,9 @@ export interface UpdateLanguageDictionary {
 export type AddLanguageDictionary = UpdateLanguageDictionary & DeleteLanguageDictionary;
 
 export type LanguageDictionary = OnlyId & AddLanguageDictionary;
+
+export interface GetDefaultMessages {
+  service: FrontendServices;
+}
+
+export type GetLocalizationMessages = DeleteLanguageDictionary & GetDefaultMessages;

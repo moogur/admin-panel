@@ -7,6 +7,7 @@ export interface Store<T = unknown> {
   error: HTTPError | null;
   abortController: AbortController | null;
   cacheRequest: boolean;
+  throwExceptionOnError: boolean;
 }
 
 export type BaseStore<T, K extends object | undefined = undefined> = K extends undefined ? Store<T> : Store<T> & K;

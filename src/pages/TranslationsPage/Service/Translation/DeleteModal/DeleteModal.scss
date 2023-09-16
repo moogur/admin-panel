@@ -1,0 +1,18 @@
+svg {
+  width: 28px;
+
+  color: #dc3545;
+
+  cursor: pointer;
+
+  &.disabled {
+    cursor: var(--btn-disabled-cursor);
+    opacity: 0.5;
+
+    pointer-events: none;
+  }
+}
+
+.language-name {
+  font-weight: bold;
+}

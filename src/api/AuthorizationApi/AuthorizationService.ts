@@ -1,4 +1,4 @@
-import { OnlyId, RequestConfigForProperties, SecretKeysEnum } from '@shared/types';
+import { OnlyId, RequestConfigForProperties, SecretKeysEnum, SuccessResult } from '@shared/types';
 
 import { BaseApiService } from '../baseApi';
 import { AUTHORIZATION_BASE_URL } from '../baseUrls';
@@ -20,6 +20,8 @@ import {
   AddLanguageDictionary,
   DeleteLanguageDictionary,
   UpdateLanguageDictionary,
+  GetLocalizationMessages,
+  GetDefaultMessages,
 } from './authorizationTypes';
 
 export class AuthorizationService extends BaseApiService {
@@ -69,7 +71,7 @@ export class AuthorizationService extends BaseApiService {
       ...config,
     });
 
-  public changeAvatar = (config: RequestConfigForProperties<FormData>): Promise<{ result: true }> =>
+  public changeAvatar = (config: RequestConfigForProperties<FormData>): Promise<SuccessResult> =>
     this.request({
       method: 'PUT',
       url: '/admin/avatar',
@@ -173,10 +175,49 @@ export class AuthorizationService extends BaseApiService {
 
   public deleteLanguageFromDictionary = (
     config: RequestConfigForProperties<undefined, DeleteLanguageDictionary>,
-  ): Promise<{ result: true }> =>
+  ): Promise<SuccessResult> =>
     this.request({
       method: 'DELETE',
       url: `/languageDictionary/${config.urlParameters.code}`,
+      ...config,
+    });
+
+  public getDefaultMessages = (
+    config: RequestConfigForProperties<undefined, GetDefaultMessages>,
+  ): Promise<Record<string, string>> =>
+    this.request({
+      method: 'GET',
+      url: `/localization/${config.urlParameters.service}`,
+      ...config,
+    });
+
+  public getLocalizationMessages = (
+    config: RequestConfigForProperties<undefined, GetLocalizationMessages>,
+  ): Promise<Record<string, string>> =>
+    this.request({
+      method: 'GET',
+      url: `/localization/${config.urlParameters.service}/${config.urlParameters.code}`,
+      ...config,
+    });
+
+  public updateLocalizationMessages = (
+    config: RequestConfigForProperties<FormData, GetLocalizationMessages>,
+  ): Promise<SuccessResult> =>
+    this.request({
+      method: 'PUT',
+      url: `/localization/${config.urlParameters.service}/${config.urlParameters.code}`,
+      headers: {
+        Accept: 'application/json; charset=utf-8',
+      },
+      ...config,
+    });
+
+  public deleteTranslation = (
+    config: RequestConfigForProperties<undefined, GetLocalizationMessages>,
+  ): Promise<SuccessResult> =>
+    this.request({
+      method: 'DELETE',
+      url: `/localization/${config.urlParameters.service}/${config.urlParameters.code}`,
       ...config,
     });
 }

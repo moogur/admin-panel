@@ -7,8 +7,8 @@ export default defineComponent({
       type: String as () => string | undefined,
     },
     placeholder: {
-      default: '',
-      type: String,
+      default: undefined,
+      type: String as () => string | undefined,
     },
     modelValue: {
       required: true,
@@ -26,13 +26,21 @@ export default defineComponent({
       default: true,
       type: Boolean,
     },
+    labelWidth: {
+      default: 100,
+      type: Number,
+    },
+    labelPlacement: {
+      default: 'left',
+      type: String as () => 'left' | 'top',
+    },
     required: {
       default: false,
       type: Boolean,
     },
-    labelWidth: {
-      default: 100,
-      type: Number,
+    showPlaceholder: {
+      default: true,
+      type: Boolean,
     },
   },
 });

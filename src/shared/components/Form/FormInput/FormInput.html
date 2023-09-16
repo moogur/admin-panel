@@ -1,5 +1,5 @@
-<label :class="{error: errorMessage}">
-  <span v-if="showLabel" :style="{width: labelWidth + 'px'}"
+<label :class="[labelPlacement, {error: errorMessage}]">
+  <span v-if="showLabel" :style="{width: labelPlacement === 'left' ? labelWidth + 'px' : 'auto'}" class="label"
     >{{ placeholder }}
     <span v-if="required" class="asterisk">*</span>
   </span>
@@ -7,7 +7,7 @@
     <input
       :class="{'with-label': showLabel}"
       type="text"
-      :placeholder="placeholder"
+      :placeholder="showPlaceholder ? placeholder : undefined"
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
       :autocomplete="autocomplete"

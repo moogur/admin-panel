@@ -14,3 +14,5 @@ export * from './restoreUsersThunk';
 export * from './addLanguageToDictionaryThunk';
 export * from './deleteLanguageFromDictionaryThunk';
 export * from './updateLanguageInDictionaryThunk';
+export * from './updateLocalizationMessagesThunk';
+export * from './deleteTranslationThunk';
