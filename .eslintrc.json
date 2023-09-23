@@ -1,0 +1,6 @@
+{
+  "extends": ["@moogur/eslint-frontend"],
+  "settings": {
+    "import/internal-regex": "^(@api|@api/|@app|@assets/|@pages|@pages/|@router|@shared/|@store|@store/|@src/)"
+  }
+}
