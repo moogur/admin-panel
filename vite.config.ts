@@ -1,18 +1,23 @@
-import { PluginOption, defineConfig } from 'vite';
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import zlib from 'node:zlib';
+
 import vue from '@vitejs/plugin-vue';
+import { visualizer } from 'rollup-plugin-visualizer';
+import { defineConfig } from 'vite';
 import viteCompression from 'vite-plugin-compression';
 import { createHtmlPlugin } from 'vite-plugin-html';
-import { visualizer } from 'rollup-plugin-visualizer';
 import viteImagemin from 'vite-plugin-imagemin';
-import path from 'node:path';
-import zlib from 'zlib';
 
-import tsconfig from './tsconfig.json';
+const tsconfig = JSON.parse(readFileSync('./tsconfig.json', 'utf8'));
+const currentDirname = path.dirname(fileURLToPath(import.meta.url));
 
 const alias = Object.entries(tsconfig.compilerOptions.paths).reduce<Array<{ replacement: string; find: string }>>(
   (accumulator, [key, value]) => {
-    const preparedKey = key.split('/')[0];
-    const preparedPath = path.resolve(__dirname, value[0].replace(/(\*|index.ts)?$/, ''));
+    const preparedKey = key.split('/')[0] ?? '';
+    const preparedValue = Array.isArray(value) && typeof value[0] === 'string' ? value[0] : '';
+    const preparedPath = path.resolve(currentDirname, preparedValue.replace(/(\*|index.ts)?$/, ''));
 
     if (accumulator.every((item) => item.replacement !== preparedPath)) {
       accumulator.push({ find: preparedKey, replacement: preparedPath });
@@ -20,22 +25,24 @@ const alias = Object.entries(tsconfig.compilerOptions.paths).reduce<Array<{ repl
 
     return accumulator;
   },
-  [{ find: '@fonts', replacement: path.resolve(__dirname, 'assets/fonts') }],
+  [{ find: '@fonts', replacement: path.resolve(currentDirname, 'assets/fonts') }],
 );
 
 const build = {
   sourcemap: false,
   rollupOptions: {
     output: {
-      manualChunks: (path) => {
-        if (/node_modules/.test(path)) {
-          const libName = path.split('node_modules/')[1]?.split('/')[0]?.replace('@', '');
-          if (libName === 'vue' || libName === 'vue-router') return `lib.vue`;
+      manualChunks: (filePath: string) => {
+        if (/node_modules/.test(filePath)) {
+          const libraryName = filePath.split('node_modules/')[1]?.split('/')[0]?.replace('@', '');
+          if (libraryName === 'vue' || libraryName === 'vue-router') return `lib.vue`;
+
           return 'lib.other';
         }
+
         return 'app';
       },
-      assetFileNames: ({ name }) => {
+      assetFileNames: ({ name }: { name: string | undefined }) => {
         switch (true) {
           case /\.(png|jpe?g|svg|gif|tiff|bmp|ico)$/i.test(name ?? ''): {
             return `images/[name].[hash][extname]`;
@@ -71,7 +78,7 @@ const css = {
 
 export default defineConfig(({ mode }) => {
   switch (mode) {
-    case 'analyze':
+    case 'analyze': {
       return {
         css,
         plugins: [
@@ -89,8 +96,9 @@ export default defineConfig(({ mode }) => {
         build,
         resolve: { alias },
       };
+    }
 
-    case 'production':
+    case 'production': {
       return {
         css,
         plugins: [
@@ -164,8 +172,9 @@ export default defineConfig(({ mode }) => {
         preview: { port: 3001 },
         resolve: { alias },
       };
+    }
 
-    default:
+    default: {
       return {
         css,
         plugins: [vue(), createHtmlPlugin({ template: '/index-dev.html' })],
@@ -173,12 +182,12 @@ export default defineConfig(({ mode }) => {
         server: {
           port: 3000,
           proxy: {
-            [process.env['VITE_AUTHORIZATION_BASE_URL']]: {
+            [String(process.env['VITE_AUTHORIZATION_BASE_URL'])]: {
               target: 'http://test.api.authorization.server.lan',
               changeOrigin: true,
-              rewrite: (path) => path.replace(/^.{1,}?\//, '/'),
+              rewrite: (url: string) => url.replace(/^.+?\//, '/'),
             },
-            [process.env['VITE_LOCALIZATION_BASE_URL']]: {
+            [String(process.env['VITE_LOCALIZATION_BASE_URL'])]: {
               target: 'http://test.admin.server.lan',
               changeOrigin: true,
             },
@@ -186,5 +195,6 @@ export default defineConfig(({ mode }) => {
         },
         resolve: { alias },
       };
+    }
   }
 });

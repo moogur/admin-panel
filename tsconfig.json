@@ -1,22 +1,7 @@
 {
-  "extends": "./tsconfig-checks.json",
+  "extends": "@moogur/tsconfig-frontend/index.json",
   "compilerOptions": {
-    "target": "ESNext",
-    "useDefineForClassFields": true,
-    "module": "ESNext",
-    "moduleResolution": "Node",
-    "strict": true,
-    "jsx": "preserve",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "lib": ["ESNext", "DOM"],
-    "skipLibCheck": true,
-    "noEmit": true,
-    "removeComments": true,
     "baseUrl": "./",
-    "forceConsistentCasingInFileNames": false,
     "paths": {
       "@api": ["./src/api/index.ts"],
       "@api/*": ["./src/api/*"],
@@ -31,6 +16,5 @@
       "@src/*": ["./src/*"]
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
