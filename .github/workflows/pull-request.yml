@@ -18,5 +18,5 @@ jobs:
     uses: moogur/all-workflows/.github/workflows/pr_annotation.yml@master
     secrets: inherit
     with:
-      sonar_project_key: 'authorization_ui'
+      sonar_project_key: 'front_admin_panel'
       skip_tests: 'true'
