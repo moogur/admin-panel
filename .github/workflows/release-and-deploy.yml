@@ -16,26 +16,5 @@ jobs:
 
   release:
     needs: kanboard
-    runs-on: ubuntu-latest
-    steps:
-      - name: 'Checkout'
-        uses: actions/checkout@v3
-
-      - name: 'Version'
-        id: version
-        run: |
-          tag=${GITHUB_REF/refs\/tags\//}
-          echo "VERSION=${tag#v}" >> $GITHUB_OUTPUT
-
-      - name: 'Publish release'
-        uses: release-drafter/release-drafter@v5
-        with:
-          version: ${{ steps.version.outputs.VERSION }}
-          publish: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  deploy:
-    needs: release
-    uses: moogur/all-workflows/.github/workflows/deploy_for_frontend.yml@master
+    uses: moogur/all-workflows/.github/workflows/release_frontend.yml@master
     secrets: inherit
